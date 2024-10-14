@@ -1,0 +1,112 @@
+.shareTechRegular {
+  font-family: "Share Tech", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.navBar {
+  background-color: #2d3748; /* bg-gray-800 */
+}
+
+.navBarContainer {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 80rem; /* max-w-7xl */
+  padding-left: 0.5rem; /* px-2 */
+  padding-right: 0.5rem; /* px-2 */
+}
+
+@media (min-width: 640px) {
+  /* sm (640px and up) */
+  .navBarContainerSm {
+    padding-left: 1.5rem; /* sm:px-6 */
+    padding-right: 1.5rem; /* sm:px-6 */
+  }
+}
+
+@media (min-width: 1024px) {
+  /* lg (1024px and up) */
+  .navBarContainerLg {
+    padding-left: 2rem; /* lg:px-8 */
+    padding-right: 2rem; /* lg:px-8 */
+  }
+}
+
+.navBarContainer1 {
+  position: relative;
+  display: flex;
+  height: 4rem; /* h-16 equivale a 4rem */
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navBar-item {
+  height: 4rem; /* h-16 */
+}
+
+.navBar-item-mobile-button {
+  padding: 0.5rem; /* p-2 */
+  color: #cbd5e0; /* text-gray-400 */
+  border-radius: 0.375rem; /* rounded-md */
+}
+
+.navBar-item-mobile-button:hover {
+  background-color: #4a5568; /* hover:bg-gray-700 */
+  color: white; /* hover:text-white */
+}
+
+.navBar-item-mobile-button:focus {
+  outline: none;
+}
+
+.navBar-link {
+  color: #a0aec0; /* text-gray-300 */
+  border-radius: 0.375rem; /* rounded-md */
+  padding: 0.5rem 0.75rem; /* px-3 py-2 */
+  font-size: 0.875rem; /* text-sm */
+  font-weight: 500; /* font-medium */
+}
+
+.navBar-link:hover {
+  background-color: #4a5568; /* hover:bg-gray-700 */
+  color: white; /* hover:text-white */
+}
+
+.navBar-link-active {
+  background-color: #1a202c; /* bg-gray-900 */
+  color: white; /* text-white */
+}
+
+.navBar-button {
+  background-color: #2d3748; /* bg-gray-800 */
+  color: #cbd5e0; /* text-gray-400 */
+  border-radius: 50%; /* rounded-full */
+  padding: 0.25rem; /* p-1 */
+}
+
+.navBar-button:hover {
+  color: white; /* hover:text-white */
+}
+
+.profile-dropdown {
+  margin-left: 0.75rem; /* ml-3 */
+  background-color: #2d3748; /* bg-gray-800 */
+  border-radius: 50%; /* rounded-full */
+}
+
+.dropdown-item {
+  color: #4a5568; /* text-gray-700 */
+  padding: 0.5rem 1rem; /* px-4 py-2 */
+  font-size: 0.875rem; /* text-sm */
+}
+
+.dropdown-item:hover {
+  background-color: #edf2f7; /* bg-gray-100 */
+}
+
+.menu-panel {
+  background-color: white;
+  padding: 0.25rem; /* py-1 */
+  margin-top: 0.5rem; /* mt-2 */
+  border-radius: 0.375rem; /* rounded-md */
+}
