@@ -1,5 +1,4 @@
 import { DisclosureButton } from "@headlessui/react";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Menu, X } from "lucide-react";
 
 const MobileMenuButton = () => (

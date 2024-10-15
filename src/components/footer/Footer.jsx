@@ -1,11 +1,12 @@
 import { classNames } from "../../utils/classNames";
 import { Facebook, Instagram } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const footerLinks = [
-  { name: "Política de privacidad", href: "#", current: false },
-  { name: "Términos de servicio", href: "#", current: false },
-  { name: "Contáctanos", href: "#", current: false },
-  { name: "Preguntas frecuentes", href: "#", current: false },
+  { name: "Política de privacidad", href: "/politica-privacidad", current: false },
+  { name: "Términos de servicio", href: "/terminos-servicio", current: false },
+  { name: "Contáctanos", href: "/contacto", current: false },
+  { name: "Preguntas frecuentes", href: "/faq", current: false },
 ];
 
 const socialLinks = [
@@ -25,23 +26,20 @@ const Footer = () => {
   return (
     <footer className="bg-gray-800 py-8 mt-8">
       <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-        {/* Links Section */}
         <div className="flex flex-col sm:flex-row justify-between items-center border-b border-gray-700 pb-8">
           <div className="flex space-x-4">
             {footerLinks.map((item) => (
-              <a
+              <Link
                 key={item.name}
-                href={item.href}
+                to={item.href}
                 className={classNames(
                   item.current ? "text-white" : "text-gray-400 hover:text-white",
                   "text-sm font-medium"
                 )}>
                 {item.name}
-              </a>
+              </Link>
             ))}
           </div>
-
-          {/* Social Links */}
           <div className="flex space-x-4 mt-4 sm:mt-0">
             {socialLinks.map((social) => (
               <a
@@ -55,8 +53,6 @@ const Footer = () => {
             ))}
           </div>
         </div>
-
-        {/* Copyright */}
         <div className="mt-8 text-gray-400 text-sm text-center">
           &copy; {new Date().getFullYear()} Cel-Fii. Todos los derechos reservados.
         </div>
