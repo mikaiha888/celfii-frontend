@@ -1,6 +1,3 @@
-// src/components/Card.jsx
-import React from "react";
-
 const Card = ({ image, title, price }) => {
   return (
     <div className="max-w-sm rounded overflow-hidden shadow-lg bg-white">

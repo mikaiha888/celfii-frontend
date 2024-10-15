@@ -1,5 +1,3 @@
-// src/pages/Home.jsx
-import React from "react";
 import Cards from "../../components/cards/Cards";
 
 const Home = () => {

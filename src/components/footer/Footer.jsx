@@ -1,5 +1,7 @@
-import React from "react";
 import { classNames } from "../../utils/classNames";
+import logoX from "../../assets/logo-x.png";
+import logoF from "../../assets/logo-face.png";
+import logoI from "../../assets/Instagram_icon.png";
 
 const footerLinks = [
   { name: "Política de privacidad", href: "#", current: false },
@@ -9,9 +11,17 @@ const footerLinks = [
 ];
 
 const socialLinks = [
-  { name: "Facebook", href: "https://facebook.com", icon: "📘" },
-  { name: "Twitter", href: "https://twitter.com", icon: "🐦" },
-  { name: "Instagram", href: "https://instagram.com", icon: "📸" },
+  {
+    name: "Facebook",
+    href: "https://www.facebook.com/profile.php?id=100018858458649",
+    icon: logoF,
+  },
+  { name: "Twitter", href: "https://x.com/Cel_fii", icon: logoX },
+  {
+    name: "Instagram",
+    href: "https://www.instagram.com/cel.fii/",
+    icon: logoI,
+  },
 ];
 
 const Footer = () => {
@@ -43,7 +53,11 @@ const Footer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-white text-2xl">
-                {social.icon}
+                <img
+                  src={social.icon}
+                  alt={social.name}
+                  className="w-8 h-8" // Ajusta el tamaño de los íconos
+                />
               </a>
             ))}
           </div>

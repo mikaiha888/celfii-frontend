@@ -1,5 +1,3 @@
-// src/components/Cards.jsx
-import React from "react";
 import Card from "../card/Card";
 
 const products = [

@@ -1,4 +1,3 @@
-import React from "react";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { classNames } from "../../utils/classNames";
 import logoLocal from '../../assets/logo-local.jpg'
