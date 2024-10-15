@@ -1,7 +1,5 @@
 import { classNames } from "../../utils/classNames";
-import logoX from "../../assets/logo-x.png";
-import logoF from "../../assets/logo-face.png";
-import logoI from "../../assets/Instagram_icon.png";
+import { Facebook, Instagram } from "lucide-react";
 
 const footerLinks = [
   { name: "Política de privacidad", href: "#", current: false },
@@ -14,13 +12,12 @@ const socialLinks = [
   {
     name: "Facebook",
     href: "https://www.facebook.com/profile.php?id=100018858458649",
-    icon: logoF,
+    icon: <Facebook color="#1877F2" />,
   },
-  { name: "Twitter", href: "https://x.com/Cel_fii", icon: logoX },
   {
     name: "Instagram",
     href: "https://www.instagram.com/cel.fii/",
-    icon: logoI,
+    icon: <Instagram color="#E1306C" />,
   },
 ];
 
@@ -53,11 +50,7 @@ const Footer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-white text-2xl">
-                <img
-                  src={social.icon}
-                  alt={social.name}
-                  className="w-8 h-8" // Ajusta el tamaño de los íconos
-                />
+                {social.icon}
               </a>
             ))}
           </div>
