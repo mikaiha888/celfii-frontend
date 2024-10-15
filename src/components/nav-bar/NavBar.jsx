@@ -6,6 +6,7 @@ import NavigationLinks from "../navigation/NavigationLinks";
 import UserMenu from "../user-menu/UserMenu";
 import { classNames } from "../../utils/classNames";
 import { Link } from "react-router-dom";
+import SearchBar from "../filter/SearchBar";
 
 const initialNavigation = [
   { name: "Inicio", href: "", current: false },
@@ -33,7 +34,8 @@ const NavBar = () => {
             <Logo />
             <NavigationLinks navigation={navigation} onLinkClick={handleNavigation} />
           </div>
-          <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+          <div className="absolute inset-y-0 right-0 flex items-center space-x-4 pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+            <SearchBar />
             <UserMenu />
           </div>
         </div>
