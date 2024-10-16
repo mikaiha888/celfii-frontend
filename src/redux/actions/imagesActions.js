@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { IMAGE_REQUEST, IMAGE_SUCCESS, IMAGE_FAILURE } from "../types";
+import { IMAGES_REQUEST, IMAGES_SUCCESS, IMAGES_FAILURE } from "../types";
 
 export const uploadImages =
   ({ id, images }) =>
@@ -8,15 +8,15 @@ export const uploadImages =
     try {
       const formData = new FormData();
       images.forEach((image) => formData.append("images", image));
-      dispatch({ type: IMAGE_REQUEST });
+      dispatch({ type: IMAGES_REQUEST });
       const { data } = await axios.post(`/images/upload/${id}`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
-      dispatch({ type: IMAGE_SUCCESS, payload: data });
+      dispatch({ type: IMAGES_SUCCESS, payload: data });
       return data;
     } catch (error) {
       dispatch({
-        type: IMAGE_FAILURE,
+        type: IMAGES_FAILURE,
         payload: error.message,
       });
     }

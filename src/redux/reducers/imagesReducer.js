@@ -1,4 +1,4 @@
-import { IMAGE_REQUEST, IMAGE_SUCCESS, IMAGE_FAILURE } from "../types";
+import { IMAGES_REQUEST, IMAGES_SUCCESS, IMAGES_FAILURE } from "../types";
 
 const initialState = {
   images: [],
@@ -6,15 +6,15 @@ const initialState = {
   error: null,
 };
 
-const imageReducer = (state = initialState, action) => {
+const imagesReducer = (state = initialState, action) => {
   switch (action.type) {
-    case IMAGE_REQUEST:
+    case IMAGES_REQUEST:
       return { ...state, loading: true, error: null };
 
-    case IMAGE_SUCCESS:
+    case IMAGES_SUCCESS:
       return { ...state, loading: false, images: action.payload, error: null };
 
-    case IMAGE_FAILURE:
+    case IMAGES_FAILURE:
       return { ...state, loading: false, error: action.payload };
 
     default:
@@ -22,4 +22,4 @@ const imageReducer = (state = initialState, action) => {
   }
 };
 
-export default imageReducer;
+export default imagesReducer;

@@ -1,2 +1,2 @@
-export * from "./imageActions";
-export * from "./productActions";
+export * from "./imagesActions";
+export * from "./productsActions";
