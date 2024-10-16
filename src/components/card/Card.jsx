@@ -1,4 +1,6 @@
-const Card = ({ image, title, price }) => {
+import { Link } from 'react-router-dom';
+
+const Card = ({ id, image, title, price }) => {
   return (
     <div className="max-w-sm rounded overflow-hidden shadow-lg bg-white">
       <img className="w-full h-60 object-cover" src={image} alt={title} />
@@ -7,9 +9,11 @@ const Card = ({ image, title, price }) => {
         <p className="text-gray-700 text-base">Precio: ARS {price}</p>
       </div>
       <div className="px-6 pt-4 pb-2">
-        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-          Ver más
-        </button>
+        <Link to={`/product/${id}`}>
+          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Ver más
+          </button>
+        </Link>
       </div>
     </div>
   );
