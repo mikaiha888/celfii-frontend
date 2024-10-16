@@ -26,13 +26,26 @@ const FieldComponent = ({ field, form }) => {
 
     case "file":
       return (
-        <input
-          type="file"
-          name={field.name}
-          accept={field.accept}
-          multiple={field.multiple}
-          onChange={handleFileChange}
-        />
+        <div>
+          <input
+            type="file"
+            name={field.name}
+            accept={field.accept}
+            multiple={field.multiple}
+            onChange={handleFileChange}
+          />
+          {form.values[field.name] && form.values[field.name].length > 0 && (
+            <div className="image-preview">
+              {form.values[field.name].map((file, index) => (
+                <img
+                  key={index}
+                  src={URL.createObjectURL(file)}
+                  alt={`preview-${index}`}
+                />
+              ))}
+            </div>
+          )}
+        </div>
       );
 
     default:
