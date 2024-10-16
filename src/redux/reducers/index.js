@@ -1,4 +1,4 @@
-import { combineReducers } from "redux";
+import { combineReducers } from 'redux';
 
 import imagesReducer from "./imagesReducer";
 import productsReducer from "./productsReducer";

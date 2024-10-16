@@ -20,7 +20,7 @@ const productsReducer = (state = initialState, action) => {
 
     case PRODUCTS_FAILURE:
       return { ...state, loading: false, error: action.payload };
-
+      
     default:
       return state;
   }
