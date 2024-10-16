@@ -1,7 +1,7 @@
 import axios from "axios";
 
 import { PRODUCTS_REQUEST, PRODUCT_SUCCESS, PRODUCTS_SUCCESS, PRODUCTS_FAILURE } from "../types";
-import { uploadImages } from "./imageActions";
+import { uploadImages } from "./imagesActions";
 
 export const createProduct = (productData) => async (dispatch) => {
   try {
@@ -13,7 +13,9 @@ export const createProduct = (productData) => async (dispatch) => {
     dispatch({
       type: PRODUCTS_FAILURE,
       payload: error.message,
-}
+    });
+  }
+};
 
 export const loadProduct = (id) => async (dispatch) => {
   try {
@@ -31,7 +33,7 @@ export const loadProduct = (id) => async (dispatch) => {
 export const loadProducts = () => async (dispatch) => {
   try {
     dispatch({ type: PRODUCTS_REQUEST });
-    const { data } = await axios.get('/products');
+    const { data } = await axios.get("/products");
     dispatch({ type: PRODUCTS_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
@@ -44,7 +46,7 @@ export const loadProducts = () => async (dispatch) => {
 export const saveProduct = (productData) => async (dispatch) => {
   try {
     dispatch({ type: PRODUCTS_REQUEST });
-    const { data } = await axios.put(`/products/${productData.id}`, productData)
+    const { data } = await axios.put(`/products/${productData.id}`, productData);
     dispatch({ type: PRODUCT_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
@@ -59,7 +61,7 @@ export const deleteProduct = (id) => async (dispatch) => {
     dispatch({ type: PRODUCTS_REQUEST });
     const { data } = await axios.delete(`/products/${id}`);
     dispatch(loadProducts());
-    return data
+    return data;
   } catch (error) {
     dispatch({
       type: PRODUCTS_FAILURE,
