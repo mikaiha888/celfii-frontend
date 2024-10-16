@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Search } from "lucide-react"; // Usamos el ícono de lucide-react
+import { Search } from "lucide-react";
 
 const SearchBar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,8 +15,6 @@ const SearchBar = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    // Aquí puedes manejar lo que quieras hacer con el valor de búsqueda
-    console.log("Buscando:", searchQuery);
   };
 
   return (
@@ -28,9 +26,7 @@ const SearchBar = () => {
       </button>
 
       {isOpen && (
-        <form
-          onSubmit={handleSearch}
-          className="absolute top-0 bottom-0 right-7 flex items-center">
+        <form onSubmit={handleSearch} className="absolute top-0 bottom-0 right-7 flex items-center">
           <input
             type="text"
             value={searchQuery}
