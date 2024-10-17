@@ -75,7 +75,7 @@ const CreateProductForm = () => {
 
   return (
     <div>
-      <h1>Create New Product</h1>
+      <h1>Crear nuevo producto</h1>
       <GenericForm
         initialValues={initialValues}
         validationSchema={createProductValidationSchema}
