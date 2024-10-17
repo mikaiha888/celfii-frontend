@@ -1,16 +1,16 @@
-import "./App.css";
-import { Routes, Route } from "react-router-dom";
+import './App.css';
+import { Routes, Route } from 'react-router-dom';
 
-import NavBar from "./components/nav-bar/NavBar";
-import Home from "./view/home-page/Home";
-import Products from "./view/products-page/Products";
-import AboutUs from "./view/aboutus-page/AboutUs";
-import Contact from "./view/contact-page/Contact";
-import Profile from './view/profile-page/Profile'
-import Settings from './view/settings-page/Settings'
-import Login from "./view/login-page/Login";
-import Footer from "./components/footer/Footer";
-import ProductDetailPage from "./view/product-detail-page/ProductDetailPage"
+import NavBar from './components/nav-bar/NavBar';
+import Home from './view/home-page/Home';
+import Products from './view/products-page/Products';
+import AboutUs from './view/aboutus-page/AboutUs';
+import Contact from './view/contact-page/Contact';
+import Profile from './view/profile-page/Profile';
+import Settings from './view/settings-page/Settings';
+import Login from './view/login-page/Login';
+import Footer from './components/footer/Footer';
+import ProductDetailPage from './view/product-detail-page/ProductDetailPage';
 
 const App = () => {
   return (
@@ -26,10 +26,11 @@ const App = () => {
             <Route path="/perfil" element={<Profile />} />
             <Route path="/configuracion" element={<Settings />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/product/:id" element={<ProductDetailPage/>} />
+            <Route path="/product/:id" element={<ProductDetailPage />} />
+            <Route path="/aboutus" element={<AboutUs />} />
           </Routes>
         </div>
-        <Footer/>
+        <Footer />
       </div>
     </>
   );
