@@ -1,15 +1,14 @@
 import { Admin, Resource } from 'react-admin';
-import jsonServerProvider from 'ra-data-json-server';
+import dataProvider from './dataProvider';
 import { ProductList } from './ProductList';
 import { CategoryList } from './CategoryList';
 import { RoleList } from './RoleList';
 import { UserList } from './UserList';
-
-const dataProvider = jsonServerProvider('http://localhost:3001');
+import { ProductShow } from './ProductShow';
 
 const AdminDashboard = () => (
   <Admin dataProvider={dataProvider} basename="/admin">
-    <Resource name="products" list={ProductList} />
+    <Resource name="products" list={ProductList} show={ProductShow} />
     <Resource name="categories" list={CategoryList} />
     <Resource name="roles" list={RoleList} />
     <Resource name="users" list={UserList} />

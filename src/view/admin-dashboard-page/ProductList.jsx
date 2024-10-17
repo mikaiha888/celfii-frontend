@@ -1,22 +1,29 @@
 /* eslint-disable react/jsx-key */
-import {
-  List,
-  Datagrid,
-  TextField,
-  NumberField,
-  TextInput,
-  NumberInput,
-  Button,
-} from 'react-admin';
+import { List, Datagrid, TextField, NumberField, TextInput, SelectInput, Filter } from 'react-admin';
 import ProductModal from '../../components/modal/ProductModal';
 import { useState } from 'react';
 
+const ProductFilter = (props) => (
+  <Filter {...props}>
+    <TextInput source="name" label="Buscar por Nombre" alwaysOn />
+    <TextInput source="minPrice" label="Precio Mínimo" />
+    <TextInput source="maxPrice" label="Precio Máximo" />
+    <SelectInput 
+      source="sort" 
+      label="Ordenar por" 
+      choices={[
+        { id: 'most popular', name: 'Más Popular' },
+        { id: 'highest price', name: 'Precio más Alto' },
+        { id: 'lowest price', name: 'Precio más Bajo' },
+        { id: 'newest', name: 'Más Nuevo' },
+      ]}
+      alwaysOn
+    />
+  </Filter>
+);
+
 export const ProductList = (props) => {
   const [modalOpen, setModalOpen] = useState(false);
-
-  const openModal = () => {
-    setModalOpen(true);
-  };
 
   const closeModal = () => {
     setModalOpen(false);
@@ -24,20 +31,14 @@ export const ProductList = (props) => {
 
   return (
     <div>
-      <Button label="Agregar Producto" onClick={openModal} />
+      <div className="flex justify-end mb-4"></div>
       <ProductModal isOpen={modalOpen} closeModal={closeModal} />
       <List
-        pagination={false}
         {...props}
-        filters={[
-          <TextInput source="name" label="Buscar por Nombre" alwaysOn />,
-          <TextInput source="minPrice" label="Precio Mínimo" />,
-          <TextInput source="maxPrice" label="Precio Máximo" />,
-          <NumberInput source="page" label="Página" alwaysOn={true} />,
-          <NumberInput source="perPage" label="Por Página" alwaysOn={true} />,
-        ]}
+        filters={<ProductFilter />}
+        perPage={25}
       >
-        <Datagrid>
+        <Datagrid rowClick="edit">
           <TextField source="id" label="ID" />
           <TextField source="name" label="Nombre del Producto" />
           <TextField source="description" label="Descripción" />
