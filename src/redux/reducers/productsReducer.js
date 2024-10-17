@@ -1,9 +1,4 @@
-import {
-  LOAD_PRODUCT,
-  LOAD_PRODUCTS,
-  LOAD_PRODUCTS_SUCCESS,
-  LOAD_PRODUCTS_FAILURE,
-} from '../types/productsTypes';
+import { PRODUCTS_REQUEST, PRODUCT_SUCCESS, PRODUCTS_SUCCESS, PRODUCTS_FAILURE } from "../types";
 
 const initialState = {
   products: [],
@@ -14,26 +9,18 @@ const initialState = {
 
 const productsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case LOAD_PRODUCT:
-    case LOAD_PRODUCTS:
-      return {
-        ...state,
-        loading: true,
-        error: null,
-      };
-    case LOAD_PRODUCTS_SUCCESS:
-      return {
-        ...state,
-        products: Array.isArray(action.payload) ? action.payload : state.products,
-        product: !Array.isArray(action.payload) ? action.payload : state.product,
-        loading: false,
-      };
-    case LOAD_PRODUCTS_FAILURE:
-      return {
-        ...state,
-        error: action.payload,
-        loading: false,
-      };
+    case PRODUCTS_REQUEST:
+      return { ...state, loading: true, error: null };
+
+    case PRODUCT_SUCCESS:
+      return { ...state, loading: false, product: action.payload, error: null };
+
+    case PRODUCTS_SUCCESS:
+      return { ...state, loading: false, products: action.payload, error: null };
+
+    case PRODUCTS_FAILURE:
+      return { ...state, loading: false, error: action.payload };
+      
     default:
       return state;
   }

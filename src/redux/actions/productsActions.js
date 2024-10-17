@@ -1,38 +1,43 @@
-import {
-  LOAD_PRODUCT,
-  LOAD_PRODUCTS,
-  LOAD_PRODUCTS_SUCCESS,
-  LOAD_PRODUCTS_FAILURE,
-} from '../types/productsTypes';
-import axios from 'axios';
+import axios from "axios";
 
-export const loadProduct = (id) => async (dispatch) => {
-  dispatch({ type: LOAD_PRODUCT });
+import { PRODUCTS_REQUEST, PRODUCT_SUCCESS, PRODUCTS_SUCCESS, PRODUCTS_FAILURE } from "../types";
+import { uploadImages } from "./imagesActions";
+
+export const createProduct = (productData) => async (dispatch) => {
   try {
-    const response = await axios.get(`http://localhost:3001/products/${id}`);
-    dispatch({
-      type: LOAD_PRODUCTS_SUCCESS,
-      payload: response.data,
-    });
+    dispatch({ type: PRODUCTS_REQUEST });
+    const { data } = await axios.post("/products", productData);
+    dispatch(uploadImages(productData));
+    dispatch({ type: PRODUCT_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
-      type: LOAD_PRODUCTS_FAILURE,
+      type: PRODUCTS_FAILURE,
+      payload: error.message,
+    });
+  }
+};
+
+export const loadProduct = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: PRODUCTS_REQUEST });
+    const { data } = await axios.get(`/products/${id}`);
+    dispatch({ type: PRODUCT_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: PRODUCTS_FAILURE,
       payload: error.message,
     });
   }
 };
 
 export const loadProducts = () => async (dispatch) => {
-  dispatch({ type: LOAD_PRODUCTS });
   try {
-    const response = await axios.get('http://localhost:3001/products');
-    dispatch({
-      type: LOAD_PRODUCTS_SUCCESS,
-      payload: response.data,
-    });
+    dispatch({ type: PRODUCTS_REQUEST });
+    const { data } = await axios.get("/products");
+    dispatch({ type: PRODUCTS_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
-      type: LOAD_PRODUCTS_FAILURE,
+      type: PRODUCTS_FAILURE,
       payload: error.message,
     });
   }
@@ -40,16 +45,12 @@ export const loadProducts = () => async (dispatch) => {
 
 export const saveProduct = (productData) => async (dispatch) => {
   try {
-    const response = productData.id
-      ? await axios.put(`http://localhost:3001/products/${productData.id}`, productData)
-      : await axios.post('http://localhost:3001/products', productData);
-    dispatch({
-      type: LOAD_PRODUCTS_SUCCESS,
-      payload: response.data,
-    });
+    dispatch({ type: PRODUCTS_REQUEST });
+    const { data } = await axios.put(`/products/${productData.id}`, productData);
+    dispatch({ type: PRODUCT_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
-      type: LOAD_PRODUCTS_FAILURE,
+      type: PRODUCTS_FAILURE,
       payload: error.message,
     });
   }
@@ -57,11 +58,13 @@ export const saveProduct = (productData) => async (dispatch) => {
 
 export const deleteProduct = (id) => async (dispatch) => {
   try {
-    await axios.delete(`http://localhost:3001/products/${id}`);
+    dispatch({ type: PRODUCTS_REQUEST });
+    const { data } = await axios.delete(`/products/${id}`);
     dispatch(loadProducts());
+    return data;
   } catch (error) {
     dispatch({
-      type: LOAD_PRODUCTS_FAILURE,
+      type: PRODUCTS_FAILURE,
       payload: error.message,
     });
   }
