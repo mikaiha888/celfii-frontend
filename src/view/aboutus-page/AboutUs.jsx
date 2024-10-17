@@ -30,19 +30,6 @@ const AboutUs = () => {
         <li>Asesoría en tecnología móvil</li>
       </ul>
 
-      <p>Encuéntranos en la siguiente dirección:</p>
-      <div>
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d820.79326208388!2d-68.35480043034727!3d-34.62506699473024!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9679081e37b0ae6d%3A0xab19bb885c203d96!2sCel-Fii!5e0!3m2!1ses-419!2sar!4v1729162892037!5m2!1ses-419!2sar"
-          width="600"
-          height="450"
-          style={{ border: 0 }}
-          allowFullScreen=""
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-        ></iframe>
-      </div>
-
       <h2>Horario de Atención</h2>
       <p>
         Lunes a Viernes: 9:00 AM - 6:00 PM
