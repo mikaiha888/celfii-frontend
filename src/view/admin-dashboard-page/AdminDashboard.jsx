@@ -6,6 +6,8 @@ import CategoryCreate from './categories/CategoryCreate';
 import CategoryEdit from './categories/CategoryEdit';
 import { RoleList } from './roles/RoleList';
 import { UserList } from './users/UserList';
+import UserCreate from './users/UserCreate';
+import UserEdit from './users/UserEdit';
 import { ProductShow } from './products/ProductShow';
 import ProductEdit from './products/ProductEdit';
 
@@ -14,7 +16,7 @@ const AdminDashboard = () => (
     <Resource name="products" list={ProductList} show={ProductShow} edit={ProductEdit} />
     <Resource name="categories" list={CategoryList} edit={CategoryEdit} create={CategoryCreate} />
     <Resource name="roles" list={RoleList} />
-    <Resource name="users" list={UserList} />
+    <Resource name="users" list={UserList} create={UserCreate} edit={UserEdit} />
   </Admin>
 );
 

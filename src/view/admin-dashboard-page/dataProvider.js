@@ -1,5 +1,12 @@
 import axios from 'axios';
 
+const getAuthHeaders = () => {
+  const token = localStorage.getItem('token');
+  return {
+    Authorization: `Bearer ${token}`,
+  };
+};
+
 const dataProvider = {
   getList: async (resource, params) => {
     const { page, perPage } = params.pagination;
@@ -16,6 +23,7 @@ const dataProvider = {
 
     const { data, headers } = await axios.get(`http://localhost:3001/${resource}`, {
       params: query,
+      headers: getAuthHeaders(),
     });
 
     return {
@@ -25,32 +33,46 @@ const dataProvider = {
   },
 
   getOne: async (resource, params) => {
-    const { data } = await axios.get(`http://localhost:3001/${resource}/${params.id}`);
+    const { data } = await axios.get(`http://localhost:3001/${resource}/${params.id}`, {
+      headers: getAuthHeaders(),
+    });
     return { data };
   },
 
   create: async (resource, params) => {
-    const { data } = await axios.post(`http://localhost:3001/${resource}`, params.data);
+    const { data } = await axios.post(`http://localhost:3001/${resource}`, params.data, {
+      headers: getAuthHeaders(),
+    });
     return { data };
   },
 
   update: async (resource, params) => {
-    const { data } = await axios.put(`http://localhost:3001/${resource}/${params.id}`, params.data);
+    const { data } = await axios.put(
+      `http://localhost:3001/${resource}/${params.id}`,
+      params.data,
+      {
+        headers: getAuthHeaders(),
+      }
+    );
     return { data };
   },
 
   delete: async (resource, params) => {
-    await axios.delete(`http://localhost:3001/${resource}/${params.id}`);
+    await axios.delete(`http://localhost:3001/${resource}/${params.id}`, {
+      headers: getAuthHeaders(),
+    });
     return { data: params.previousData };
   },
 
   deleteMany: async (resource, params) => {
-    const deleteRequests = params.ids.map(id => 
-      axios.delete(`http://localhost:3001/${resource}/${id}`)
+    const deleteRequests = params.ids.map((id) =>
+      axios.delete(`http://localhost:3001/${resource}/${id}`, {
+        headers: getAuthHeaders(),
+      })
     );
 
     await Promise.all(deleteRequests);
-    return { data: params.ids }; 
+    return { data: params.ids };
   },
 };
 

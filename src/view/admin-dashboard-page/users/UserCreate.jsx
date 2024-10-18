@@ -1,11 +1,9 @@
 import { Create, SimpleForm, TextInput, useNotify, useRefresh, useRedirect } from 'react-admin';
 import { useDataProvider } from 'react-admin';
 
-const required = (value) => (value ? undefined : 'El nombre es obligatorio');
-const validateLetters = (value) => 
-  /^[A-Za-z\s]+$/.test(value) ? undefined : 'El nombre solo puede contener letras y espacios';
+const required = (value) => (value ? undefined : 'El campo es obligatorio');
 
-const CategoryCreate = (props) => {
+const UserCreate = (props) => {
   const notify = useNotify();
   const refresh = useRefresh();
   const redirect = useRedirect();
@@ -13,9 +11,9 @@ const CategoryCreate = (props) => {
 
   const handleCreate = async (data) => {
     try {
-      await dataProvider.create('categories', { data });
-      notify('Categoría creada con éxito');
-      redirect('/admin/categories');
+      await dataProvider.create('users', { data });
+      notify('Usuario creado con éxito');
+      redirect('/admin/users');
       refresh();
     } catch (error) {
       notify(`Error: ${error.message}`, { type: 'warning' });
@@ -25,14 +23,12 @@ const CategoryCreate = (props) => {
   return (
     <Create {...props}>
       <SimpleForm onSubmit={handleCreate}>
-        <TextInput 
-          source="name" 
-          label="Nombre de la Categoría" 
-          validate={[required, validateLetters]} 
-        />
+        <TextInput source="username" label="Nombre de Usuario" validate={required} />
+        <TextInput source="email" label="Correo Electrónico" validate={required} />
+        <TextInput source="password" label="Contraseña" type="password" validate={required} />
       </SimpleForm>
     </Create>
   );
 };
 
-export default CategoryCreate;
+export default UserCreate;
