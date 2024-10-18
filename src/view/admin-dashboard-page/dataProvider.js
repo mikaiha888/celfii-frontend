@@ -43,6 +43,15 @@ const dataProvider = {
     await axios.delete(`http://localhost:3001/${resource}/${params.id}`);
     return { data: params.previousData };
   },
+
+  deleteMany: async (resource, params) => {
+    const deleteRequests = params.ids.map(id => 
+      axios.delete(`http://localhost:3001/${resource}/${id}`)
+    );
+
+    await Promise.all(deleteRequests);
+    return { data: params.ids }; 
+  },
 };
 
 export default dataProvider;

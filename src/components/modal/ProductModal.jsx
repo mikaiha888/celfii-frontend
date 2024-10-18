@@ -1,35 +1,22 @@
-import Modal from 'react-modal';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import CustomModal from './Modal';
 import CreateProductForm from '../form/CreateProductForm';
 
-Modal.setAppElement('#root');
+const ProductModal = ({ isOpen, onClose, product }) => {
+  const [modalTitle, setModalTitle] = useState('Agregar Producto');
 
-const ProductModal = () => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const openModal = () => {
-    setIsOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsOpen(false);
-  };
+  useEffect(() => {
+    if (product) {
+      setModalTitle('Editar Producto');
+    } else {
+      setModalTitle('Agregar Producto');
+    }
+  }, [product]);
 
   return (
-    <>
-      <button onClick={openModal}>Agregar Producto</button>
-      <Modal
-        isOpen={isOpen}
-        onRequestClose={closeModal}
-        contentLabel="Agregar Producto"
-        className="ReactModal__Content"
-        overlayClassName="ReactModal__Overlay"
-      >
-        <h2>Agregar Nuevo Producto</h2>
-        <CreateProductForm />
-        <button onClick={closeModal}>Cerrar</button>
-      </Modal>
-    </>
+    <CustomModal isOpen={isOpen} onClose={onClose} title={modalTitle}>
+      <CreateProductForm product={product} />
+    </CustomModal>
   );
 };
 
