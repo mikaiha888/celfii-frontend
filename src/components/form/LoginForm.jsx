@@ -1,8 +1,14 @@
+import { useDispatch } from "react-redux";
 import { loginValidationSchema } from "./validations";
+import { loginUser } from "../../redux/actions/authActions";
 
 import GenericForm from "./GenericForm";
+import { useNavigate } from "react-router-dom";
 
-const LoginFotm = () => {
+const LoginForm = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const initialValues = {
     email: "",
     password: "",
@@ -16,7 +22,7 @@ const LoginFotm = () => {
       placeholder: "usuario123@ejemplo.com",
     },
     {
-      name: "description",
+      name: "password",
       label: "Contraseña:",
       type: "password",
       placeholder: "Tu contraseña",
@@ -30,10 +36,13 @@ const LoginFotm = () => {
         initialValues={initialValues}
         validationSchema={loginValidationSchema}
         fields={fields}
-        onSubmit
+        onSubmit={(formData) => {
+          dispatch(loginUser(formData));
+          navigate("/");
+        }}
         buttonLabel="Iniciar Sesión"
       />
     </div>
   );
 };
-export default LoginFotm;
+export default LoginForm;
