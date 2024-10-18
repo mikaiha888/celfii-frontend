@@ -8,6 +8,7 @@ import {
   Filter,
   DeleteButton,
   EditButton,
+  ImageField,
 } from 'react-admin';
 
 const ProductFilter = (props) => (
@@ -34,6 +35,7 @@ export const ProductList = (props) => (
     <Datagrid>
       <TextField source="id" label="ID" />
       <TextField source="name" label="Nombre del Producto" />
+      <ImageField source="images[0].url" label="Imagen" />
       <TextField source="category.name" label="Categoría" />
       <NumberField source="priceArs" label="Precio (ARS)" />
       <NumberField source="stock" label="Stock" />

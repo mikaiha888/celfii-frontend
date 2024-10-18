@@ -9,7 +9,11 @@ import {
   useRefresh,
   useRedirect,
   useDataProvider,
+  SelectInput,
+  FileInput,
+  FileField,
 } from 'react-admin';
+import { useEffect, useState } from 'react';
 
 const ProductEditToolbar = (props) => (
   <Toolbar {...props}>
@@ -22,6 +26,18 @@ const ProductEdit = (props) => {
   const refresh = useRefresh();
   const redirect = useRedirect();
   const dataProvider = useDataProvider();
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    dataProvider
+      .getList('categories', { pagination: {}, sort: {}, filter: {} })
+      .then(({ data }) => {
+        setCategories(data.map((category) => ({ id: category.id, name: category.name })));
+      })
+      .catch((error) => {
+        notify(`Error al cargar categorías: ${error.message}`, { type: 'warning' });
+      });
+  }, [dataProvider, notify]);
 
   const handleSave = async (data) => {
     try {
@@ -40,12 +56,15 @@ const ProductEdit = (props) => {
         <TextInput source="id" disabled />
         <TextInput source="name" label="Nombre del Producto" />
         <TextInput source="description" label="Descripción" />
-        <TextInput source="category.name" label="Categoría" />
+        <SelectInput source="category" label="Categoría" choices={categories} />
         <NumberInput source="priceArs" label="Precio (ARS)" />
         <NumberInput source="priceUsd" label="Precio (USD)" />
         <NumberInput source="stock" label="Stock" />
         <TextInput source="code" label="Código" />
         <TextInput source="imei" label="IMEI" />
+        <FileInput source="images" label="Imágenes" accept="image/*" multiple>
+          <FileField source="src" title="title" />
+        </FileInput>
         <ProductEditToolbar />
       </SimpleForm>
     </Edit>

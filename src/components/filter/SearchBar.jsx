@@ -1,9 +1,12 @@
-import { useState } from "react";
-import { Search } from "lucide-react";
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { Search } from 'lucide-react';
+import { loadProducts } from '../../redux/actions';
 
 const SearchBar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState('');
+  const dispatch = useDispatch();
 
   const toggleSearchBar = () => {
     setIsOpen(!isOpen);
@@ -15,13 +18,15 @@ const SearchBar = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
+    dispatch(loadProducts(searchQuery));
   };
 
   return (
     <div className="relative">
       <button
         onClick={toggleSearchBar}
-        className="text-gray-400 hover:text-white focus:outline-none">
+        className="text-gray-400 hover:text-white focus:outline-none"
+      >
         <Search size={24} className="mt-1" />
       </button>
 
