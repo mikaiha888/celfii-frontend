@@ -1,12 +1,12 @@
-import axios from 'axios';
+import axios from "axios";
 
-import { PRODUCTS_REQUEST, PRODUCT_SUCCESS, PRODUCTS_SUCCESS, PRODUCTS_FAILURE } from '../types';
-import { uploadImages } from './imagesActions';
+import { PRODUCTS_REQUEST, PRODUCT_SUCCESS, PRODUCTS_SUCCESS, PRODUCTS_FAILURE } from "../types";
+import { uploadImages } from "./imagesActions";
 
 export const createProduct = (productData) => async (dispatch) => {
   try {
     dispatch({ type: PRODUCTS_REQUEST });
-    const { data } = await axios.post('/products', productData);
+    const { data } = await axios.post("/products", productData);
     dispatch(uploadImages(productData));
     dispatch({ type: PRODUCT_SUCCESS, payload: data });
   } catch (error) {
@@ -30,14 +30,18 @@ export const loadProduct = (id) => async (dispatch) => {
   }
 };
 
-export const loadProducts =
-  (searchQuery = '') =>
-  async (dispatch) => {
+export const loadProducts = (data) => {
+  const { pagination, name, category, sort } = data;
+  const params = new URLSearchParams();
+
+  return async (dispatch) => {
     try {
       dispatch({ type: PRODUCTS_REQUEST });
-      const { data } = await axios.get('/products', {
-        params: { name: searchQuery },
-      });
+      if (pagination) params.append("perPage", pagination);
+      if (name) params.append("name", name);
+      if (category) params.append("category", category);
+      if (sort) params.append("sort", sort);
+      const { data } = await axios.get(`/products?${params.toString()}`);
 
       dispatch({ type: PRODUCTS_SUCCESS, payload: data });
     } catch (error) {
@@ -47,6 +51,7 @@ export const loadProducts =
       });
     }
   };
+};
 
 export const saveProduct = (productData) => async (dispatch) => {
   try {
