@@ -16,11 +16,16 @@ const productsReducer = (state = initialState, action) => {
       return { ...state, loading: false, product: action.payload, error: null };
 
     case PRODUCTS_SUCCESS:
-      return { ...state, loading: false, products: action.payload, error: null };
+      return {
+        ...state,
+        loading: false,
+        products: action.payload,
+        error: null,
+      };
 
     case PRODUCTS_FAILURE:
       return { ...state, loading: false, error: action.payload };
-      
+
     default:
       return state;
   }

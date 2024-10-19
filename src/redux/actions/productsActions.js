@@ -31,19 +31,24 @@ export const loadProduct = (id) => async (dispatch) => {
 };
 
 export const loadProducts = (data) => {
-  const { pagination, name, category, sort } = data;
+  const { page, pagination, name, category, sort } = data;
   const params = new URLSearchParams();
 
   return async (dispatch) => {
     try {
       dispatch({ type: PRODUCTS_REQUEST });
+      if (page) params.append("page", page);
       if (pagination) params.append("perPage", pagination);
       if (name) params.append("name", name);
       if (category) params.append("category", category);
       if (sort) params.append("sort", sort);
       const { data } = await axios.get(`/products?${params.toString()}`);
+      console.log(data);
 
-      dispatch({ type: PRODUCTS_SUCCESS, payload: data });
+      dispatch({
+        type: PRODUCTS_SUCCESS,
+        payload: data,
+      });
     } catch (error) {
       dispatch({
         type: PRODUCTS_FAILURE,
