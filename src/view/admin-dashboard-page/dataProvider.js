@@ -18,6 +18,7 @@ const dataProvider = {
       name: filters.name || undefined,
       minPrice: filters.minPrice || undefined,
       maxPrice: filters.maxPrice || undefined,
+      category: filters.category || undefined,
       sort,
     };
 
