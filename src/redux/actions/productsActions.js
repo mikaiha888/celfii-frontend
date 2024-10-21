@@ -43,7 +43,6 @@ export const loadProducts = (data) => {
       if (category) params.append("category", category);
       if (sort) params.append("sort", sort);
       const { data } = await axios.get(`/products?${params.toString()}`);
-      console.log(data);
 
       dispatch({
         type: PRODUCTS_SUCCESS,
