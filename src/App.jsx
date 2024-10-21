@@ -11,6 +11,7 @@ import Settings from './view/settings-page/Settings';
 import Login from './view/login-page/Login';
 import Footer from './components/footer/Footer';
 import ProductDetailPage from './view/product-detail-page/ProductDetailPage';
+import AdminDashboard from './view/admin-dashboard-page/AdminDashboard';
 
 const App = () => {
   return (
@@ -27,6 +28,7 @@ const App = () => {
             <Route path="/configuracion" element={<Settings />} />
             <Route path="/login" element={<Login />} />
             <Route path="/product/:id" element={<ProductDetailPage />} />
+            <Route path="/admin/*" element={<AdminDashboard />} />
           </Routes>
         </div>
         <Footer />
