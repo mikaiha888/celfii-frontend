@@ -1,7 +1,7 @@
 import { Show, SimpleShowLayout, TextField, NumberField, ImageField } from 'react-admin';
 
 export const ProductShow = (props) => (
-  <Show {...props}>
+  <Show title="Producto" {...props}>
     <SimpleShowLayout>
       <TextField source="id" label="ID" />
       <TextField source="name" label="Nombre del Producto" />

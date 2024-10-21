@@ -21,7 +21,7 @@ const UserCreate = (props) => {
   };
 
   return (
-    <Create {...props}>
+    <Create title="Crear usuario" {...props}>
       <SimpleForm onSubmit={handleCreate}>
         <TextInput source="username" label="Nombre de Usuario" validate={required} />
         <TextInput source="email" label="Correo Electrónico" validate={required} />

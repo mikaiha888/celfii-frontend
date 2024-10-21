@@ -70,7 +70,7 @@ const ProductCreate = (props) => {
   };
 
   return (
-    <Create {...props}>
+    <Create title="Crear producto"{...props}>
       <SimpleForm onSubmit={handleCreate}>
         <TextInput source="id" label="Id del producto" validate={required} />
         <TextInput source="name" label="Nombre del Producto" validate={required} />

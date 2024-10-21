@@ -4,7 +4,7 @@ const required = (value) => (value ? undefined : 'El campo es obligatorio');
 
 const UserEdit = (props) => {
   return (
-    <Edit {...props}>
+    <Edit title="Editar usuario" {...props}>
       <SimpleForm>
         <TextInput source="username" label="Nombre de Usuario" validate={required} />
         <TextInput source="email" label="Correo Electrónico" validate={required} />

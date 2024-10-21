@@ -23,7 +23,7 @@ const CategoryCreate = (props) => {
   };
 
   return (
-    <Create {...props}>
+    <Create title="Crear categoria"{...props}>
       <SimpleForm onSubmit={handleCreate}>
         <TextInput 
           source="name" 

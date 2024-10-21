@@ -13,7 +13,6 @@ import { useEffect, useState } from 'react';
 
 const ProductEdit = (props) => {
   const notify = useNotify();
-
   const dataProvider = useDataProvider();
   const [categories, setCategories] = useState([]);
 
@@ -29,7 +28,7 @@ const ProductEdit = (props) => {
   }, [dataProvider, notify]);
 
   return (
-    <Edit {...props}>
+    <Edit title="Editar producto"{...props}>
       <SimpleForm>
         <TextInput source="id" disabled />
         <TextInput source="name" label="Nombre del Producto" />
