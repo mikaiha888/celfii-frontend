@@ -3,11 +3,7 @@ import {
   SimpleForm,
   TextInput,
   NumberInput,
-  SaveButton,
-  Toolbar,
   useNotify,
-  useRefresh,
-  useRedirect,
   useDataProvider,
   SelectInput,
   FileInput,
@@ -15,16 +11,9 @@ import {
 } from 'react-admin';
 import { useEffect, useState } from 'react';
 
-const ProductEditToolbar = (props) => (
-  <Toolbar {...props}>
-    <SaveButton />
-  </Toolbar>
-);
-
 const ProductEdit = (props) => {
   const notify = useNotify();
-  const refresh = useRefresh();
-  const redirect = useRedirect();
+
   const dataProvider = useDataProvider();
   const [categories, setCategories] = useState([]);
 
@@ -39,20 +28,9 @@ const ProductEdit = (props) => {
       });
   }, [dataProvider, notify]);
 
-  const handleSave = async (data) => {
-    try {
-      await dataProvider.update('products', { id: data.id, data });
-      notify('Producto actualizado con éxito');
-      redirect('list', 'products');
-      refresh();
-    } catch {
-      notify('Error al actualizar el producto', { type: 'warning' });
-    }
-  };
-
   return (
     <Edit {...props}>
-      <SimpleForm onSubmit={handleSave}>
+      <SimpleForm>
         <TextInput source="id" disabled />
         <TextInput source="name" label="Nombre del Producto" />
         <TextInput source="description" label="Descripción" />
@@ -65,7 +43,6 @@ const ProductEdit = (props) => {
         <FileInput source="images" label="Imágenes" accept="image/*" multiple>
           <FileField source="src" title="title" />
         </FileInput>
-        <ProductEditToolbar />
       </SimpleForm>
     </Edit>
   );
