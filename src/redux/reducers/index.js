@@ -2,7 +2,7 @@ import { combineReducers } from "redux";
 
 import imagesReducer from './imagesReducer';
 import productsReducer from './productsReducer';
-import categoriesReducer from './categoryReducer';
+import categoriesReducer from './categoriesReducer';
 import authReducer from "./authReducer";
 import usersReducer from "./usersReducer";
 

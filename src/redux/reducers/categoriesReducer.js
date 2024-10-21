@@ -1,4 +1,4 @@
-import { CATEGORY_REQUEST, CATEGORY_SUCCESS, CATEGORY_FAILURE } from '../types/categoryTypes';
+import { CATEGORIES_REQUEST, CATEGORIES_SUCCESS, CATEGORIES_FAILURE } from "../types";
 
 const initialState = {
   categories: [],
@@ -8,13 +8,13 @@ const initialState = {
 
 const categoriesReducer = (state = initialState, action) => {
   switch (action.type) {
-    case CATEGORY_REQUEST:
+    case CATEGORIES_REQUEST:
       return { ...state, loading: true, error: null };
 
-    case CATEGORY_SUCCESS:
+    case CATEGORIES_SUCCESS:
       return { ...state, loading: false, categories: action.payload, error: null };
 
-    case CATEGORY_FAILURE:
+    case CATEGORIES_FAILURE:
       return { ...state, loading: false, error: action.payload };
 
     default:

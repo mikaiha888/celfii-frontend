@@ -28,7 +28,7 @@ const dataProvider = {
     });
 
     return {
-      data,
+      data: data.products ? data.products : data,
       total: parseInt(headers['x-total-count'], 10),
     };
   },
