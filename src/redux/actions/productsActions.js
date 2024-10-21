@@ -47,7 +47,10 @@ export const loadProducts = (data) => {
 
       dispatch({
         type: PRODUCTS_SUCCESS,
-        payload: data,
+        payload: {
+          products: data.products,
+          totalItems: data.totalItems,
+        }
       });
     } catch (error) {
       dispatch({

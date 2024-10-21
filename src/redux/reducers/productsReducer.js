@@ -3,6 +3,7 @@ import { PRODUCTS_REQUEST, PRODUCT_SUCCESS, PRODUCTS_SUCCESS, PRODUCTS_FAILURE }
 const initialState = {
   products: [],
   product: {},
+  totalItems: 0,
   loading: false,
   error: null,
 };
@@ -19,7 +20,8 @@ const productsReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        products: action.payload,
+        products: action.payload.products,
+        totalItems: action.payload.totalItems,
         error: null,
       };
 
