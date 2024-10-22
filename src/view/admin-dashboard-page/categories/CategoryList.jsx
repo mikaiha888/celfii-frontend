@@ -5,10 +5,9 @@ export const CategoryList = () => {
     <div>
       <List title="Categorias" pagination={false}>
         <Datagrid>
-          <TextField source="id" label="ID" />
           <TextField source="name" label="Nombre de la Categoría" />
-          <EditButton label="Editar"  basePath="/categories" />
-          <DeleteButton label="Eliminar" undoable={false} />
+          <EditButton label="Editar" />
+          <DeleteButton label="Eliminar"  />
         </Datagrid>
       </List>
     </div>

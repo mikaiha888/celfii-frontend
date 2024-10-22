@@ -64,7 +64,6 @@ const ProductFilter = (props) => {
 export const ProductList = (props) => (
   <List title="Productos" {...props} filters={<ProductFilter />} perPage={25}>
     <Datagrid>
-      <TextField source="id" label="ID" />
       <TextField source="name" label="Nombre del Producto" />
       <ImageField source="images[0].url" label="Imagen" />
       <TextField source="category.name" label="Categoría" />
@@ -72,8 +71,8 @@ export const ProductList = (props) => (
       <NumberField source="stock" label="Stock" />
       <TextField source="code" label="Código" />
       <NumberField source="view.counter" label="Vistas" />
-      <EditButton label="Editar" basePath="/products" />
-      <DeleteButton label="Eliminar" undoable={false} />
+      <EditButton label="Editar" />
+      <DeleteButton label="Eliminar"  />
     </Datagrid>
   </List>
 );
