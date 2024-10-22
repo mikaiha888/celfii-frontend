@@ -16,14 +16,27 @@ const AdminDashboard = () => (
   <Admin dataProvider={dataProvider} basename="/admin">
     <Resource
       name="products"
+      options={{ label: 'Productos' }}
       list={ProductList}
       show={ProductShow}
       edit={ProductEdit}
       create={ProductCreate}
     />
-    <Resource name="categories" list={CategoryList} edit={CategoryEdit} create={CategoryCreate} />
-    <Resource name="roles" list={RoleList} />
-    <Resource name="users" list={UserList} create={UserCreate} edit={UserEdit} />
+    <Resource
+      name="categories"
+      options={{ label: 'Categorias' }}
+      list={CategoryList}
+      edit={CategoryEdit}
+      create={CategoryCreate}
+    />
+    <Resource name="roles" options={{ label: 'Roles' }} list={RoleList} />
+    <Resource
+      name="users"
+      options={{ label: 'Usuarios' }}
+      list={UserList}
+      create={UserCreate}
+      edit={UserEdit}
+    />
   </Admin>
 );
 
