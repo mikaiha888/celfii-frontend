@@ -72,8 +72,8 @@ export const ProductList = (props) => (
       <NumberField source="stock" label="Stock" />
       <TextField source="code" label="Código" />
       <NumberField source="view.counter" label="Vistas" />
-      <EditButton label="Editar" basePath="/products" />
-      <DeleteButton label="Eliminar" undoable={false} />
+      <EditButton label="Editar" />
+      <DeleteButton label="Eliminar"  />
     </Datagrid>
   </List>
 );
