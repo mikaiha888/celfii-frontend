@@ -7,6 +7,7 @@ import UserMenu from "../user-menu/UserMenu";
 import { classNames } from "../../utils/classNames";
 import { Link } from "react-router-dom";
 import SearchBar from "../filter/SearchBar";
+import Favourites from "../favourites/Favourites";
 
 const initialNavigation = [
   { name: "Productos", href: "productos", current: false },
@@ -32,6 +33,7 @@ const NavBar = () => {
           <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
             <Logo />
             <NavigationLinks navigation={navigation} onLinkClick={handleNavigation} />
+            <Favourites />
           </div>
           <div className="absolute inset-y-0 right-0 flex items-center space-x-4 pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
             <SearchBar />
@@ -57,6 +59,7 @@ const NavBar = () => {
               {item.name}
             </DisclosureButton>
           ))}
+          <Favourites/>
         </div>
       </DisclosurePanel>
     </Disclosure>
