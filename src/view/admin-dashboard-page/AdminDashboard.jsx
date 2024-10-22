@@ -1,4 +1,7 @@
-import { Admin, Resource } from 'react-admin';
+import { Admin, Resource, Layout, AppBar, UserMenu} from 'react-admin';
+import { useNavigate } from "react-router-dom";
+import { Button } from '@mui/material';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import dataProvider from './dataProvider';
 import { ProductList } from './products/ProductList';
 import ProductCreate from './products/ProductCreate';
@@ -12,8 +15,29 @@ import UserEdit from './users/UserEdit';
 import { ProductShow } from './products/ProductShow';
 import ProductEdit from './products/ProductEdit';
 
+const CustomAppBar = (props) => {
+  const navigate = useNavigate();
+
+  return (
+    <AppBar {...props}>
+      <UserMenu />
+      <Button
+        color="inherit"
+        startIcon={<ExitToAppIcon />}
+        onClick={() => {
+          navigate('/');
+        }}
+      >
+        Salir
+      </Button>
+    </AppBar>
+  );
+};
+
+const CustomLayout = (props) => <Layout {...props} appBar={CustomAppBar} />;
+
 const AdminDashboard = () => (
-  <Admin dataProvider={dataProvider} basename="/admin">
+  <Admin dataProvider={dataProvider} basename="/admin" layout={CustomLayout}>
     <Resource
       name="products"
       options={{ label: 'Productos' }}
