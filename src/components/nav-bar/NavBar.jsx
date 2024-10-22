@@ -9,7 +9,6 @@ import { Link } from "react-router-dom";
 import SearchBar from "../filter/SearchBar";
 
 const initialNavigation = [
-  { name: "Inicio", href: "", current: false },
   { name: "Productos", href: "productos", current: false },
   { name: "Nosotros", href: "nosotros", current: false },
   { name: "Contacto", href: "contacto", current: false },
