@@ -1,12 +1,19 @@
-import { useState } from "react";
-import { Heart } from "lucide-react";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { addFavourite, removeFavourite } from "../../redux/actions/favouritesActions";
 
 const Card = ({ product }) => {
-  const [isFavourite, setIsFavourite] = useState(false);
+  const dispatch = useDispatch()
+  const favourites = useSelector(state => state.favourites)
+  const isFavourite = favourites.some(fav => fav.id === product.id)
 
   const toggleFavourite = () => {
-    setIsFavourite(!isFavourite);
+    if (isFavourite) {
+      dispatch(removeFavourite(product));
+    } else {
+      dispatch(addFavourite(product));
+    }
   };
 
   return (
@@ -47,6 +54,7 @@ const Card = ({ product }) => {
       </div>
     </div>
   );
+
 };
 
 export default Card;
