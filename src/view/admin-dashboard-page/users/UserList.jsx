@@ -5,7 +5,6 @@ export const UserList = () => {
     <div>
       <List title="Usuarios" pagination={false} >
         <Datagrid>
-          <TextField source="id" label="ID" />
           <TextField source="username" label="Nombre de Usuario" />
           <TextField source="email" label="Correo Electrónico" />
           <EditButton label="Editar"  />
