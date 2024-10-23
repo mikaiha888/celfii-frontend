@@ -1,17 +1,18 @@
-import './App.css';
-import { Routes, Route } from 'react-router-dom';
+import "./App.css";
+import { Routes, Route } from "react-router-dom";
 
-import NavBar from './components/nav-bar/NavBar';
-import Home from './view/home-page/Home';
-import Products from './view/products-page/Products';
-import AboutUs from './view/aboutus-page/AboutUs';
-import Contact from './view/contact-page/Contact';
-import Profile from './view/profile-page/Profile';
-import Settings from './view/settings-page/Settings';
-import Login from './view/login-page/Login';
-import Footer from './components/footer/Footer';
-import ProductDetailPage from './view/product-detail-page/ProductDetailPage';
-import AdminDashboard from './view/admin-dashboard-page/AdminDashboard';
+import NavBar from "./components/nav-bar/NavBar";
+import Home from "./view/home-page/Home";
+import Products from "./view/products-page/Products";
+import AboutUs from "./view/aboutus-page/AboutUs";
+import Contact from "./view/contact-page/Contact";
+import Profile from "./view/profile-page/Profile";
+import Settings from "./view/settings-page/Settings";
+import Login from "./view/login-page/Login";
+import Footer from "./components/footer/Footer";
+import ProductDetailPage from "./view/product-detail-page/ProductDetailPage";
+import AdminDashboard from "./view/admin-dashboard-page/AdminDashboard";
+import FavouritePage from "./view/favourite-page/FavouritePage";
 
 const App = () => {
   return (
@@ -29,6 +30,7 @@ const App = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/product/:id" element={<ProductDetailPage />} />
             <Route path="/admin/*" element={<AdminDashboard />} />
+            <Route path="/favourites" element={<FavouritePage />} />
           </Routes>
         </div>
         <Footer />

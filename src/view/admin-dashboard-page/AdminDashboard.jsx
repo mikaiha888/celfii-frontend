@@ -1,4 +1,7 @@
-import { Admin, Resource } from 'react-admin';
+import { Admin, Resource, Layout, AppBar, UserMenu} from 'react-admin';
+import { useNavigate } from "react-router-dom";
+import { Button } from '@mui/material';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import dataProvider from './dataProvider';
 import { ProductList } from './products/ProductList';
 import { CategoryList } from './categories/CategoryList';
@@ -12,18 +15,52 @@ import { ProductShow } from './products/ProductShow';
 import ProductCreate from './products/ProductCreate';
 import ProductEdit from './products/ProductEdit';
 
+const CustomAppBar = (props) => {
+  const navigate = useNavigate();
+
+  return (
+    <AppBar {...props}>
+      <UserMenu />
+      <Button
+        color="inherit"
+        startIcon={<ExitToAppIcon />}
+        onClick={() => {
+          navigate('/');
+        }}
+      >
+        Salir
+      </Button>
+    </AppBar>
+  );
+};
+
+const CustomLayout = (props) => <Layout {...props} appBar={CustomAppBar} />;
+
 const AdminDashboard = () => (
-  <Admin dataProvider={dataProvider} basename="/admin">
+  <Admin dataProvider={dataProvider} basename="/admin" layout={CustomLayout}>
     <Resource
       name="products"
+      options={{ label: 'Productos' }}
       list={ProductList}
       show={ProductShow}
       edit={ProductEdit}
       create={ProductCreate}
     />
-    <Resource name="categories" list={CategoryList} edit={CategoryEdit} create={CategoryCreate} />
-    <Resource name="roles" list={RoleList} />
-    <Resource name="users" list={UserList} create={UserCreate} edit={UserEdit} />
+    <Resource
+      name="categories"
+      options={{ label: 'Categorias' }}
+      list={CategoryList}
+      edit={CategoryEdit}
+      create={CategoryCreate}
+    />
+    <Resource name="roles" options={{ label: 'Roles' }} list={RoleList} />
+    <Resource
+      name="users"
+      options={{ label: 'Usuarios' }}
+      list={UserList}
+      create={UserCreate}
+      edit={UserEdit}
+    />
   </Admin>
 );
 

@@ -5,12 +5,9 @@ import { Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/react
 
 import Logo from "../logo/Logo";
 import SearchBar from "../filter/SearchBar";
-import UserMenu from "../user-menu/UserMenu";
-import NavigationLinks from "../navigation/NavigationLinks";
-import MobileMenuButton from "../mobile-menu/MobileMenuButton";
+import Favourites from "../favourites/Favourites";
 
 const initialNavigation = [
-  { name: "Inicio", href: "", current: false },
   { name: "Productos", href: "productos", current: false },
   { name: "Nosotros", href: "nosotros", current: false },
   { name: "Contacto", href: "contacto", current: false },
@@ -34,6 +31,7 @@ const NavBar = () => {
           <div className="flex items-center justify-center flex-1 sm:items-stretch sm:justify-start">
             <Logo />
             <NavigationLinks navigation={navigation} onLinkClick={handleNavigation} />
+            <Favourites />
           </div>
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 space-x-4 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
             <SearchBar />
@@ -59,6 +57,7 @@ const NavBar = () => {
               {item.name}
             </DisclosureButton>
           ))}
+          <Favourites/>
         </div>
       </DisclosurePanel>
     </Disclosure>
