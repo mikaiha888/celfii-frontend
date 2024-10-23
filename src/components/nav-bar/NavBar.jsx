@@ -2,10 +2,13 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { classNames } from "../../helpers/styleHelper";
 import { Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/react";
+import MobileMenuButton from "../mobile-menu/MobileMenuButton";
 
 import Logo from "../logo/Logo";
 import SearchBar from "../filter/SearchBar";
+import UserMenu from "../user-menu/UserMenu";
 import Favourites from "../favourites/Favourites";
+import NavigationLinks from "../navigation/NavigationLinks";
 
 const initialNavigation = [
   { name: "Productos", href: "productos", current: false },
