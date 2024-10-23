@@ -1,10 +1,10 @@
-import { useDispatch, useSelector } from "react-redux";
-import Cards from "../../components/cards/Cards";
-import Filter from "../../components/filter/Filter";
-import CreateProductForm from "../../components/form/CreateProductForm";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { loadProducts } from "../../redux/actions";
 import { debounce } from "lodash";
+
+import Cards from "../../components/cards/Cards";
+import Filter from "../../components/filter/Filter";
 import Pagination from "../../components/pagination/Pagination";
 
 const Home = () => {
@@ -59,7 +59,6 @@ const Home = () => {
           />
         </>
       )}
-      <CreateProductForm />
     </div>
   );
 };

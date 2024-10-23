@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { classNames } from "../../utils/classNames";
+import { classNames } from "../../helpers/styleHelper";
 import { logoutUser } from "../../redux/actions/authActions";
 import { useDispatch, useSelector } from "react-redux";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";

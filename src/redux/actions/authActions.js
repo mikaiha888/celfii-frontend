@@ -1,11 +1,10 @@
-import axios from "axios";
-
 import { AUTH_REQUEST, LOGIN_SUCCESS, LOGOUT_SUCCESS, AUTH_FAILURE } from "../types";
+import { postRequest } from "../../helpers/apiHelper";
 
 export const loginUser = (userData) => async (dispatch) => {
   try {
     dispatch({ type: AUTH_REQUEST });
-    const { data } = await axios.post("/auth/login", userData);
+    const { data } = await postRequest("/auth/login", userData);
     localStorage.setItem("token", data.token);
     localStorage.setItem("userData", JSON.stringify(data.user));
     dispatch({ type: LOGIN_SUCCESS, payload: data });

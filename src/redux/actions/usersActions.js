@@ -1,17 +1,10 @@
-import axios from "axios";
-
+import { getRequest, postRequest, putRequest, deleteRequest } from "../../helpers/apiHelper";
 import { USERS_REQUEST, USER_SUCCESS, USERS_SUCCESS, USERS_FAILURE } from "../types";
 
-export const createUser = (userData, token) => async (dispatch) => {
+export const createUser = (userData) => async (dispatch) => {
   try {
-    console.log(token);
-    
     dispatch({ type: USERS_REQUEST });
-    const { data } = await axios.post("/users", userData, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const { data } = await postRequest("/users", userData);
     dispatch({ type: USER_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
@@ -21,14 +14,10 @@ export const createUser = (userData, token) => async (dispatch) => {
   }
 };
 
-export const loadUser = (id, token) => async (dispatch) => {
+export const loadUser = (id) => async (dispatch) => {
   try {
     dispatch({ type: USERS_REQUEST });
-    const { data } = await axios.get(`/users/${id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const { data } = await getRequest(`/users/${id}`);
     dispatch({ type: USER_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
@@ -38,14 +27,10 @@ export const loadUser = (id, token) => async (dispatch) => {
   }
 };
 
-export const loadUsers = (token) => async (dispatch) => {
+export const loadUsers = () => async (dispatch) => {
   try {
     dispatch({ type: USERS_REQUEST });
-    const { data } = await axios.get("/users", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const { data } = await getRequest("/users");
     dispatch({ type: USERS_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
@@ -55,14 +40,10 @@ export const loadUsers = (token) => async (dispatch) => {
   }
 };
 
-export const saveUser = (userData, token) => async (dispatch) => {
+export const saveUser = (userData) => async (dispatch) => {
   try {
     dispatch({ type: USERS_REQUEST });
-    const { data } = await axios.put(`/users/${userData.id}`, userData, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const { data } = await putRequest(`/users/${userData.id}`, userData);
     dispatch({ type: USER_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
@@ -72,14 +53,10 @@ export const saveUser = (userData, token) => async (dispatch) => {
   }
 };
 
-export const deleteUser = (id, token) => async (dispatch) => {
+export const deleteUser = (id) => async (dispatch) => {
   try {
     dispatch({ type: USERS_REQUEST });
-    const { data } = await axios.delete(`/users/${id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const { data } = await deleteRequest(`/users/${id}`);
     dispatch(loadUsers());
     return data;
   } catch (error) {

@@ -1,4 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { loadCategories } from "../../../redux/actions";
 import {
   List,
   Datagrid,
@@ -10,29 +12,15 @@ import {
   DeleteButton,
   EditButton,
   ImageField,
-  useDataProvider,
-} from 'react-admin';
+} from "react-admin";
 
 const ProductFilter = (props) => {
-  const [categories, setCategories] = useState([]);
-  const dataProvider = useDataProvider();
+  const dispatch = useDispatch();
+  const { categories } = useSelector(state => state.categories)
 
   useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const { data } = await dataProvider.getList('categories', {
-          pagination: { page: 1, perPage: 100 },
-          sort: { field: 'name', order: 'ASC' },
-          filter: {},
-        });
-        setCategories(data.map(({ id, name }) => ({ id, name })));
-      } catch (error) {
-        console.error('Error al cargar las categorías:', error);
-      }
-    };
-
-    fetchCategories();
-  }, [dataProvider]);
+    dispatch(loadCategories())
+  }, []);
 
   return (
     <Filter {...props}>
@@ -40,7 +28,7 @@ const ProductFilter = (props) => {
       <TextInput source="minPrice" label="Precio Mínimo" />
       <TextInput source="maxPrice" label="Precio Máximo" />
       <SelectInput
-        source="category"
+        source="category.name"
         label="Categoría"
         choices={categories}
         optionValue="name"
@@ -50,10 +38,10 @@ const ProductFilter = (props) => {
         source="sort"
         label="Ordenar por"
         choices={[
-          { id: 'most popular', name: 'Más Popular' },
-          { id: 'highest price', name: 'Precio más Alto' },
-          { id: 'lowest price', name: 'Precio más Bajo' },
-          { id: 'newest', name: 'Más Nuevo' },
+          { id: "most popular", name: "Más Popular" },
+          { id: "highest price", name: "Precio más Alto" },
+          { id: "lowest price", name: "Precio más Bajo" },
+          { id: "newest", name: "Más Nuevo" },
         ]}
         alwaysOn
       />
@@ -61,8 +49,8 @@ const ProductFilter = (props) => {
   );
 };
 
-export const ProductList = (props) => (
-  <List title="Productos" {...props} filters={<ProductFilter />} perPage={25}>
+export const ProductList = () => (
+  <List title="Productos" filters={<ProductFilter />} perPage={25}>
     <Datagrid>
       <TextField source="id" label="ID" />
       <TextField source="name" label="Nombre del Producto" />

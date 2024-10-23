@@ -1,6 +1,6 @@
-import { classNames } from "../../utils/classNames";
-import { Facebook, Instagram } from "lucide-react";
 import { Link } from "react-router-dom";
+import { classNames } from "../../helpers/styleHelper";
+import { Facebook, Instagram } from "lucide-react";
 
 const footerLinks = [
   { name: "Política de privacidad", href: "/politica-privacidad", current: false },
@@ -24,9 +24,9 @@ const socialLinks = [
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-800 py-8 mt-8">
-      <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-        <div className="flex flex-col sm:flex-row justify-between items-center border-b border-gray-700 pb-8">
+    <footer className="py-8 mt-8 bg-gray-800">
+      <div className="px-2 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div className="flex flex-col items-center justify-between pb-8 border-b border-gray-700 sm:flex-row">
           <div className="flex space-x-4">
             {footerLinks.map((item) => (
               <Link
@@ -40,20 +40,20 @@ const Footer = () => {
               </Link>
             ))}
           </div>
-          <div className="flex space-x-4 mt-4 sm:mt-0">
+          <div className="flex mt-4 space-x-4 sm:mt-0">
             {socialLinks.map((social) => (
               <a
                 key={social.name}
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-white text-2xl">
+                className="text-2xl text-gray-400 hover:text-white">
                 {social.icon}
               </a>
             ))}
           </div>
         </div>
-        <div className="mt-8 text-gray-400 text-sm text-center">
+        <div className="mt-8 text-sm text-center text-gray-400">
           &copy; {new Date().getFullYear()} Cel-Fii. Todos los derechos reservados.
         </div>
       </div>

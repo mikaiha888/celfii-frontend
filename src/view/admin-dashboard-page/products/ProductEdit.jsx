@@ -1,48 +1,56 @@
-import {
-  Edit,
-  SimpleForm,
-  TextInput,
-  NumberInput,
-  useNotify,
-  useDataProvider,
-  SelectInput,
-  FileInput,
-  FileField,
-} from 'react-admin';
-import { useEffect, useState } from 'react';
+import dataProvider from "../dataProvider";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { loadCategories, loadProduct } from "../../../redux/actions";
+import { Edit, Loading, useNotify, useRedirect } from "react-admin";
 
-const ProductEdit = (props) => {
+import ProductForm from "../../../components/form/ProductForm";
+
+const ProductEdit = () => {
+  const dispatch = useDispatch();
   const notify = useNotify();
-  const dataProvider = useDataProvider();
-  const [categories, setCategories] = useState([]);
+  const redirect = useRedirect();
+  const [imagesToDelete, setImagesToDelete] = useState([]);
+
+  const { id } = useParams();
+  const { product, loading } = useSelector((state) => state.products);
+  const { categories } = useSelector((state) => state.categories);
+
+const handleImageRemove = (removedImage) => {
+  setImagesToDelete((prev) => [...prev, removedImage]);
+};
+
+  const handleSubmit = async (data) => {
+    try {
+      await dataProvider.update("products", {
+        id: product.id.toString(),
+        data: { imagesToDelete, ...data },
+      });
+      notify("Producto actualizado exitosamente", { type: "info" });
+      redirect("/admin/products");
+    } catch (error) {
+      notify(`Error actualizando proyecto: ${error}`, { type: "warning" });
+    }
+  };
 
   useEffect(() => {
-    dataProvider
-      .getList('categories', { pagination: {}, sort: {}, filter: {} })
-      .then(({ data }) => {
-        setCategories(data.map((category) => ({ id: category.id, name: category.name })));
-      })
-      .catch((error) => {
-        notify(`Error al cargar categorías: ${error.message}`, { type: 'warning' });
-      });
-  }, [dataProvider, notify]);
+    dispatch(loadProduct(id));
+    dispatch(loadCategories());
+  }, [dispatch, id]);
+
+  if (loading) return <Loading />;
 
   return (
-    <Edit title="Editar producto"{...props}>
-      <SimpleForm>
-        <TextInput source="id" disabled />
-        <TextInput source="name" label="Nombre del Producto" />
-        <TextInput source="description" label="Descripción" />
-        <SelectInput source="category" label="Categoría" choices={categories} />
-        <NumberInput source="priceArs" label="Precio (ARS)" />
-        <NumberInput source="priceUsd" label="Precio (USD)" />
-        <NumberInput source="stock" label="Stock" />
-        <TextInput source="code" label="Código" />
-        <TextInput source="imei" label="IMEI" />
-        <FileInput source="images" label="Imágenes" accept="image/*" multiple>
-          <FileField source="src" title="title" />
-        </FileInput>
-      </SimpleForm>
+    <Edit title="Editar producto">
+      {product && (
+        <ProductForm
+          product={product}
+          categories={categories}
+          onSubmit={handleSubmit}
+          onImageRemove={handleImageRemove}
+        />
+      )}
     </Edit>
   );
 };
