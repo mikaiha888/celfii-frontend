@@ -20,6 +20,7 @@ const dataProvider = {
       maxPrice: filters.maxPrice || undefined,
       category: filters.category || undefined,
       sort,
+      onlyDeleted: filters.onlyDeleted || undefined,
     };
 
     const { data, headers } = await axios.get(`http://localhost:3001/${resource}`, {

@@ -9,6 +9,7 @@ import {
 import { Card, CardContent, TextField } from '@mui/material';
 import CategoryIcon from '@mui/icons-material/LocalOffer';
 import SortIcon from '@mui/icons-material/Sort';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export const ProductFilterSidebar = () => {
   const [categories, setCategories] = useState([]);
@@ -44,7 +45,7 @@ export const ProductFilterSidebar = () => {
   return (
     <Card sx={{ order: -1, mr: 2, mt: 9, width: 250 }}>
       <CardContent>
-        <FilterLiveSearch source="name" />
+        <FilterLiveSearch label="Buscar" source="name" />
         <TextField
           label="Precio Mínimo"
           variant="outlined"
@@ -71,6 +72,10 @@ export const ProductFilterSidebar = () => {
           <FilterListItem label="Precio más Alto" value={{ sort: 'highest price' }} />
           <FilterListItem label="Precio más Bajo" value={{ sort: 'lowest price' }} />
           <FilterListItem label="Más Nuevo" value={{ sort: 'newest' }} />
+        </FilterList>
+        <FilterList label="Estado" icon={<DeleteIcon />}>
+          <FilterListItem label="Mostrar Eliminados" value={{ onlyDeleted: true }} />
+          <FilterListItem label="Mostrar Activos" value={{ onlyDeleted: false }} />
         </FilterList>
       </CardContent>
     </Card>
