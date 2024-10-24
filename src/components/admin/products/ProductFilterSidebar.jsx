@@ -1,38 +1,29 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from "react";
+import { Card, CardContent, TextField } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { loadCategories } from "../../../redux/actions";
 import {
   FilterLiveSearch,
   FilterList,
   FilterListItem,
   useDataProvider,
   useListContext,
-} from 'react-admin';
-import { Card, CardContent, TextField } from '@mui/material';
-import CategoryIcon from '@mui/icons-material/LocalOffer';
-import SortIcon from '@mui/icons-material/Sort';
+} from "react-admin";
+
+import CategoryIcon from "@mui/icons-material/LocalOffer";
+import SortIcon from "@mui/icons-material/Sort";
 import DeleteIcon from '@mui/icons-material/Delete';
 
-export const ProductFilterSidebar = () => {
-  const [categories, setCategories] = useState([]);
-  const { setFilters, filterValues } = useListContext();
+const ProductFilterSidebar = () => {
+  const dispatch = useDispatch();
   const dataProvider = useDataProvider();
 
-  const { minPrice = '', maxPrice = '' } = filterValues;
+  const { setFilters, filterValues } = useListContext();
+  const { categories } = useSelector((state) => state.categories);
+  const { minPrice = "", maxPrice = "" } = filterValues;
 
   useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const { data } = await dataProvider.getList('categories', {
-          pagination: { page: 1, perPage: 100 },
-          sort: { field: 'name', order: 'ASC' },
-          filter: {},
-        });
-        setCategories(data.map(({ id, name }) => ({ id, name })));
-      } catch (error) {
-        console.error('Error al cargar las categorías:', error);
-      }
-    };
-
-    fetchCategories();
+    dispatch(loadCategories());
   }, [dataProvider]);
 
   const handlePriceChange = (setter) => (e) => {
@@ -52,7 +43,7 @@ export const ProductFilterSidebar = () => {
           fullWidth
           margin="normal"
           value={minPrice}
-          onChange={handlePriceChange('minPrice')}
+          onChange={handlePriceChange("minPrice")}
         />
         <TextField
           label="Precio Máximo"
@@ -60,7 +51,7 @@ export const ProductFilterSidebar = () => {
           fullWidth
           margin="normal"
           value={maxPrice}
-          onChange={handlePriceChange('maxPrice')}
+          onChange={handlePriceChange("maxPrice")}
         />
         <FilterList label="Categoría" icon={<CategoryIcon />}>
           {categories.map(({ id, name }) => (
@@ -68,10 +59,10 @@ export const ProductFilterSidebar = () => {
           ))}
         </FilterList>
         <FilterList label="Ordenar por" icon={<SortIcon />}>
-          <FilterListItem label="Más Popular" value={{ sort: 'most popular' }} />
-          <FilterListItem label="Precio más Alto" value={{ sort: 'highest price' }} />
-          <FilterListItem label="Precio más Bajo" value={{ sort: 'lowest price' }} />
-          <FilterListItem label="Más Nuevo" value={{ sort: 'newest' }} />
+          <FilterListItem label="Más Popular" value={{ sort: "most popular" }} />
+          <FilterListItem label="Precio más Alto" value={{ sort: "highest price" }} />
+          <FilterListItem label="Precio más Bajo" value={{ sort: "lowest price" }} />
+          <FilterListItem label="Más Nuevo" value={{ sort: "newest" }} />
         </FilterList>
         <FilterList label="Estado" icon={<DeleteIcon />}>
           <FilterListItem label="Mostrar Eliminados" value={{ onlyDeleted: true }} />
@@ -81,3 +72,5 @@ export const ProductFilterSidebar = () => {
     </Card>
   );
 };
+
+export default ProductFilterSidebar;

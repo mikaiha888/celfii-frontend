@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import Selector from "./Selector";
 import SearchBar from "./SearchBar";
 import { useEffect, useState } from "react";
-import { fetchCategories } from "../../redux/actions/categoriesActions";
+import { loadCategories } from "../../redux/actions/categoriesActions";
 import Sort from "./Sort";
 
 const Filter = ({ updateSearchParams }) => {
@@ -12,7 +12,7 @@ const Filter = ({ updateSearchParams }) => {
   const [sortOrder, setSortOrder] = useState("newest");
 
   useEffect(() => {
-    dispatch(fetchCategories());
+    dispatch(loadCategories());
   }, [dispatch]);
 
   const handleCategoryChange = (select) => {

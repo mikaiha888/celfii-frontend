@@ -9,7 +9,7 @@ import store from "./redux";
 import App from "./App.jsx";
 import "./index.css";
 
-axios.defaults.baseURL = "http://localhost:3001/";
+axios.defaults.baseURL = "http://localhost:3001";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>

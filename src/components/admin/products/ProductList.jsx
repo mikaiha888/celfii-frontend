@@ -15,8 +15,8 @@ import {
 } from 'react-admin';
 import RestoreIcon from '@mui/icons-material/Restore';
 import { Button } from '@mui/material';
-import dataProvider from '../dataProvider';
-import { ProductFilterSidebar } from './ProductFilterSidebar';
+import dataProvider from '../../../view/admin-dashboard-page/dataProvider';
+import  ProductFilterSidebar  from './ProductFilterSidebar';
 
 export const ProductList = (props) => {
   return (
@@ -39,8 +39,8 @@ export const ProductList = (props) => {
 };
 
 const ProductDataGrid = () => {
-  const { filterValues } = useListContext();
-  const showDeleted = filterValues.onlyDeleted;
+  const { filterValues = {} } = useListContext();
+  const showDeleted = filterValues.onlyDeleted || false;
   const notify = useNotify();
   const refresh = useRefresh();
 

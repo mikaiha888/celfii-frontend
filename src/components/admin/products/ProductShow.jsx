@@ -1,6 +1,6 @@
-import { Show, SimpleShowLayout, TextField, NumberField, ImageField } from 'react-admin';
+import { Show, SimpleShowLayout, TextField, NumberField, ImageField } from "react-admin";
 
-export const ProductShow = (props) => (
+const ProductShow = (props) => (
   <Show title="Producto" {...props}>
     <SimpleShowLayout>
       <TextField source="id" label="ID" />
@@ -26,3 +26,5 @@ export const ProductShow = (props) => (
     </SimpleShowLayout>
   </Show>
 );
+
+export default ProductShow;

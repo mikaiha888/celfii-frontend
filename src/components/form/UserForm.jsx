@@ -1,12 +1,11 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { createUserValidationSchema } from "./validations";
 import { createUser } from "../../redux/actions/usersActions";
 
-import GenericForm from "./GenericForm";
+import { GenericForm } from "./Form";
 
-const CreateUserForm = () => {
+const UserForm = () => {
   const dispatch = useDispatch();
-  const { token } = useSelector(state => state.auth)
 
   const initialValues = {
     username: "",
@@ -42,10 +41,10 @@ const CreateUserForm = () => {
         initialValues={initialValues}
         validationSchema={createUserValidationSchema}
         fields={fields}
-        onSubmit={(formData) => dispatch(createUser(formData, token))}
+        onSubmit={(formData) => dispatch(createUser(formData))}
         buttonLabel="Crear Usuario"
       />
     </div>
   );
 };
-export default CreateUserForm;
+export default UserForm;
