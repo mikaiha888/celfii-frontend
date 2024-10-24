@@ -55,7 +55,7 @@ const ProductDataGrid = () => {
   };
 
   return (
-    <Datagrid rowClick="edit">
+    <Datagrid>
       <TextField source="name" label="Nombre del Producto" />
       <ImageField source="images[0].url" label="Imagen" />
       <TextField source="category.name" label="Categoría" />
