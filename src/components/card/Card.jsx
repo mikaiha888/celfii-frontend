@@ -1,11 +1,12 @@
-import { useDispatch, useSelector } from "react-redux";
+import { Heart } from "lucide-react";
 import { Link } from "react-router-dom";
-import { addFavourite, removeFavourite } from "../../redux/actions/favouritesActions";
+import { useDispatch, useSelector } from "react-redux";
+import { addFavourite, removeFavourite } from "../../redux/actions";
 
 const Card = ({ product }) => {
-  const dispatch = useDispatch()
-  const favourites = useSelector(state => state.favourites)
-  const isFavourite = favourites.some(fav => fav.id === product.id)
+  const dispatch = useDispatch();
+  const favourites = useSelector((state) => state.favourites);
+  const isFavourite = favourites.some((fav) => fav.id === product.id);
 
   const toggleFavourite = () => {
     if (isFavourite) {
@@ -16,7 +17,7 @@ const Card = ({ product }) => {
   };
 
   return (
-    <div className="max-w-sm overflow-hidden bg-white rounded shadow-lg relative">
+    <div className="relative max-w-sm overflow-hidden bg-white rounded shadow-lg">
       {product.images &&
         product.images.map((image, index) => (
           <img
@@ -26,18 +27,6 @@ const Card = ({ product }) => {
             alt={image.altText}
           />
         ))}
-
-      <div className="absolute bottom-2 right-2 p-2">
-        {isFavourite ? (
-          <button onClick={toggleFavourite} className="text-red-500 text-2xl">
-            ❤️
-          </button>
-        ) : (
-          <button onClick={toggleFavourite} className="text-gray-500 text-2xl">
-            🤍
-          </button>
-        )}
-      </div>
 
       <div className="px-6 py-4">
         <div className="mb-2 text-xl font-bold">{product.name}</div>
@@ -49,11 +38,13 @@ const Card = ({ product }) => {
           <button className="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">
             Ver más
           </button>
+          <button onClick={toggleFavourite}>
+            <Heart stroke={0} fill={isFavourite ? "#de3f3f" : "#d6d6d6"} />
+          </button>
         </Link>
       </div>
     </div>
   );
-
 };
 
 export default Card;

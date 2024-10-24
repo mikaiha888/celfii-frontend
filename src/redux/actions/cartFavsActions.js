@@ -1,4 +1,4 @@
-import { ADD_FAVOURITE, REMOVE_FAVOURITE, SET_FAVOURITES } from "../types/favouritesTypes";
+import { ADD_FAVOURITE, REMOVE_FAVOURITE, SET_FAVOURITES } from "../types";
 
 export const addFavourite = (product) => {
   return {
