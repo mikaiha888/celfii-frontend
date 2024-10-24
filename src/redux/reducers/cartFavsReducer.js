@@ -1,18 +1,45 @@
-import { ADD_FAVOURITE, REMOVE_FAVOURITE, SET_FAVOURITES } from "../types";
+import {
+  CART_FAVS_REQUEST,
+  CART_FAVS_SUCCESS,
+  CART_FAVS_FAILURE,
+  UPDATE_CART_FAV
+} from "../types";
 
-const initialState = [];
+const initialState = {
+  cart: [],
+  favourites: [],
+  loading: false,
+  error: null,
+};
 
-const favouritesReducer = (state = initialState, action) => {
+const cartFavsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_FAVOURITE:
-      return [...state, action.payload];
-    case REMOVE_FAVOURITE:
-      return state.filter((product) => product.id !== action.payload.id);
-    case SET_FAVOURITES:
-      return action.payload;
+    case CART_FAVS_REQUEST:
+      return { ...state, loading: true, error: null };
+
+    case CART_FAVS_SUCCESS:
+      return {
+        ...state,
+        cart: action.payload.cart,
+        favourites: action.payload.favourites,
+        loading: false,
+        error: null,
+      };
+
+    case CART_FAVS_FAILURE:
+      return { ...state, loading: false, error: action.payload };
+
+    case UPDATE_CART_FAV:
+      return {
+        ...state,
+        ...action.payload,
+        loading: false,
+        error: null,
+      };
+
     default:
       return state;
   }
 };
 
-export default favouritesReducer;
+export default cartFavsReducer;

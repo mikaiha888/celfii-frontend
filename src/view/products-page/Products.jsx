@@ -3,13 +3,15 @@ import Cards from "../../components/cards/Cards";
 import Filter from "../../components/filter/Filter";
 import CreateProductForm from "../../components/form/CreateProductForm";
 import { useEffect, useState } from "react";
-import { loadProducts } from "../../redux/actions";
+import { loadCartFavs, loadProducts } from "../../redux/actions";
 import { debounce } from "lodash";
 import Pagination from "../../components/pagination/Pagination";
 
 const Products = () => {
   const dispatch = useDispatch();
   const { products, totalItems, loading } = useSelector((state) => state.products);
+  const { favourites } = useSelector((state) => state.cartFavs);
+
   const [searchParams, setSearchParams] = useState({
     page: 1,
     pagination: 15,
@@ -35,6 +37,7 @@ const Products = () => {
 
   useEffect(() => {
     dispatch(loadProducts(searchParams));
+    dispatch(loadCartFavs("favorites"))
   }, [dispatch]);
 
   const totalPages = Math.ceil(totalItems / searchParams.pagination);
@@ -51,7 +54,7 @@ const Products = () => {
         <p>Cargando productos...</p>
       ) : (
         <>
-          <Cards products={products} />
+          <Cards products={products} favourites={favourites} />
           <Pagination
             currentPage={searchParams.page}
             totalPages={totalPages}
