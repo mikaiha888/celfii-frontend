@@ -1,24 +1,18 @@
-import { useEffect } from "react";
-import { Card, CardContent, TextField } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
-import { loadCategories } from "../../../redux/actions";
-import {
-  FilterLiveSearch,
-  FilterList,
-  FilterListItem,
-  useListContext,
-} from "react-admin";
+import { useEffect } from 'react';
+import { Card, CardContent, TextField } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import { loadCategories } from '../../../redux/actions';
+import { FilterLiveSearch, FilterList, FilterListItem, useListContext } from 'react-admin';
 
-import CategoryIcon from "@mui/icons-material/LocalOffer";
-import SortIcon from "@mui/icons-material/Sort";
+import CategoryIcon from '@mui/icons-material/LocalOffer';
+import SortIcon from '@mui/icons-material/Sort';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 const ProductFilterSidebar = () => {
   const dispatch = useDispatch();
-
   const { setFilters, filterValues } = useListContext();
   const { categories } = useSelector((state) => state.categories);
-  const { minPrice = "", maxPrice = "" } = filterValues;
+  const { minPrice = '', maxPrice = '' } = filterValues;
 
   useEffect(() => {
     dispatch(loadCategories());
@@ -41,7 +35,7 @@ const ProductFilterSidebar = () => {
           fullWidth
           margin="normal"
           value={minPrice}
-          onChange={handlePriceChange("minPrice")}
+          onChange={handlePriceChange('minPrice')}
         />
         <TextField
           label="Precio Máximo"
@@ -49,18 +43,18 @@ const ProductFilterSidebar = () => {
           fullWidth
           margin="normal"
           value={maxPrice}
-          onChange={handlePriceChange("maxPrice")}
+          onChange={handlePriceChange('maxPrice')}
         />
         <FilterList label="Categoría" icon={<CategoryIcon />}>
-          {categories.map(({ id, name }) => (
+          {(Array.isArray(categories) ? categories : []).map(({ id, name }) => (
             <FilterListItem key={id} label={name} value={{ category: name }} />
           ))}
         </FilterList>
         <FilterList label="Ordenar por" icon={<SortIcon />}>
-          <FilterListItem label="Más Popular" value={{ sort: "most popular" }} />
-          <FilterListItem label="Precio más Alto" value={{ sort: "highest price" }} />
-          <FilterListItem label="Precio más Bajo" value={{ sort: "lowest price" }} />
-          <FilterListItem label="Más Nuevo" value={{ sort: "newest" }} />
+          <FilterListItem label="Más Popular" value={{ sort: 'most popular' }} />
+          <FilterListItem label="Precio más Alto" value={{ sort: 'highest price' }} />
+          <FilterListItem label="Precio más Bajo" value={{ sort: 'lowest price' }} />
+          <FilterListItem label="Más Nuevo" value={{ sort: 'newest' }} />
         </FilterList>
         <FilterList label="Estado" icon={<DeleteIcon />}>
           <FilterListItem label="Mostrar Eliminados" value={{ onlyDeleted: true }} />
