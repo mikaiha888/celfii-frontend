@@ -6,7 +6,6 @@ import {
   FilterLiveSearch,
   FilterList,
   FilterListItem,
-  useDataProvider,
   useListContext,
 } from "react-admin";
 
@@ -16,7 +15,6 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 const ProductFilterSidebar = () => {
   const dispatch = useDispatch();
-  const dataProvider = useDataProvider();
 
   const { setFilters, filterValues } = useListContext();
   const { categories } = useSelector((state) => state.categories);
@@ -24,7 +22,7 @@ const ProductFilterSidebar = () => {
 
   useEffect(() => {
     dispatch(loadCategories());
-  }, [dataProvider]);
+  }, [dispatch]);
 
   const handlePriceChange = (setter) => (e) => {
     setFilters({
