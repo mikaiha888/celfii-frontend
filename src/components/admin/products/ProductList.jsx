@@ -9,12 +9,13 @@ import {
   CreateButton,
   ExportButton,
 } from 'react-admin';
-import { ProductFilterSidebar } from './ProductFilterSidebar';
 
-export const ProductList = (props) => (
+import ProductFilterSidebar from './ProductFilterSidebar';
+
+const ProductList = (props) => (
   <List
-    title="Productos"
     {...props}
+    title="Productos"
     perPage={25}
     rowsPerPageLabel="Filas por página"
     aside={<ProductFilterSidebar />}

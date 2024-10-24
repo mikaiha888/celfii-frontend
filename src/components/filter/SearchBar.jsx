@@ -17,13 +17,13 @@ const SearchBar = ({ value, onChange }) => {
       </button>
 
       {isOpen && (
-        <div className="absolute top-0 bottom-0 right-7 flex items-center">
+        <div className="absolute top-0 bottom-0 flex items-center right-7">
           <input
             type="text"
             name="search"
             value={value}
             onChange={onChange}
-            className="bg-gray-700 text-white rounded-full pl-8 pr-4 py-2 w-64 sm:w-48 md:w-72 lg:w-80 transition-all duration-300 ease-in-out focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            className="w-64 py-2 pl-8 pr-4 text-white transition-all duration-300 ease-in-out bg-gray-700 rounded-full sm:w-48 md:w-72 lg:w-80 focus:ring-2 focus:ring-blue-500 focus:outline-none"
             placeholder="Buscar..."
           />
         </div>

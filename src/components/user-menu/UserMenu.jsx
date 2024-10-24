@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { classNames } from "../../utils/classNames";
+import { classNames } from "../../helpers/styleHelper";
 import { logoutUser } from "../../redux/actions/authActions";
 import { useDispatch, useSelector } from "react-redux";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
@@ -35,13 +35,13 @@ const UserMenu = () => {
         <MenuItem>
           {({ active }) => (
             <Link
-              to="configuracion"
+              to="admin"
               className={classNames(
                 active ? "bg-gray-100" : "",
                 "block px-4 py-2 text-sm text-gray-700"
               )}
             >
-              Configuración
+              Admin
             </Link>
           )}
         </MenuItem>
