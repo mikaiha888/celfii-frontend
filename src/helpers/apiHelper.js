@@ -13,8 +13,6 @@ export const postRequest = async (url, payload) => {
 };
 
 export const putRequest = async (url, payload) => {
-  console.log(payload);
-  
   const data = await axios.put(url, payload, { headers: getAuthHeaders() });
   return data;
 };

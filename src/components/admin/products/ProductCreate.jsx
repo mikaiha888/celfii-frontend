@@ -1,4 +1,4 @@
-import dataProvider from "../dataProvider";
+import dataProvider from "../../../view/admin-dashboard-page/dataProvider";
 import { useEffect } from "react";
 import { loadCategories } from "../../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";

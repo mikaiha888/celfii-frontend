@@ -1,4 +1,4 @@
-import dataProvider from "../dataProvider";
+import dataProvider from "../../../view/admin-dashboard-page/dataProvider";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";

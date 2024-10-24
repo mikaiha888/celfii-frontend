@@ -1,6 +1,6 @@
 import { List, Datagrid, TextField, EditButton, DeleteButton, CreateButton, ExportButton } from 'react-admin';
 
-export const CategoryList = () => {
+const CategoryList = () => {
   return (
     <div>
       <List

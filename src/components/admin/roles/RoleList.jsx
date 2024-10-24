@@ -1,6 +1,6 @@
 import { List, Datagrid, TextField , ExportButton } from 'react-admin';
 
-export const RoleList = () => (
+const RoleList = () => (
   <List title="Roles" pagination={false} actions={
     <div>
       <ExportButton label="Exportar Roles" />
@@ -11,3 +11,5 @@ export const RoleList = () => (
     </Datagrid>
   </List>
 );
+
+export default RoleList

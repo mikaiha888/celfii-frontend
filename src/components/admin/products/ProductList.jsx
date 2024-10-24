@@ -10,9 +10,9 @@ import {
   ExportButton,
 } from 'react-admin';
 
-import { ProductFilterSidebar } from './ProductFilterSidebar';
+import ProductFilterSidebar from './ProductFilterSidebar';
 
-export const ProductList = (props) => (
+const ProductList = (props) => (
   <List
     {...props}
     title="Productos"
