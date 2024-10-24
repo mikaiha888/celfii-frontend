@@ -13,6 +13,8 @@ import {
   useRefresh,
   FunctionField,
 } from 'react-admin';
+import RestoreIcon from '@mui/icons-material/Restore';
+import { Button } from '@mui/material';
 import dataProvider from '../dataProvider';
 import { ProductFilterSidebar } from './ProductFilterSidebar';
 
@@ -25,10 +27,10 @@ export const ProductList = (props) => {
       rowsPerPageLabel="Filas por página"
       aside={<ProductFilterSidebar />}
       actions={
-        <div>
+        <>
           <CreateButton label="Crear Producto" />
           <ExportButton label="Exportar Productos" />
-        </div>
+        </>
       }
     >
       <ProductDataGrid />
@@ -48,7 +50,7 @@ const ProductDataGrid = () => {
       notify('Producto restaurado con éxito', { type: 'success' });
       refresh();
     } catch (error) {
-      notify('Error al restaurar el producto' , error, { type: 'error' });
+      notify('Error al restaurar el producto', error, { type: 'error' });
     }
   };
 
@@ -66,14 +68,21 @@ const ProductDataGrid = () => {
         <FunctionField
           label="Acciones"
           render={(record) => (
-            <button
+            <Button
               onClick={(event) => {
                 event.stopPropagation();
                 handleRestore(record.id);
               }}
+              startIcon={<RestoreIcon />}
+              style={{
+                textTransform: 'none',
+                padding: 0,
+                minWidth: 'auto',
+                color: '#1976d2',
+              }}
             >
               Recuperar
-            </button>
+            </Button>
           )}
         />
       ) : (
