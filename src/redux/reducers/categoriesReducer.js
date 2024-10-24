@@ -1,4 +1,4 @@
-import { CATEGORIES_REQUEST, CATEGORIES_SUCCESS, CATEGORIES_FAILURE } from "../types";
+import { CATEGORIES_REQUEST, CATEGORIES_SUCCESS, CATEGORIES_FAILURE } from '../types/categoriesTypes';
 
 const initialState = {
   categories: [],

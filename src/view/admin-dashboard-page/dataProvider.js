@@ -1,77 +1,59 @@
-import axios from 'axios';
-
-const getAuthHeaders = () => {
-  const token = localStorage.getItem('token');
-  return {
-    Authorization: `Bearer ${token}`,
-  };
-};
+import { getRequest, postRequest, putRequest, deleteRequest } from "../../helpers/apiHelper";
 
 const dataProvider = {
   getList: async (resource, params) => {
-    const { page, perPage } = params.pagination;
-    const filters = params.filter;
-    const sort = filters.sort || '';
     const query = {
-      page,
-      perPage,
-      name: filters.name || undefined,
-      minPrice: filters.minPrice || undefined,
-      maxPrice: filters.maxPrice || undefined,
-      category: filters.category || undefined,
-      sort,
+      page: params.pagination.page,
+      perPage: params.pagination.perPage,
+      name: params.filter.name || undefined,
+      minPrice: params.filter.minPrice || undefined,
+      maxPrice: params.filter.maxPrice || undefined,
+      category: params.filter.category || undefined,
+      sort: params.filter.sort || "",
     };
-
-    const { data, headers } = await axios.get(`http://localhost:3001/${resource}`, {
-      params: query,
-      headers: getAuthHeaders(),
-    });
-
+    const { data, headers } = await getRequest(`/${resource}`, query);
     return {
       data: data.products ? data.products : data,
-      total: parseInt(headers['x-total-count'], 10),
+      total: parseInt(headers["x-total-count"], 10),
     };
   },
 
   getOne: async (resource, params) => {
-    const { data } = await axios.get(`http://localhost:3001/${resource}/${params.id}`, {
-      headers: getAuthHeaders(),
-    });
-    return { data };
+    const response = await getRequest(`/${resource}/${params.id}`);
+    return response;
   },
 
   create: async (resource, params) => {
-    const { data } = await axios.post(`http://localhost:3001/${resource}`, params.data, {
-      headers: getAuthHeaders(),
-    });
-    return { data };
+    const response = await postRequest(`/${resource}`, params.data);
+    return response;
   },
 
   update: async (resource, params) => {
-    const { data } = await axios.put(
-      `http://localhost:3001/${resource}/${params.id}`,
-      params.data,
-      {
-        headers: getAuthHeaders(),
-      }
-    );
-    return { data };
+    const formData = new FormData();
+    if (params.data.imagesToDelete && Array.isArray(params.data.imagesToDelete))
+      params.data.imagesToDelete.forEach((image, index) =>
+        formData.append(`imagesToDelete[${index}]`, JSON.stringify(image))
+      );
+    if (params.data.images)
+      params.data.images.forEach(
+        (image) =>
+          image.rawFile && image.rawFile instanceof File && formData.append("images", image.rawFile)
+      );
+    if (params.data.category && typeof params.data.category === "object")
+      params.data.category = params.data.category.name;
+    for (const key in params.data)
+      if (key !== "images" && key !== "imagesToDelete") formData.append(key, params.data[key]);
+    const response = await putRequest(`/${resource}/${params.id}`, formData);
+    return response;
   },
 
   delete: async (resource, params) => {
-    await axios.delete(`http://localhost:3001/${resource}/${params.id}`, {
-      headers: getAuthHeaders(),
-    });
+    await deleteRequest(`/${resource}/${params.id}`);
     return { data: params.previousData };
   },
 
   deleteMany: async (resource, params) => {
-    const deleteRequests = params.ids.map((id) =>
-      axios.delete(`http://localhost:3001/${resource}/${id}`, {
-        headers: getAuthHeaders(),
-      })
-    );
-
+    const deleteRequests = params.ids.map((id) => deleteRequest(`/${resource}/${id}`));
     await Promise.all(deleteRequests);
     return { data: params.ids };
   },

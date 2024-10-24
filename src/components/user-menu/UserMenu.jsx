@@ -35,13 +35,13 @@ const UserMenu = () => {
         <MenuItem>
           {({ active }) => (
             <Link
-              to="configuracion"
+              to="admin"
               className={classNames(
                 active ? "bg-gray-100" : "",
                 "block px-4 py-2 text-sm text-gray-700"
               )}
             >
-              Configuración
+              Admin
             </Link>
           )}
         </MenuItem>

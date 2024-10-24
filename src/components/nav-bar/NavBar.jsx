@@ -1,13 +1,14 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import { classNames } from "../../helpers/styleHelper";
 import { Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/react";
 import MobileMenuButton from "../mobile-menu/MobileMenuButton";
+
 import Logo from "../logo/Logo";
-import NavigationLinks from "../navigation/NavigationLinks";
-import UserMenu from "../user-menu/UserMenu";
-import { classNames } from "../../utils/classNames";
-import { Link } from "react-router-dom";
 import SearchBar from "../filter/SearchBar";
+import UserMenu from "../user-menu/UserMenu";
 import Favourites from "../favourites/Favourites";
+import NavigationLinks from "../navigation/NavigationLinks";
 
 const initialNavigation = [
   { name: "Productos", href: "productos", current: false },
@@ -27,15 +28,15 @@ const NavBar = () => {
   };
   return (
     <Disclosure as="nav" className="bg-gray-800">
-      <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-        <div className="relative flex h-16 items-center justify-between">
+      <div className="px-2 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div className="relative flex items-center justify-between h-16">
           <MobileMenuButton />
-          <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+          <div className="flex items-center justify-center flex-1 sm:items-stretch sm:justify-start">
             <Logo />
             <NavigationLinks navigation={navigation} onLinkClick={handleNavigation} />
             <Favourites />
           </div>
-          <div className="absolute inset-y-0 right-0 flex items-center space-x-4 pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+          <div className="absolute inset-y-0 right-0 flex items-center pr-2 space-x-4 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
             <SearchBar />
             <UserMenu />
           </div>
@@ -43,7 +44,7 @@ const NavBar = () => {
       </div>
 
       <DisclosurePanel className="sm:hidden">
-        <div className="space-y-1 px-2 pb-3 pt-2">
+        <div className="px-2 pt-2 pb-3 space-y-1">
           {navigation.map((item) => (
             <DisclosureButton
               key={item.name}

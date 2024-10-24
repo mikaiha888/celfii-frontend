@@ -1,4 +1,4 @@
-import { classNames } from "../../utils/classNames";
+import { classNames } from "../../helpers/styleHelper";
 import { useNavigate } from "react-router-dom";
 
 const NavigationLinks = ({ navigation, onLinkClick }) => {

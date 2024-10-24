@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import Cards from "../../components/cards/Cards";
 import Filter from "../../components/filter/Filter";
-import CreateProductForm from "../../components/form/CreateProductForm";
 import { useEffect, useState } from "react";
 import { loadCartFavs, loadProducts } from "../../redux/actions";
 import { debounce } from "lodash";
@@ -62,7 +61,6 @@ const Products = () => {
           />
         </>
       )}
-      <CreateProductForm />
     </div>
   );
 };

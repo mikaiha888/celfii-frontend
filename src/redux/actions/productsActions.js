@@ -1,12 +1,11 @@
-import axios from "axios";
-
-import { PRODUCTS_REQUEST, PRODUCT_SUCCESS, PRODUCTS_SUCCESS, PRODUCTS_FAILURE } from "../types";
 import { uploadImages } from "./imagesActions";
+import { getRequest, postRequest, putRequest, deleteRequest } from "../../helpers/apiHelper";
+import { PRODUCTS_REQUEST, PRODUCT_SUCCESS, PRODUCTS_SUCCESS, PRODUCTS_FAILURE } from "../types";
 
 export const createProduct = (productData) => async (dispatch) => {
   try {
     dispatch({ type: PRODUCTS_REQUEST });
-    const { data } = await axios.post("/products", productData);
+    const { data } = await postRequest("/products", productData);
     dispatch(uploadImages(productData));
     dispatch({ type: PRODUCT_SUCCESS, payload: data });
   } catch (error) {
@@ -20,7 +19,7 @@ export const createProduct = (productData) => async (dispatch) => {
 export const loadProduct = (id) => async (dispatch) => {
   try {
     dispatch({ type: PRODUCTS_REQUEST });
-    const { data } = await axios.get(`/products/${id}`);
+    const { data } = await getRequest(`/products/${id}`);
     dispatch({ type: PRODUCT_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
@@ -30,27 +29,13 @@ export const loadProduct = (id) => async (dispatch) => {
   }
 };
 
-export const loadProducts = (data) => {
-  const { page, pagination, name, category, sort } = data;
-  const params = new URLSearchParams();
-
-  return async (dispatch) => {
+export const loadProducts =
+  (queries = {}) =>
+  async (dispatch) => {
     try {
       dispatch({ type: PRODUCTS_REQUEST });
-      if (page) params.append("page", page);
-      if (pagination) params.append("perPage", pagination);
-      if (name) params.append("name", name);
-      if (category) params.append("category", category);
-      if (sort) params.append("sort", sort);
-      const { data } = await axios.get(`/products?${params.toString()}`);
-
-      dispatch({
-        type: PRODUCTS_SUCCESS,
-        payload: {
-          products: data.products,
-          totalItems: data.totalItems,
-        }
-      });
+      const { data } = await getRequest("/products", queries);
+      dispatch({ type: PRODUCTS_SUCCESS, payload: data });
     } catch (error) {
       dispatch({
         type: PRODUCTS_FAILURE,
@@ -58,12 +43,11 @@ export const loadProducts = (data) => {
       });
     }
   };
-};
 
 export const saveProduct = (productData) => async (dispatch) => {
   try {
     dispatch({ type: PRODUCTS_REQUEST });
-    const { data } = await axios.put(`/products/${productData.id}`, productData);
+    const { data } = await putRequest(`/products/${productData.id}`, productData);
     dispatch({ type: PRODUCT_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
@@ -76,7 +60,7 @@ export const saveProduct = (productData) => async (dispatch) => {
 export const deleteProduct = (id) => async (dispatch) => {
   try {
     dispatch({ type: PRODUCTS_REQUEST });
-    const { data } = await axios.delete(`/products/${id}`);
+    const { data } = await deleteRequest(`/products/${id}`);
     dispatch(loadProducts());
     return data;
   } catch (error) {

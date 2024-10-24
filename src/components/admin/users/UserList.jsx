@@ -8,7 +8,7 @@ import {
   ExportButton,
 } from 'react-admin';
 
-export const UserList = () => {
+const UserList = () => {
   return (
     <div>
       <List
