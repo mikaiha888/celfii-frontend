@@ -3,7 +3,7 @@ import { loginUser } from "../../redux/actions";
 import { useNavigate } from "react-router-dom";
 import { loginValidationSchema } from "./validations";
 
-import GenericForm from "./GenericForm";
+import { GenericForm } from "./Form";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
