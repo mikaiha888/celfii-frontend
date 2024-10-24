@@ -9,7 +9,11 @@ import {
   CreateButton,
   ExportButton,
   useListContext,
+  useNotify,
+  useRefresh,
+  FunctionField,
 } from 'react-admin';
+import dataProvider from '../dataProvider';
 import { ProductFilterSidebar } from './ProductFilterSidebar';
 
 export const ProductList = (props) => {
@@ -35,9 +39,21 @@ export const ProductList = (props) => {
 const ProductDataGrid = () => {
   const { filterValues } = useListContext();
   const showDeleted = filterValues.onlyDeleted;
+  const notify = useNotify();
+  const refresh = useRefresh();
+
+  const handleRestore = async (id) => {
+    try {
+      await dataProvider.restore('products', { id });
+      notify('Producto restaurado con éxito', { type: 'success' });
+      refresh();
+    } catch (error) {
+      notify('Error al restaurar el producto' , error, { type: 'error' });
+    }
+  };
 
   return (
-    <Datagrid>
+    <Datagrid rowClick="edit">
       <TextField source="name" label="Nombre del Producto" />
       <ImageField source="images[0].url" label="Imagen" />
       <TextField source="category.name" label="Categoría" />
@@ -46,7 +62,21 @@ const ProductDataGrid = () => {
       <TextField source="code" label="Código" />
       <NumberField source="view.counter" label="Vistas" />
 
-      {!showDeleted && (
+      {showDeleted ? (
+        <FunctionField
+          label="Acciones"
+          render={(record) => (
+            <button
+              onClick={(event) => {
+                event.stopPropagation();
+                handleRestore(record.id);
+              }}
+            >
+              Recuperar
+            </button>
+          )}
+        />
+      ) : (
         <>
           <EditButton label="Editar" />
           <DeleteButton label="Eliminar" />

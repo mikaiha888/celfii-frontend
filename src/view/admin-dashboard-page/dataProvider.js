@@ -72,9 +72,21 @@ const dataProvider = {
         headers: getAuthHeaders(),
       })
     );
+    
 
     await Promise.all(deleteRequests);
     return { data: params.ids };
+  },
+
+  restore: async (resource, params) => {
+    const { data } = await axios.post(
+      `http://localhost:3001/${resource}/${params.id}`,
+      {},
+      {
+        headers: getAuthHeaders(),
+      }
+    );
+    return { data };
   },
 };
 
