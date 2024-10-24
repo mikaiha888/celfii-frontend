@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import { createUserValidationSchema } from "./validations";
 import { createUser } from "../../redux/actions/usersActions";
 
-import GenericForm from "./GenericForm";
+import { GenericForm } from "./Form";
 
 const UserForm = () => {
   const dispatch = useDispatch();

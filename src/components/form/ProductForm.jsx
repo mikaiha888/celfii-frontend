@@ -1,6 +1,6 @@
 import { createProductValidationSchema } from "./validations";
 
-import GenericForm from "./GenericForm";
+import { AdminForm } from "./Form";
 
 const ProductForm = ({ product, categories, onSubmit, onImageRemove }) => {
   const initialValues = {
@@ -72,14 +72,14 @@ const ProductForm = ({ product, categories, onSubmit, onImageRemove }) => {
       label: "Imágenes",
       multiple: true,
       defaultValue: product && product.images ? product.images : null,
-      onImageRemove
+      onImageRemove,
     },
   ];
 
   return (
     <div>
       <h1>{product ? "Actualizar Producto" : "Crear Producto"}</h1>
-      <GenericForm
+      <AdminForm
         initialValues={initialValues}
         validationSchema={createProductValidationSchema}
         onSubmit={onSubmit}
