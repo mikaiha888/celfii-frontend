@@ -39,8 +39,13 @@ const CustomAppBar = (props) => {
     </AppBar>
   );
 };
-
-const CustomLayout = (props) => <Layout {...props} appBar={CustomAppBar} />;
+const CustomLayout = (props) => {
+  return (
+    <div className="mt-10">
+      <Layout {...props} appBar={CustomAppBar} />
+    </div>
+  );
+};
 
 const AdminDashboard = () => (
   <Admin dataProvider={dataProvider} basename="/admin" layout={CustomLayout}>
@@ -67,11 +72,7 @@ const AdminDashboard = () => (
       create={UserCreate}
       edit={UserEdit}
     />
-    <Resource
-      name="charts" 
-      options={{ label: 'Gráficos' }} 
-      list={Charts} 
-    />
+    <Resource name="charts" options={{ label: 'Gráficos' }} list={Charts} />
   </Admin>
 );
 
