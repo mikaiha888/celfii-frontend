@@ -37,7 +37,7 @@ const Charts = () => {
             <XAxis dataKey="name" />
             <YAxis />
             <Tooltip formatter={(value) => [`productos ${value}`]} />
-            <Bar dataKey="productCount" fill="#8884d8" />
+            <Bar dataKey="productCount" fill="#ff0000" />
           </BarChart>
         </ResponsiveContainer>
       </CardContent>
