@@ -16,7 +16,7 @@ import {
 import RestoreIcon from '@mui/icons-material/Restore';
 import { Button } from '@mui/material';
 import dataProvider from '../../../view/admin-dashboard-page/dataProvider';
-import  ProductFilterSidebar  from './ProductFilterSidebar';
+import ProductFilterSidebar from './ProductFilterSidebar';
 
 export const ProductList = (props) => {
   return (
@@ -24,7 +24,6 @@ export const ProductList = (props) => {
       title="Productos"
       {...props}
       perPage={25}
-      rowsPerPageLabel="Filas por página"
       aside={<ProductFilterSidebar />}
       actions={
         <>

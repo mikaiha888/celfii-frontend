@@ -23,6 +23,10 @@ import RoleList from '../../components/admin/roles/RoleList';
 
 import Charts from '../../components/admin/charts/Charts';
 
+import polyglotI18nProvider from 'ra-i18n-polyglot';
+import customSpanishMessages from './customSpanishMessages';
+
+
 const CustomAppBar = (props) => {
   const navigate = useNavigate();
 
@@ -41,6 +45,7 @@ const CustomAppBar = (props) => {
     </AppBar>
   );
 };
+
 const CustomLayout = (props) => {
   return (
     <div className="mt-10">
@@ -48,6 +53,8 @@ const CustomLayout = (props) => {
     </div>
   );
 };
+
+const i18nProvider = polyglotI18nProvider(() => customSpanishMessages, 'es');
 
 const AdminDashboard = () => (
   <ThemeProvider theme={lightTheme}>
@@ -57,6 +64,7 @@ const AdminDashboard = () => (
       layout={CustomLayout}
       theme={lightTheme}
       darkTheme={darkTheme}
+      i18nProvider={i18nProvider} // Configuración del i18nProvider
     >
       <Resource
         name="products"
