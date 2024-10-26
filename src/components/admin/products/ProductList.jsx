@@ -24,7 +24,6 @@ export const ProductList = (props) => {
       title="Productos"
       {...props}
       perPage={25}
-      rowsPerPageLabel="Filas por página"
       aside={<ProductFilterSidebar />}
       actions={
         <>
