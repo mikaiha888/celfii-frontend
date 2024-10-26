@@ -11,21 +11,12 @@ import {
   useListContext,
   useNotify,
   useRefresh,
-  BulkDeleteButton,
   FunctionField,
 } from 'react-admin';
 import RestoreIcon from '@mui/icons-material/Restore';
 import { Button } from '@mui/material';
 import dataProvider from '../../../view/admin-dashboard-page/dataProvider';
 import ProductFilterSidebar from './ProductFilterSidebar';
-
-const CustomBulkActionButtons = (props) => {
-  return (
-    <>
-      <BulkDeleteButton label="Eliminar seleccionados" {...props} />
-    </>
-  );
-};
 
 export const ProductList = (props) => {
   return (
@@ -64,7 +55,7 @@ const ProductDataGrid = () => {
   };
 
   return (
-    <Datagrid bulkActionButtons={<CustomBulkActionButtons />}>
+    <Datagrid>
       <TextField source="name" label="Nombre del Producto" />
       <ImageField source="images[0].url" label="Imagen" />
       <TextField source="category.name" label="Categoría" />

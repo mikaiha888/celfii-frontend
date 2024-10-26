@@ -18,6 +18,7 @@
     "lucide": "^0.453.0",
     "lucide-react": "^0.453.0",
     "ra-data-json-server": "^5.2.3",
+    "ra-language-spanish": "^1.0.0",
     "react": "^18.3.1",
     "react-admin": "^5.2.3",
     "react-dom": "^18.3.1",
