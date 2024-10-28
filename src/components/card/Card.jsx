@@ -1,13 +1,17 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { addFavourite, removeFavourite } from "../../redux/actions/favouritesActions";
+import { useState } from "react";
 
 const Card = ({ product }) => {
-  const dispatch = useDispatch()
-  const favourites = useSelector(state => state.favourites)
-  const isFavourite = favourites.some(fav => fav.id === product.id)
+  const dispatch = useDispatch();
+  const favourites = useSelector((state) => state.favourites);
+  const isFavourite = favourites.some((fav) => fav.id === product.id);
 
-  const toggleFavourite = () => {
+  const [hovered, setHovered] = useState(false);
+
+  const toggleFavourite = (e) => {
+    e.stopPropagation();
     if (isFavourite) {
       dispatch(removeFavourite(product));
     } else {
@@ -16,44 +20,42 @@ const Card = ({ product }) => {
   };
 
   return (
-    <div className="max-w-sm overflow-hidden bg-white rounded shadow-lg relative">
-      {product.images &&
-        product.images.map((image, index) => (
+    <div
+      className="relative max-w-sm overflow-hidden bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}>
+      <Link to={`/product/${product.id}`} className="block">
+        {product.images && product.images[0] && (
           <img
-            key={index}
-            className="object-cover w-full h-60"
-            src={image.url}
-            alt={image.altText}
+            className="object-cover w-full h-60 rounded-t-lg"
+            src={product.images[0].url}
+            alt={product.images[0].altText || product.name}
           />
-        ))}
-
-      <div className="absolute bottom-2 right-2 p-2">
-        {isFavourite ? (
-          <button onClick={toggleFavourite} className="text-red-500 text-2xl">
-            ❤️
-          </button>
-        ) : (
-          <button onClick={toggleFavourite} className="text-gray-500 text-2xl">
-            🤍
-          </button>
         )}
-      </div>
 
-      <div className="px-6 py-4">
-        <div className="mb-2 text-xl font-bold">{product.name}</div>
-        <p className="text-base text-gray-700">Precio: ARS {product.priceArs}</p>
-        <p className="text-base text-gray-700"> {product.category.name}</p>
-      </div>
-      <div className="px-6 pt-4 pb-2">
-        <Link to={`/product/${product.id}`}>
-          <button className="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">
-            Ver más
-          </button>
-        </Link>
-      </div>
+        <div className="px-6 py-4">
+          <h3 className="mb-2 text-xl font-bold">{product.name}</h3>
+          <p className="text-gray-700">Precio: ARS {product.priceArs}</p>
+          <p className="text-gray-600 text-sm">{product.category.name}</p>
+          <p className="text-gray-600 text-sm">{product.view.counter} vistas</p>
+        </div>
+      </Link>
+
+      <button
+        onClick={toggleFavourite}
+        className={`absolute top-2 right-2 text-2xl transition-all duration-300 transform ${
+          hovered ? "opacity-100 translate-x-0" : "opacity-0 translate-x-4"
+        }`}
+        style={{ transitionProperty: "opacity, transform" }}
+      >
+        {isFavourite ? (
+          <span className="text-red-500">❤️</span>
+        ) : (
+          <span className="text-gray-500">🤍</span>
+        )}
+      </button>
     </div>
   );
-
 };
 
 export default Card;

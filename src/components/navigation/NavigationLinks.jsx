@@ -5,8 +5,8 @@ const NavigationLinks = ({ navigation, onLinkClick }) => {
   const navigate = useNavigate();
 
   return (
-    <div className="hidden sm:ml-6 sm:block">
-      <div className="flex space-x-4">
+    <div className="hidden sm:ml-8 sm:block">
+      <div className="flex space-x-6 mt-5">
         {navigation.map((item) => (
           <button
             key={item.name}
@@ -17,9 +17,10 @@ const NavigationLinks = ({ navigation, onLinkClick }) => {
             aria-current={item.current ? "page" : undefined}
             className={classNames(
               item.current
-                ? "bg-gray-900 text-white"
-                : "text-gray-300 hover:bg-gray-700 hover:text-white",
-              "rounded-md px-3 py-2 text-sm font-medium"
+                ? "bg-red-800 text-white" // Fondo bordó sin degradado
+                : "text-gray-300 hover:bg-red-700 hover:text-white",
+              "rounded-full px-4 py-2 text-sm font-semibold transition-all duration-200 ease-in-out shadow-md transform hover:scale-105",
+              "hover:border hover:border-red-500"
             )}>
             {item.name}
           </button>

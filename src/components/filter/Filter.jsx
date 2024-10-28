@@ -44,12 +44,13 @@ const Filter = ({ updateSearchParams }) => {
 
   return (
     <div>
-      <Selector onCategoryChange={handleCategoryChange} selectedCategory={selectedCategory} />
-      <SearchBar
-        value={search}
-        onChange={handleSearchChange}      
-      />
-      <Sort onSortChange={handleSortChange} />
+      <div className="flex flex-col sm:flex-row items-center gap-4 p-4 bg-gray-100 rounded-md shadow-lg">
+        <Selector onCategoryChange={handleCategoryChange} selectedCategory={selectedCategory} />
+        <Sort onSortChange={handleSortChange} />
+        <div className="ml-auto">
+        <SearchBar value={search} onChange={handleSearchChange} />
+        </div>
+      </div>
     </div>
   );
 };
