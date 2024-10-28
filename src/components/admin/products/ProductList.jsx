@@ -12,11 +12,11 @@ import {
   useNotify,
   useRefresh,
   FunctionField,
-} from 'react-admin';
-import RestoreIcon from '@mui/icons-material/Restore';
-import { Button } from '@mui/material';
-import dataProvider from '../../../view/admin-dashboard-page/dataProvider';
-import ProductFilterSidebar from './ProductFilterSidebar';
+} from "react-admin";
+import RestoreIcon from "@mui/icons-material/Restore";
+import { Button } from "@mui/material";
+import dataProvider from "../../../view/admin-dashboard-page/dataProvider";
+import ProductFilterSidebar from "./ProductFilterSidebar";
 
 export const ProductList = (props) => {
   return (
@@ -45,11 +45,11 @@ const ProductDataGrid = () => {
 
   const handleRestore = async (id) => {
     try {
-      await dataProvider.restore('products', { id });
-      notify('Producto restaurado con éxito', { type: 'success' });
+      await dataProvider.restore("products", { id });
+      notify("Producto restaurado con éxito", { type: "success" });
       refresh();
     } catch (error) {
-      notify('Error al restaurar el producto', error, { type: 'error' });
+      notify("Error al restaurar el producto", error, { type: "error" });
     }
   };
 
@@ -74,10 +74,10 @@ const ProductDataGrid = () => {
               }}
               startIcon={<RestoreIcon />}
               style={{
-                textTransform: 'none',
+                textTransform: "none",
                 padding: 0,
-                minWidth: 'auto',
-                color: '#1976d2',
+                minWidth: "auto",
+                color: "#1976d2",
               }}
             >
               Recuperar

@@ -1,4 +1,4 @@
-import spanishMessages from 'ra-language-spanish'; // Asegúrate de importar los mensajes de español
+import spanishMessages from "ra-language-spanish";
 
 const customSpanishMessages = {
   ...spanishMessages,
@@ -6,9 +6,8 @@ const customSpanishMessages = {
     ...spanishMessages.ra,
     navigation: {
       ...spanishMessages.ra.navigation,
-      page_rows_per_page: 'Filas por página', // Modifica o agrega tus traducciones aquí
+      page_rows_per_page: "Filas por página",
     },
-    // Puedes añadir más mensajes personalizados aquí
   },
 };
 

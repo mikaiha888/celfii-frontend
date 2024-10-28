@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { Card, CardContent, Typography } from "@mui/material";
-import {
-  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
-} from "recharts";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 import { getRequest } from "../../../helpers/apiHelper";
 
 const Charts = () => {
@@ -14,7 +12,7 @@ const Charts = () => {
         const response = await getRequest("/categories");
         const categoryData = response.data.map((category) => ({
           name: category.name,
-          productCount: category.productCount, 
+          productCount: category.productCount,
         }));
         setData(categoryData);
       } catch (error) {

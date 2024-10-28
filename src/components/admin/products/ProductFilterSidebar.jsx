@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import {
   Card,
   CardContent,
@@ -7,23 +7,23 @@ import {
   Accordion,
   AccordionSummary,
   AccordionDetails,
-} from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux';
-import { loadCategories } from '../../../redux/actions';
-import { FilterLiveSearch, FilterListItem, useListContext } from 'react-admin';
+} from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { loadCategories } from "../../../redux/actions";
+import { FilterLiveSearch, FilterListItem, useListContext } from "react-admin";
 
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import CategoryIcon from '@mui/icons-material/LocalOffer';
-import SortIcon from '@mui/icons-material/Sort';
-import DeleteIcon from '@mui/icons-material/Delete';
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import CategoryIcon from "@mui/icons-material/LocalOffer";
+import SortIcon from "@mui/icons-material/Sort";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const ProductFilterSidebar = () => {
   const dispatch = useDispatch();
   const { setFilters, filterValues } = useListContext();
   const { categories } = useSelector((state) => state.categories);
 
-  const [minPrice, setMinPrice] = useState('');
-  const [maxPrice, setMaxPrice] = useState('');
+  const [minPrice, setMinPrice] = useState("");
+  const [maxPrice, setMaxPrice] = useState("");
 
   useEffect(() => {
     dispatch(loadCategories());
@@ -42,8 +42,8 @@ const ProductFilterSidebar = () => {
   };
 
   const clearFilters = () => {
-    setMinPrice('');
-    setMaxPrice('');
+    setMinPrice("");
+    setMaxPrice("");
     setFilters({
       ...filterValues,
       minPrice: undefined,
@@ -111,10 +111,10 @@ const ProductFilterSidebar = () => {
             <SortIcon /> <span style={{ marginLeft: 8 }}>Ordenar por</span>
           </AccordionSummary>
           <AccordionDetails>
-            <FilterListItem label="Más Popular" value={{ sort: 'most popular' }} />
-            <FilterListItem label="Precio más Alto" value={{ sort: 'highest price' }} />
-            <FilterListItem label="Precio más Bajo" value={{ sort: 'lowest price' }} />
-            <FilterListItem label="Más Nuevo" value={{ sort: 'newest' }} />
+            <FilterListItem label="Más Popular" value={{ sort: "most popular" }} />
+            <FilterListItem label="Precio más Alto" value={{ sort: "highest price" }} />
+            <FilterListItem label="Precio más Bajo" value={{ sort: "lowest price" }} />
+            <FilterListItem label="Más Nuevo" value={{ sort: "newest" }} />
           </AccordionDetails>
         </Accordion>
 
