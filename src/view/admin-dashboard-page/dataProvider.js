@@ -25,7 +25,25 @@ const dataProvider = {
   },
 
   create: async (resource, params) => {
-    const response = await postRequest(`/${resource}`, params.data);
+    const formData = new FormData();
+    if (params.data.images) {
+      params.data.images.forEach((image) => {
+        if (image.rawFile && image.rawFile instanceof File) {
+          formData.append("images", image.rawFile);
+        }
+      });
+    }
+    if (params.data.category && typeof params.data.category === "object") {
+      formData.append("category", params.data.category.name);
+    } else if (typeof params.data.category === "string") {
+      formData.append("category", params.data.category);
+    }
+    for (const key in params.data) {
+      if (key !== "images" && key !== "category") {
+        formData.append(key, params.data[key]);
+      }
+    }
+    const response = await postRequest(`/${resource}`, formData);
     return response;
   },
 
