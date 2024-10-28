@@ -35,7 +35,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
   };
 
   return (
-    <div className="flex justify-center items-center space-x-4">
+    <div className="flex justify-center items-center space-x-4 mt-7">
       <button onClick={handleFirst} disabled={currentPage === 1}>
         <ChevronFirst className={`w-5 h-5 ${currentPage === 1 ? "text-gray-400" : "text-black"}`} />
       </button>

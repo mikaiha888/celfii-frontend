@@ -45,7 +45,7 @@ const Products = () => {
   return (
     <div className="container py-10 mx-auto">
       <Filter updateSearchParams={updateSearchParams} />
-      <h1 className="mb-8 text-3xl font-bold text-center">Accesorios para Celulares</h1>
+      <h1 className="mb-8 text-3xl font-bold text-center mt-8">Accesorios para Celulares</h1>
       {loading ? (
         <p>Cargando productos...</p>
       ) : (

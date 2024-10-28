@@ -30,8 +30,7 @@ export const ProductList = (props) => {
           <CreateButton label="Crear Producto" />
           <ExportButton label="Exportar Productos" />
         </>
-      }
-    >
+      }>
       <ProductDataGrid />
     </List>
   );
@@ -78,17 +77,13 @@ const ProductDataGrid = () => {
                 padding: 0,
                 minWidth: "auto",
                 color: "#1976d2",
-              }}
-            >
+              }}>
               Recuperar
             </Button>
           )}
         />
       ) : (
-        <>
-          <EditButton label="Editar" />
-          <DeleteButton label="Eliminar" />
-        </>
+        <EditButton label="Editar" />
       )}
     </Datagrid>
   );
