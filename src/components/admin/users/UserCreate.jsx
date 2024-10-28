@@ -1,7 +1,7 @@
-import { Create, SimpleForm, TextInput, useNotify, useRefresh, useRedirect } from 'react-admin';
-import { useDataProvider } from 'react-admin';
+import { Create, SimpleForm, TextInput, useNotify, useRefresh, useRedirect } from "react-admin";
+import { useDataProvider } from "react-admin";
 
-const required = (value) => (value ? undefined : 'El campo es obligatorio');
+const required = (value) => (value ? undefined : "El campo es obligatorio");
 
 const UserCreate = (props) => {
   const notify = useNotify();
@@ -11,12 +11,12 @@ const UserCreate = (props) => {
 
   const handleCreate = async (data) => {
     try {
-      await dataProvider.create('users', { data });
-      notify('Usuario creado con éxito');
-      redirect('/admin/users');
+      await dataProvider.create("users", { data });
+      notify("Usuario creado con éxito");
+      redirect("/admin/users");
       refresh();
     } catch (error) {
-      notify(`Error: ${error.message}`, { type: 'warning' });
+      notify(`Error: ${error.message}`, { type: "warning" });
     }
   };
 

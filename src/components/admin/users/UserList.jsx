@@ -6,7 +6,7 @@ import {
   DeleteButton,
   CreateButton,
   ExportButton,
-} from 'react-admin';
+} from "react-admin";
 
 const UserList = () => {
   return (

@@ -10,6 +10,7 @@ const dataProvider = {
       maxPrice: params.filter.maxPrice || undefined,
       category: params.filter.category || undefined,
       sort: params.filter.sort || "",
+      onlyDeleted: params.filter.onlyDeleted || undefined,
     };
     const { data, headers } = await getRequest(`/${resource}`, query);
     return {
@@ -56,6 +57,11 @@ const dataProvider = {
     const deleteRequests = params.ids.map((id) => deleteRequest(`/${resource}/${id}`));
     await Promise.all(deleteRequests);
     return { data: params.ids };
+  },
+
+  restore: async (resource, params) => {
+    const response = await postRequest(`/${resource}/${params.id}`, {});
+    return response;
   },
 };
 
