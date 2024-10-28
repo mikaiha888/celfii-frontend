@@ -17,9 +17,9 @@ const ProductEdit = () => {
   const { product, loading } = useSelector((state) => state.products);
   const { categories } = useSelector((state) => state.categories);
 
-const handleImageRemove = (removedImage) => {
-  setImagesToDelete((prev) => [...prev, removedImage]);
-};
+  const handleImageRemove = (removedImage) => {
+    setImagesToDelete((prev) => [...prev, removedImage]);
+  };
 
   const handleSubmit = async (data) => {
     try {

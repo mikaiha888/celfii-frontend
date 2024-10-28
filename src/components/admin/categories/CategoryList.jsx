@@ -1,4 +1,12 @@
-import { List, Datagrid, TextField, EditButton, DeleteButton, CreateButton, ExportButton } from 'react-admin';
+import {
+  List,
+  Datagrid,
+  TextField,
+  EditButton,
+  DeleteButton,
+  CreateButton,
+  ExportButton,
+} from "react-admin";
 
 const CategoryList = () => {
   return (

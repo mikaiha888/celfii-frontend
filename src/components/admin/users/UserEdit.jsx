@@ -1,6 +1,6 @@
-import { Edit, SimpleForm, TextInput } from 'react-admin';
+import { Edit, SimpleForm, TextInput } from "react-admin";
 
-const required = (value) => (value ? undefined : 'El campo es obligatorio');
+const required = (value) => (value ? undefined : "El campo es obligatorio");
 
 const UserEdit = (props) => {
   return (
