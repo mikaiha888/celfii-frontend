@@ -31,7 +31,7 @@ const Footer = () => {
     });
   };
   return (
-    <footer className="bg-gradient-to-r from-red-600 via-red-700 to-burgundy-800 py-8 mt-8">
+    <footer className="bg-red-800 py-8 mt-8">
       <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
         <div className="flex flex-col sm:flex-row justify-between items-center border-b border-red-800 pb-8">
           <button
