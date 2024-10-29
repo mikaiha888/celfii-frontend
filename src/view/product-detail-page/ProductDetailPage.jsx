@@ -70,11 +70,15 @@ const ProductDetailPage = () => {
           <h1 className="text-3xl font-bold mb-4">{product.name}</h1>
           <p className="text-xl text-gray-700 mb-2">Precio: ARS {product.priceArs}</p>
           <p className="text-xl text-gray-700 mb-6">Precio: USD {product.priceUsd}</p>
-          <p className="text-gray-600 mb-6">{product.description}</p>
           <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 transition">
             Agregar al carrito
           </button>
         </div>
+      </div>
+      <hr className="mt-6"/>
+      <div className="mt-6">
+        <h2 className="text-2xl font-bold mb-2">Descripción del Producto</h2>
+        <p className="text-gray-600">{product.description}</p>
       </div>
     </div>
   );
