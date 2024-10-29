@@ -1,9 +1,11 @@
+import { debounce } from "lodash";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { loadCartFavs, loadProducts } from "../../redux/actions";
+
 import Cards from "../../components/cards/Cards";
 import Filter from "../../components/filter/Filter";
-import { useEffect, useState } from "react";
-import { loadCartFavs, loadProducts } from "../../redux/actions";
-import { debounce } from "lodash";
+import SearchBar from "../../components/filter/SearchBar";
 import Pagination from "../../components/pagination/Pagination";
 
 const Products = () => {
@@ -13,7 +15,7 @@ const Products = () => {
 
   const [searchParams, setSearchParams] = useState({
     page: 1,
-    pagination: 15,
+    perPage: 54,
     name: "",
     category: "",
     sort: "newest",
@@ -25,8 +27,10 @@ const Products = () => {
 
   const updateSearchParams = (newParams) => {
     setSearchParams((prevParams) => {
+      const resetPage = "page" in newParams ? newParams.page : 1;
       const updatedParams = {
         ...prevParams,
+        page: resetPage,
         ...newParams,
       };
       debouncedUpdateProducts(updatedParams);
@@ -36,31 +40,49 @@ const Products = () => {
 
   useEffect(() => {
     dispatch(loadProducts(searchParams));
-    dispatch(loadCartFavs("favorites"))
+    dispatch(loadCartFavs("favorites"));
   }, [dispatch]);
 
-  const totalPages = Math.ceil(totalItems / searchParams.pagination);
+  const totalPages = Math.ceil(totalItems / searchParams.perPage);
 
   const handlePageChange = (newPage) => {
     updateSearchParams({ page: newPage });
   };
 
   return (
-    <div className="container py-10 mx-auto">
-      <Filter updateSearchParams={updateSearchParams} />
-      <h1 className="mb-8 text-3xl font-bold text-center">Accesorios para Celulares</h1>
-      {loading ? (
-        <p>Cargando productos...</p>
-      ) : (
-        <>
-          <Cards products={products} favourites={favourites} />
-          <Pagination
-            currentPage={searchParams.page}
-            totalPages={totalPages}
-            onPageChange={handlePageChange}
-          />
-        </>
-      )}
+    <div className="container flex py-10 mx-auto">
+      <div className="flex flex-col w-full">
+        <SearchBar
+          value={searchParams.name}
+          onChange={(e) => updateSearchParams({ name: e.target.value })}
+        />
+
+        <div className="flex">
+          <aside className="w-1/4 p-4">
+            <Filter updateSearchParams={updateSearchParams} />
+          </aside>
+          <main className="flex-1 p-4">
+            {loading ? (
+              <p>Cargando productos...</p>
+            ) : products.length === 0 ? (
+              <div className="flex items-center justify-center mt-10 text-gray-500">
+                <p className="text-lg font-semibold">
+                  No se encontraron productos que coincidan con la búsqueda o filtros aplicados.
+                </p>
+              </div>
+            ) : (
+              <>
+                <Cards products={products} favourites={favourites} />
+                <Pagination
+                  currentPage={searchParams.page}
+                  totalPages={totalPages}
+                  onPageChange={handlePageChange}
+                />
+              </>
+            )}
+          </main>
+        </div>
+      </div>
     </div>
   );
 };

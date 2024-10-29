@@ -15,7 +15,7 @@ const UserMenu = () => {
       <div>
         <MenuButton className="relative flex text-sm bg-gray-800 rounded-full focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
           <span className="sr-only">Abrir menú usuario</span>
-          <img className="w-8 h-8 rounded-full" src={logoLocal} alt="" />
+          <img className="w-12 h-12 rounded-full" src={logoLocal} alt="" />
         </MenuButton>
       </div>
       <MenuItems className="absolute right-0 z-10 w-48 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
