@@ -12,13 +12,13 @@ import MobileMenuButton from "../mobile-menu/MobileMenuButton";
 const NavItems = ({ links, onClick }) => {
   return (
     <>
-      <div className="px-2 mx-auto max-w-7xl sm:px-6 lg:px-8">
-        <div className="relative flex items-center justify-between h-16">
+      <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div className="relative flex items-center justify-between h-24">
           <MobileMenuButton />
 
-          <div className="flex items-center justify-center flex-1 sm:items-stretch sm:justify-start">
+          <div className="flex items-center flex-1 space-x-6 sm:items-stretch sm:justify-start">
             <Logo />
-            <div className="hidden sm:block sm:ml-6">
+            <div className="flex hidden mt-5 space-x-6 sm:block sm:ml-6">
               {links.map((item) => (
                 <button
                   key={item.name}
@@ -26,9 +26,10 @@ const NavItems = ({ links, onClick }) => {
                   aria-current={item.current ? "page" : undefined}
                   className={classNames(
                     item.current
-                      ? "bg-gray-900 text-white"
-                      : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                    "rounded-md px-3 py-2 text-sm font-medium"
+                      ? "bg-red-800 text-white"
+                      : "text-gray-300 hover:bg-red-700 hover:text-white",
+                    "rounded-full px-4 py-2 text-sm font-semibold transition-all duration-200 ease-in-out shadow-md transform hover:scale-105",
+                    "hover:border hover:border-red-500"
                   )}
                 >
                   {item.name}
