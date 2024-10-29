@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ChevronFirst, ChevronLeft, ChevronRight, ChevronLast } from "lucide-react";
 
 const Pagination = ({ currentPage, totalPages, onPageChange }) => {
-
   const [inputPage, setInputPage] = useState(currentPage);
+
+  useEffect(() => {
+    setInputPage(currentPage)
+  }, [currentPage])
 
   const handleFirst = () => {
     if (currentPage > 1) onPageChange(1);

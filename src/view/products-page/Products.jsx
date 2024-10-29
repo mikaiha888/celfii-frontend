@@ -11,7 +11,7 @@ const Products = () => {
   const { products, totalItems, loading } = useSelector((state) => state.products);
   const [searchParams, setSearchParams] = useState({
     page: 1,
-    pagination: 15,
+    perPage: 54,
     name: "",
     category: "",
     sort: "newest",
@@ -23,8 +23,10 @@ const Products = () => {
 
   const updateSearchParams = (newParams) => {
     setSearchParams((prevParams) => {
+      const resetPage = 'page' in newParams ? newParams.page : 1;
       const updatedParams = {
         ...prevParams,
+        page: resetPage,
         ...newParams,
       };
       debouncedUpdateProducts(updatedParams);
@@ -36,7 +38,7 @@ const Products = () => {
     dispatch(loadProducts(searchParams));
   }, [dispatch]);
 
-  const totalPages = Math.ceil(totalItems / searchParams.pagination);
+  const totalPages = Math.ceil(totalItems / searchParams.perPage);
 
   const handlePageChange = (newPage) => {
     updateSearchParams({ page: newPage });
