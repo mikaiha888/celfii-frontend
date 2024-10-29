@@ -94,6 +94,26 @@ const Home = () => {
 
   return (
     <div className="container mx-auto p-6">
+      <section className="relative mb-10">
+        <img
+          src="https://tecstore.pe/media/magefan_blog/16celusPORTADA_1_.jpg"
+          alt="Oferta semanal"
+          className="w-full h-64 md:h-80 lg:h-96 object-cover rounded-lg shadow-lg"
+        />
+        <div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-60 rounded-lg">
+          <h2 className="text-white text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+            ¡Oferta de la Semana!
+          </h2>
+          <p className="text-white text-lg md:text-xl mb-6">
+            Aprovecha nuestras ofertas en smartphones y accesorios seleccionados.
+          </p>
+          <Link
+            to="/ofertas"
+            className="px-6 py-3 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition duration-300">
+            Ver Ofertas
+          </Link>
+        </div>
+      </section>
 
       <section>
         <h2 className="text-2xl font-bold mb-4">Teléfonos celulares destacados</h2>
@@ -160,7 +180,7 @@ const Home = () => {
             className="px-4 py-2 font-bold text-white bg-green-500 rounded hover:bg-green-700">
             Ir al carrito de compras
           </Link>
-          <WhatsAppButton/>
+          <WhatsAppButton />
         </div>
       </section>
     </div>

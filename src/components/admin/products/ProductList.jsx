@@ -5,7 +5,6 @@ import {
   NumberField,
   ImageField,
   EditButton,
-  DeleteButton,
   CreateButton,
   ExportButton,
   useListContext,
@@ -53,39 +52,42 @@ const ProductDataGrid = () => {
   };
 
   return (
-    <Datagrid>
-      <TextField source="name" label="Nombre del Producto" />
-      <ImageField source="images[0].url" label="Imagen" />
-      <TextField source="category.name" label="Categoría" />
-      <NumberField source="priceArs" label="Precio (ARS)" />
-      <NumberField source="stock" label="Stock" />
-      <TextField source="code" label="Código" />
-      <NumberField source="view.counter" label="Vistas" />
+    <div style={{ marginRight: "20px" }}>
+      {" "}
+      <Datagrid>
+        <TextField source="name" label="Nombre del Producto" />
+        <ImageField source="images[0].url" label="Imagen" />
+        <TextField source="category.name" label="Categoría" />
+        <NumberField source="priceArs" label="Precio (ARS)" />
+        <NumberField source="stock" label="Stock" />
+        <TextField source="code" label="Código" />
+        <NumberField source="view.counter" label="Vistas" />
 
-      {showDeleted ? (
-        <FunctionField
-          label="Acciones"
-          render={(record) => (
-            <Button
-              onClick={(event) => {
-                event.stopPropagation();
-                handleRestore(record.id);
-              }}
-              startIcon={<RestoreIcon />}
-              style={{
-                textTransform: "none",
-                padding: 0,
-                minWidth: "auto",
-                color: "#1976d2",
-              }}>
-              Recuperar
-            </Button>
-          )}
-        />
-      ) : (
-        <EditButton label="Editar" />
-      )}
-    </Datagrid>
+        {showDeleted ? (
+          <FunctionField
+            label="Acciones"
+            render={(record) => (
+              <Button
+                onClick={(event) => {
+                  event.stopPropagation();
+                  handleRestore(record.id);
+                }}
+                startIcon={<RestoreIcon />}
+                style={{
+                  textTransform: "none",
+                  padding: 0,
+                  minWidth: "auto",
+                  color: "#1976d2",
+                }}>
+                Recuperar
+              </Button>
+            )}
+          />
+        ) : (
+          <EditButton label="Editar" />
+        )}
+      </Datagrid>
+    </div>
   );
 };
 
