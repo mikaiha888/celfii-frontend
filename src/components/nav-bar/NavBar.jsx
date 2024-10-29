@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { Disclosure } from "@headlessui/react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import NavItems from "./NavItems";
+import NavMobileMenu from "./NavMobileMenu";
+import MobileMenuButton from "../mobile-menu/MobileMenuButton";
 
 const NavBar = () => {
   const navigate = useNavigate();
@@ -15,8 +17,8 @@ const NavBar = () => {
   ]);
 
   useEffect(() => {
-    setLinks((prevLink) =>
-      prevLink.map((item) =>
+    setLinks((prevLinks) =>
+      prevLinks.map((item) =>
         location.pathname === item.href ? { ...item, current: true } : { ...item, current: false }
       )
     );
@@ -37,8 +39,12 @@ const NavBar = () => {
       as="nav"
       className="shadow-lg bg-gradient-to-r from-red-600 via-red-700 to-red-800 h-28"
     >
-      <div className="px-2 mx-auto max-w-7xl sm:px-6 lg:px-8">
-        <NavItems links={links} onClick={handleClick} />
+      <div className="px-4 mx-auto max-w-screen-2xl md:px-6">
+        <div className="relative flex items-center justify-between h-24">
+          <MobileMenuButton />
+          <NavItems links={links} onClick={handleClick} />
+          <NavMobileMenu links={links} onClick={handleClick} />
+        </div>
       </div>
     </Disclosure>
   );

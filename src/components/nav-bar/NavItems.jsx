@@ -1,72 +1,41 @@
-import { Link } from "react-router-dom";
 import { classNames } from "../../helpers/styleHelper";
-import { DisclosureButton, DisclosurePanel } from "@headlessui/react";
 import { Heart, ShoppingCart } from "lucide-react";
 
 import Logo from "../logo/Logo";
-import SearchBar from "../filter/SearchBar";
 import UserMenu from "../user-menu/UserMenu";
 import NavIconButton from "./nav-icon-button/NavIconButton";
-import MobileMenuButton from "../mobile-menu/MobileMenuButton";
 
 const NavItems = ({ links, onClick }) => {
   return (
     <>
-      <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-        <div className="relative flex items-center justify-between h-24">
-          <MobileMenuButton />
-
-          <div className="flex items-center flex-1 space-x-6 sm:items-stretch sm:justify-start">
-            <Logo />
-            <div className="flex hidden mt-5 space-x-6 sm:block sm:ml-6">
-              {links.map((item) => (
-                <button
-                  key={item.name}
-                  onClick={() => onClick(item.name, item.href)}
-                  aria-current={item.current ? "page" : undefined}
-                  className={classNames(
-                    item.current
-                      ? "bg-red-800 text-white"
-                      : "text-gray-300 hover:bg-red-700 hover:text-white",
-                    "rounded-full px-4 py-2 text-sm font-semibold transition-all duration-200 ease-in-out shadow-md transform hover:scale-105",
-                    "hover:border hover:border-red-500"
-                  )}
-                >
-                  {item.name}
-                </button>
-              ))}
-            </div>
-          </div>
-          <SearchBar />
-          <NavIconButton to="/favourites" icon={<Heart />} tooltipText="Favoritos" />
-          <NavIconButton to="/cart" icon={<ShoppingCart />} tooltipText="Mi Carrito" />
-          <UserMenu />
-        </div>
-      </div>
-
-      <DisclosurePanel className="sm:hidden">
-        <div className="px-2 pt-2 pb-3 space-y-1">
+      <div className="flex items-center justify-center flex-1 space-x-6 md:justify-start">
+        <Logo />
+        <div className="hidden md:flex">
           {links.map((item) => (
-            <DisclosureButton
+            <button
               key={item.name}
-              as={Link}
-              to={item.href}
               onClick={() => onClick(item.name, item.href)}
               aria-current={item.current ? "page" : undefined}
               className={classNames(
                 item.current
-                  ? "bg-gray-900 text-white"
-                  : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                "block rounded-md px-3 py-2 text-base font-medium"
+                  ? "bg-red-800 text-white"
+                  : "text-gray-300 hover:bg-red-700 hover:text-white",
+                "rounded-full px-4 py-2 text-sm font-semibold transition-all duration-200 ease-in-out shadow-md transform hover:scale-105",
+                "hover:border hover:border-red-500"
               )}
             >
               {item.name}
-            </DisclosureButton>
+            </button>
           ))}
+        </div>
+      </div>
+      <div className="absolute inset-y-0 right-0 flex items-center space-x-4 md:static md:inset-auto md:ml-6 md:pr-0">
+        <div className="items-center hidden gap-4 md:flex">
           <NavIconButton to="/favourites" icon={<Heart />} tooltipText="Favoritos" />
           <NavIconButton to="/cart" icon={<ShoppingCart />} tooltipText="Mi Carrito" />
         </div>
-      </DisclosurePanel>
+          <UserMenu className="mr-4 md:mr-0" />
+      </div>
     </>
   );
 };
