@@ -1,4 +1,5 @@
 import "./App.css";
+import { ToastContainer } from "react-toastify";
 import { Routes, Route, useLocation } from "react-router-dom";
 
 import NavBar from "./components/nav-bar/NavBar";
@@ -27,6 +28,13 @@ const App = () => {
       <div className="App">
         {!isAdminRoute && <NavBar />}
         <div className="App-Container">
+          <ToastContainer
+            position="bottom-right"
+            autoClose={2000}
+            closeOnClick
+            pauseOnHover
+            draggable
+          />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />

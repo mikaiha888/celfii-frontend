@@ -9,6 +9,7 @@ import {
   loadFromLocalStorage,
   addToArrayInLocalStorage,
   removeFromArrayInLocalStorage,
+  updateArrayInLocalStorage
 } from "../../helpers";
 
 export const addCartFavs = (key, product) => (dispatch) => {
@@ -57,6 +58,24 @@ export const loadCartFavs = () => (dispatch) => {
       type: CART_FAVS_SUCCESS,
       payload: { cart, favourites },
     });
+  } catch (error) {
+    dispatch({
+      type: CART_FAVS_FAILURE,
+      payload: error.message,
+    });
+  }
+};
+
+export const updateCart = (key, product) => (dispatch) => {
+  try {
+    dispatch({ type: CART_FAVS_REQUEST });
+    const updatedKey = updateArrayInLocalStorage(key, product);
+    if (updatedKey) {
+      dispatch({
+        type: UPDATE_CART_FAV,
+        payload: { cart: updatedKey },
+      });
+    }
   } catch (error) {
     dispatch({
       type: CART_FAVS_FAILURE,

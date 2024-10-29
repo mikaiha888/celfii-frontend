@@ -1,8 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loadCartFavs } from "../../redux/actions";
-
-import Cards from "../../components/cards/Cards";
+import CartItem from "../../components/cart-item/CartItem";
 
 const CartPage = () => {
   const dispatch = useDispatch();
@@ -10,16 +9,21 @@ const CartPage = () => {
 
   useEffect(() => {
     dispatch(loadCartFavs("cart"));
-  }, []);
+  }, [dispatch]);
 
   return (
     <div>
       <h1 className="text-2xl font-bold">Mi Carrito</h1>
-      {cart && cart.length ? (
-        <Cards products={cart} cart={cart} />
-      ) : (
-        <p>Carrito vacio</p>
-      )}
+      <div>
+        <ul>
+          {cart && cart.length && cart.map(item => 
+            <CartItem key={item.id} item={item} />
+          )}
+        </ul>
+      </div>
+      <div>
+
+      </div>
     </div>
   );
 };
