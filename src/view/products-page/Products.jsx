@@ -48,7 +48,7 @@ const Products = () => {
   return (
     <div className="flex container mx-auto py-10">
       <div className="flex flex-col w-full">
-        <h1 className="mb-8 text-3xl font-bold text-center">Accesorios para Celulares</h1>
+
 
         <SearchBar
           value={searchParams.name}
