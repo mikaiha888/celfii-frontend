@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import Cards from "../../components/cards/Cards";
 import Filter from "../../components/filter/Filter";
+import SearchBar from "../../components/filter/SearchBar";
 import { useEffect, useState } from "react";
 import { loadProducts } from "../../redux/actions";
 import { debounce } from "lodash";
@@ -23,7 +24,7 @@ const Products = () => {
 
   const updateSearchParams = (newParams) => {
     setSearchParams((prevParams) => {
-      const resetPage = 'page' in newParams ? newParams.page : 1;
+      const resetPage = "page" in newParams ? newParams.page : 1;
       const updatedParams = {
         ...prevParams,
         page: resetPage,
@@ -36,7 +37,7 @@ const Products = () => {
 
   useEffect(() => {
     dispatch(loadProducts(searchParams));
-  }, [dispatch]);
+  }, [dispatch, searchParams]);
 
   const totalPages = Math.ceil(totalItems / searchParams.perPage);
 
@@ -44,30 +45,44 @@ const Products = () => {
     updateSearchParams({ page: newPage });
   };
 
-   return (
-     <div className="container py-10 mx-auto">
-       <Filter updateSearchParams={updateSearchParams} />
-       <h1 className="mb-8 text-3xl font-bold text-center mt-8">Accesorios para Celulares</h1>
-       {loading ? (
-         <p>Cargando productos...</p>
-       ) : products.length === 0 ? (
-         <div className="flex justify-center items-center text-gray-500 mt-10">
-           <p className="text-lg font-semibold">
-             No se encontraron productos que coincidan con la búsqueda o filtros aplicados.
-           </p>
-         </div>
-       ) : (
-         <>
-           <Cards products={products} />
-           <Pagination
-             currentPage={searchParams.page}
-             totalPages={totalPages}
-             onPageChange={handlePageChange}
-           />
-         </>
-       )}
-     </div>
-   );
+  return (
+    <div className="flex container mx-auto py-10">
+      <div className="flex flex-col w-full">
+        <h1 className="mb-8 text-3xl font-bold text-center">Accesorios para Celulares</h1>
+
+        <SearchBar
+          value={searchParams.name}
+          onChange={(e) => updateSearchParams({ name: e.target.value })}
+        />
+
+        <div className="flex">
+          <aside className="w-1/4 p-4">
+            <Filter updateSearchParams={updateSearchParams} />
+          </aside>
+          <main className="flex-1 p-4">
+            {loading ? (
+              <p>Cargando productos...</p>
+            ) : products.length === 0 ? (
+              <div className="flex justify-center items-center text-gray-500 mt-10">
+                <p className="text-lg font-semibold">
+                  No se encontraron productos que coincidan con la búsqueda o filtros aplicados.
+                </p>
+              </div>
+            ) : (
+              <>
+                <Cards products={products} />
+                <Pagination
+                  currentPage={searchParams.page}
+                  totalPages={totalPages}
+                  onPageChange={handlePageChange}
+                />
+              </>
+            )}
+          </main>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default Products;

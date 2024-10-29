@@ -1,59 +1,44 @@
 import { useState } from "react";
-import { ArrowUpDown } from "lucide-react";
+import { X } from "lucide-react";
 
 const Sort = ({ onSortChange }) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [selectedSort, setSelectedSort] = useState("");
+  const sortOptions = [
+    { value: "most popular", label: "Más popular" },
+    { value: "highest price", label: "Mayor precio" },
+    { value: "lowest price", label: "Menor precio" },
+    { value: "newest", label: "Más reciente" },
+  ];
 
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const handleSortChange = (sortOrder) => {
-    onSortChange(sortOrder);
-    setIsOpen(false); // Cierra el menú después de seleccionar
+  const handleSortClick = (sortValue) => {
+    if (selectedSort === sortValue) {
+      setSelectedSort("");
+      onSortChange("");
+    } else {
+      setSelectedSort(sortValue);
+      onSortChange(sortValue);
+    }
   };
 
   return (
-    <div className="relative inline-block text-left">
-      <div
-        className="flex items-center space-x-2 cursor-pointer bg-gray-200 hover:bg-gray-300 px-3 py-2 rounded-md shadow-sm"
-        onClick={toggleDropdown}>
-        <ArrowUpDown size={20} strokeWidth={2} className="text-gray-600" />
-        <span className="font-semibold text-gray-700">Ordenar por</span>
-      </div>
-
-      {isOpen && (
-        <ul className="absolute z-10 mt-2 w-40 bg-white border border-gray-200 rounded-md shadow-lg">
-          <li>
-            <button
-              className="block w-full px-4 py-2 text-left text-gray-600 hover:bg-gray-100 hover:text-blue-600 transition-colors"
-              onClick={() => handleSortChange("most popular")}>
-              Más popular
-            </button>
-          </li>
-          <li>
-            <button
-              className="block w-full px-4 py-2 text-left text-gray-600 hover:bg-gray-100 hover:text-blue-600 transition-colors"
-              onClick={() => handleSortChange("highest price")}>
-              Mayor precio
-            </button>
-          </li>
-          <li>
-            <button
-              className="block w-full px-4 py-2 text-left text-gray-600 hover:bg-gray-100 hover:text-blue-600 transition-colors"
-              onClick={() => handleSortChange("lowest price")}>
-              Menor precio
-            </button>
-          </li>
-          <li>
-            <button
-              className="block w-full px-4 py-2 text-left text-gray-600 hover:bg-gray-100 hover:text-blue-600 transition-colors"
-              onClick={() => handleSortChange("newest")}>
-              Más reciente
-            </button>
-          </li>
-        </ul>
-      )}
+    <div className="flex flex-col gap-4">
+      {sortOptions.map((option) => (
+        <div key={option.value} className="relative">
+          <button
+            onClick={() => handleSortClick(option.value)}
+            className={`block w-full px-4 py-2 text-left text-gray-600 hover:bg-gray-100 transition-colors rounded-md ${
+              selectedSort === option.value ? "bg-red-500 text-white" : ""
+            }`}
+          >
+            <span>{option.label}</span>
+            {selectedSort === option.value && (
+              <span className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white">
+                <X size={20} aria-label="Remove sort option" />
+              </span>
+            )}
+          </button>
+        </div>
+      ))}
     </div>
   );
 };
