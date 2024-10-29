@@ -31,7 +31,7 @@ const Home = () => {
       },
     ],
   };
-  
+
   const products = [
     {
       id: 1,
@@ -65,28 +65,27 @@ const Home = () => {
     },
   ];
 
-  // Categorías
   const categories = [
     {
       name: "Accesorios",
-      link: "/categoria/accesorios",
+      link: "/productos?category=Accesorio",
       image:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQk9VQwgAicbc2qfmTG-9_4A4IEWPS7v50fw&s",
     },
     {
       name: "Repuestos",
-      link: "/categoria/repuestos",
+      link: "/productos?category=Repuesto",
       image:
         "https://static.landkit.engeni.com/assets/2649/7a51a2c2-be1f-407f-ac9d-50d8cf89af35/1e3194e2acff4a5399c6.jpg",
     },
     {
       name: "Equipos",
-      link: "/categoria/equipos",
+      link: "/productos?category=Equipos",
       image: "https://www.cronista.com/files/image/419/419139/61d3378d218ac.jpg",
     },
     {
-      name: "Electrónica",
-      link: "/categoria/electronica",
+      name: "Otros",
+      link: "/productos?category=Otros",
       image:
         "https://electronicaonline.net/wp-content/uploads/2024/05/Historia-de-la-Electronica.jpg",
     },
@@ -109,7 +108,8 @@ const Home = () => {
           </p>
           <Link
             to="/ofertas"
-            className="px-6 py-3 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition duration-300">
+            className="px-6 py-3 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition duration-300"
+          >
             Ver Ofertas
           </Link>
         </div>
@@ -177,7 +177,8 @@ const Home = () => {
         <div className="text-center">
           <Link
             to="/carrito"
-            className="px-4 py-2 font-bold text-white bg-green-500 rounded hover:bg-green-700">
+            className="px-4 py-2 font-bold text-white bg-green-500 rounded hover:bg-green-700"
+          >
             Ir al carrito de compras
           </Link>
           <WhatsAppButton />
