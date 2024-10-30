@@ -19,6 +19,7 @@ import AdminDashboard from "./view/admin-dashboard-page/AdminDashboard";
 import TermsOfService from "./view/terms-of-service-page/TermsOfService";
 import PrivacyPolicyPage from "./view/privacy-policy-page/PrivacyPolicyPage";
 import ProductDetailPage from "./view/product-detail-page/ProductDetailPage";
+import WhatsAppButton from "./components/whatsapp-button/WhatsAppButton";
 
 const App = () => {
   const location = useLocation();
@@ -51,6 +52,7 @@ const App = () => {
             <Route path="/terminos-servicio" element={<TermsOfService />} />
             <Route path="/politica-privacidad" element={<PrivacyPolicyPage />} />
           </Routes>
+          <WhatsAppButton/>
         </div>
         <Footer />
       </div>
