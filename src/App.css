@@ -5,11 +5,6 @@
   flex-direction: column;
 }
 
-.App-Container {
-  width: 100vw;
-  flex: 1;
-}
-
 .ReactModal__Overlay {
   position: fixed;
   top: 0;

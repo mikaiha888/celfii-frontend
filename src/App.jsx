@@ -26,8 +26,6 @@ const App = () => {
   return (
     <>
       <div className="App">
-        {!isAdminRoute && <NavBar />}
-        <div className="App-Container">
           <ToastContainer
             position="bottom-right"
             autoClose={2000}
@@ -35,6 +33,7 @@ const App = () => {
             pauseOnHover
             draggable
           />
+          {!isAdminRoute && <NavBar />}
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
@@ -51,7 +50,6 @@ const App = () => {
             <Route path="/terminos-servicio" element={<TermsOfService />} />
             <Route path="/politica-privacidad" element={<PrivacyPolicyPage />} />
           </Routes>
-        </div>
         <Footer />
       </div>
     </>
