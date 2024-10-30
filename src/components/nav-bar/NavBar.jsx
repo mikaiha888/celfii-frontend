@@ -11,18 +11,10 @@ const NavBar = () => {
   const location = useLocation();
 
   const [links, setLinks] = useState([
-    { name: "Productos", href: "productos", current: false },
-    { name: "Nosotros", href: "nosotros", current: false },
-    { name: "Contacto", href: "contacto", current: false },
+    { name: "Productos", href: "/productos", current: false },
+    { name: "Nosotros", href: "/nosotros", current: false },
+    { name: "Contacto", href: "/contacto", current: false },
   ]);
-
-  useEffect(() => {
-    setLinks((prevLinks) =>
-      prevLinks.map((item) =>
-        location.pathname === item.href ? { ...item, current: true } : { ...item, current: false }
-      )
-    );
-  }, [location]);
 
   const handleClick = (name, href) => {
     setLinks(
@@ -33,6 +25,14 @@ const NavBar = () => {
     );
     navigate(href);
   };
+
+  useEffect(() => {
+    setLinks((prevLinks) =>
+      prevLinks.map((item) =>
+        location.pathname === item.href ? { ...item, current: true } : { ...item, current: false }
+      )
+    );
+  }, [location]);
 
   return (
     <Disclosure
