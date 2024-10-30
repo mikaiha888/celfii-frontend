@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { X } from "lucide-react";
 
-const Sort = ({ onSortChange }) => {
-  const [selectedSort, setSelectedSort] = useState("");
+const Sort = ({ onSortChange, resetSort }) => {
+  const initialSort = localStorage.getItem("sortOrder") || "";
+  const [selectedSort, setSelectedSort] = useState(initialSort);
+
   const sortOptions = [
     { value: "most popular", label: "Más popular" },
     { value: "highest price", label: "Mayor precio" },
@@ -13,12 +15,22 @@ const Sort = ({ onSortChange }) => {
   const handleSortClick = (sortValue) => {
     if (selectedSort === sortValue) {
       setSelectedSort("");
+      localStorage.setItem("sortOrder", "");
       onSortChange("");
     } else {
       setSelectedSort(sortValue);
+      localStorage.setItem("sortOrder", sortValue);
       onSortChange(sortValue);
     }
   };
+
+  useEffect(() => {
+    if (resetSort) {
+      setSelectedSort("");
+      localStorage.removeItem("sortOrder");
+      onSortChange("");
+    }
+  }, [resetSort, onSortChange]);
 
   return (
     <div className="flex flex-col gap-4">
