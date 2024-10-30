@@ -9,6 +9,8 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 const Filter = ({ updateSearchParams }) => {
   const dispatch = useDispatch();
 
+  const [refreshKey, setRefreshKey] = useState(0);
+
   const [selectedCategory, setSelectedCategories] = useState(
     localStorage.getItem("selectedCategory") || ""
   );
@@ -89,6 +91,9 @@ const Filter = ({ updateSearchParams }) => {
     localStorage.removeItem("sortOrder");
     localStorage.removeItem("minPrice");
     localStorage.removeItem("maxPrice");
+
+    setRefreshKey((prevKey) => prevKey + 1);
+
     updateSearchParams({
       category: undefined,
       sort: "newest",
@@ -110,7 +115,7 @@ const Filter = ({ updateSearchParams }) => {
   };
 
   return (
-    <div className="bg-white shadow-md rounded-lg p-4">
+    <div key={refreshKey} className="bg-white shadow-md rounded-lg p-4">
       <div className="flex flex-col gap-4 mt-4">
         <input
           type="number"
