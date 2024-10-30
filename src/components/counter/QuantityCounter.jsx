@@ -14,7 +14,7 @@ const QuantityCounter = ({ initialQuantity = 1, maxQuantity = 10, onChange, cart
         const newQuantity = quantity + 1;
         setQuantity(newQuantity);
         onChange(newQuantity);
-      } else if (quantity < maxQuantity && cartQuantity >= maxQuantity) {
+      } else if (quantity + cartQuantity < maxQuantity) {
         const newQuantity = quantity + 1;
         setQuantity(newQuantity);
         onChange(newQuantity);
