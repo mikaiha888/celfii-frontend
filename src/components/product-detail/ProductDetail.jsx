@@ -49,7 +49,6 @@ const ProductDetail = ({ product, cart, isFavourite }) => {
           <h1 className="mb-4 text-3xl font-bold">{product.name}</h1>
           <p className="mb-2 text-xl text-gray-700">Precio: ARS {product.priceArs}</p>
           <p className="mb-6 text-xl text-gray-700">Precio: USD {product.priceUsd}</p>
-          <p className="mb-6 text-gray-600">{product.description}</p>
           {item && item.quantity >= product.stock ? (
             <button
               onClick={() => handleCartClick({ ...product, quantity })}
@@ -86,6 +85,11 @@ const ProductDetail = ({ product, cart, isFavourite }) => {
             Ver Carrito
           </Link>
         </div>
+      </div>
+      <hr className="mt-6" />
+      <div className="mt-6">
+        <h2 className="mb-2 text-2xl font-bold">Descripción del Producto</h2>
+        <p className="text-gray-600">{product.description}</p>
       </div>
     </>
   );
