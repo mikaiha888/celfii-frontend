@@ -36,6 +36,10 @@ const Products = () => {
     });
   };
 
+  const handleSearch = (searchTerm) => {
+    updateSearchParams({ name: searchTerm, page: 1 });
+  };
+
   useEffect(() => {
     dispatch(loadProducts(searchParams));
     dispatch(loadCartFavs("favorites"));
@@ -49,10 +53,7 @@ const Products = () => {
 
   return (
     <div className="container mx-auto">
-      <SearchBar
-        value={searchParams.name}
-        onChange={(e) => updateSearchParams({ name: e.target.value })}
-      />
+      <SearchBar value={searchParams.name} onSearch={handleSearch} />
       <div className="flex">
         <aside>
           <Filter updateSearchParams={updateSearchParams} />
