@@ -21,13 +21,11 @@ const ProductDetail = ({ product, cart, isFavourite }) => {
   };
 
   const handleCartClick = (product) => {
-    const newQuantity = item ? item.quantity + product.quantity : product.quantity;
-    if (newQuantity > product.stock)
-      toast.error(`Has alcanzado el límite de stock, no puedes agregar más productos.`);
-    else {
+    const newQuantity = item && item.length ? item.quantity + product.quantity : product.quantity;    
+    if (newQuantity <= product.stock) {
       dispatch(addCartFavs("cart", product));
       toast.success("Producto agregado al carrito");
-    }
+    } else toast.error(`Has alcanzado el límite de stock, no puedes agregar más productos.`);
   };
 
   return (
@@ -59,8 +57,12 @@ const ProductDetail = ({ product, cart, isFavourite }) => {
             </button>
           ) : (
             <>
-              {product.stock === 1 ? (
-                <span className="px-3 py-1 text-lg font-semibold">1 unidad</span>
+              {product.stock <= 1 ? (
+                product.stock < 1 ? (
+                  <span className="px-3 py-1 text-lg font-semibold">Sin stock</span>
+                ) : (
+                  <span className="px-3 py-1 text-lg font-semibold">1 unidad</span>
+                )
               ) : (
                 <QuantityCounter
                   initialQuantity={quantity}
