@@ -107,10 +107,10 @@ const Home = () => {
             Aprovecha nuestras ofertas en smartphones y accesorios seleccionados.
           </p>
           <Link
-            to="/ofertas"
+            to="/productos"
             className="px-6 py-3 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition duration-300"
           >
-            Ver Ofertas
+            Explorar
           </Link>
         </div>
       </section>
@@ -176,12 +176,11 @@ const Home = () => {
         </ul>
         <div className="text-center">
           <Link
-            to="/carrito"
+            to="/cart"
             className="px-4 py-2 font-bold text-white bg-green-500 rounded hover:bg-green-700"
           >
             Ir al carrito de compras
           </Link>
-          <WhatsAppButton />
         </div>
       </section>
     </div>

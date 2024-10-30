@@ -10,9 +10,9 @@ const Contact = () => {
       </p>
 
       <h2 className="text-2xl font-semibold text-gray-800 mt-6 mb-2">Información de Contacto</h2>
-      <p className="text-lg text-gray-700">WhatsApp: +54 123-456-7890</p>
+      <p className="text-lg text-gray-700">WhatsApp: +54 9 2604 54-5982</p>
       <a
-        href="https://wa.me/541151489932"
+        href="https://wa.me/5492604545982"
         target="_blank"
         rel="noopener noreferrer"
         className="inline-flex items-center space-x-2 text-green-600 hover:text-green-700 transition">
