@@ -39,7 +39,7 @@ const Products = () => {
   useEffect(() => {
     dispatch(loadProducts(searchParams));
     dispatch(loadCartFavs("favorites"));
-  }, [dispatch]);
+  }, [dispatch, searchParams]);
 
   const totalPages = Math.ceil(totalItems / searchParams.perPage);
 
