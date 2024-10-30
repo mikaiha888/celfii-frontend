@@ -1,17 +1,19 @@
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { debounce } from "lodash";
 import { useLocation } from "react-router-dom";
-import { loadProducts } from "../../redux/actions";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { loadCartFavs, loadProducts } from "../../redux/actions";
+
 import Cards from "../../components/cards/Cards";
 import Filter from "../../components/filter/Filter";
-import Pagination from "../../components/pagination/Pagination";
 import SearchBar from "../../components/filter/SearchBar";
-import { debounce } from "lodash";
+import Pagination from "../../components/pagination/Pagination";
 
 const Products = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const { products, totalItems, loading } = useSelector((state) => state.products);
+  const { favourites } = useSelector((state) => state.cartFavs);
 
   const [searchParams, setSearchParams] = useState({
     page: 1,
@@ -36,7 +38,8 @@ const Products = () => {
 
   useEffect(() => {
     dispatch(loadProducts(searchParams));
-  }, [dispatch, searchParams]);
+    dispatch(loadCartFavs("favorites"));
+  }, [dispatch]);
 
   const totalPages = Math.ceil(totalItems / searchParams.perPage);
 
@@ -61,7 +64,7 @@ const Products = () => {
             <p>No se encontraron productos.</p>
           ) : (
             <>
-              <Cards products={products} />
+              <Cards products={products} favourites={favourites} />
               <Pagination
                 currentPage={searchParams.page}
                 totalPages={totalPages}

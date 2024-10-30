@@ -1,4 +1,3 @@
-import { Heart } from "lucide-react";
 import {
   Tooltip,
   TooltipTrigger,
@@ -9,21 +8,16 @@ import {
 } from "@radix-ui/react-tooltip";
 import { Link } from "react-router-dom";
 
-const Favourites = () => {
+const NavIconButton = ({ to, icon, tooltipText }) => {
   return (
     <TooltipProvider delayDuration={200}>
-      {" "}
       <Tooltip>
         <TooltipTrigger asChild>
-          <Link to='/favourites'>
-          <button className="relative inline-flex items-center p-2 text-gray-600 hover:text-red-500 focus:outline-none">
-            <Heart className="w-6 h-6" />
-          </button>
-          </Link>
+          <Link to={to}>{icon}</Link>
         </TooltipTrigger>
         <TooltipPortal>
-          <TooltipContent sideOffset={5} className="bg-black text-white p-2 rounded-md shadow-lg">
-            <span>Mis favoritos</span>
+          <TooltipContent sideOffset={5} className="p-2 text-white bg-black rounded-md shadow-lg">
+            <span>{tooltipText}</span>
             <TooltipArrow className="fill-black" />
           </TooltipContent>
         </TooltipPortal>
@@ -32,4 +26,4 @@ const Favourites = () => {
   );
 };
 
-export default Favourites;
+export default NavIconButton;
