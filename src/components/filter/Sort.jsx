@@ -26,9 +26,11 @@ const Sort = ({ onSortChange }) => {
         <div key={option.value} className="relative">
           <button
             onClick={() => handleSortClick(option.value)}
-            className={`block w-full px-4 py-2 text-left text-gray-600 hover:bg-gray-100 transition-colors rounded-md ${
-              selectedSort === option.value ? "bg-red-500 text-white" : ""
-            }`}
+            className={`p-2 rounded-md text-left transition-colors duration-200 ${
+              selectedSort === option.value
+                ? "bg-red-500 text-white"
+                : "bg-white text-gray-700 hover:bg-gray-200"
+            } w-full flex justify-between items-center`}
           >
             <span>{option.label}</span>
             {selectedSort === option.value && (
