@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { Heart } from "lucide-react";
+import { Heart, Plus } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addCartFavs, removeCartFavs } from "../../redux/actions";
@@ -7,7 +6,6 @@ import { addCartFavs, removeCartFavs } from "../../redux/actions";
 const Card = ({ product, favourites }) => {
   const dispatch = useDispatch();
   const isFavourite = favourites?.some((fav) => fav.id === product.id);
-  const [hovered, setHovered] = useState(false);
 
   const toggleFavourite = (e) => {
     e.stopPropagation();
@@ -17,33 +15,33 @@ const Card = ({ product, favourites }) => {
   };
 
   return (
-    <div onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
+    <div>
       <Link to={`/product/${product.id}`}>
         {product.images && product.images[0] && (
           <img
-            className="object-cover w-60 h-80 border-gray-50"
+            className={"object-cover border border-gray-100 shadow-sm w-60 h-80 "}
             src={product.images[0].url}
             alt={product.images[0].altText || product.name}
           />
         )}
-        <span className="px-2 py-1 mt-3 text-xs font-semibold text-white bg-red-500 border rounded-full">
-          {product.category.name}
-        </span>
-        <h3 className="text-sm text-gray-500 w-60">{product.name}</h3>
-        <p className="text-sm font-semibold font-poppins">ARS {product.priceArs}</p>
+        <div className="flex items-center justify-between mt-1">
+          <h3 className="w-40 text-sm text-gray-500 truncate">{product.name}</h3>
+          <div className="flex items-center justify-between text-gray-400">
+            <button className="p-1 rounded-full hover:text-red-600 hover:bg-red-100">
+              <Plus size={18} />
+            </button>
+            <button onClick={toggleFavourite} className="p-1 rounded-full">
+              <Heart stroke={0} size={18} fill={isFavourite ? "#de3f3f" : "#d6d6d6"} />
+            </button>
+          </div>
+        </div>
+        <div className="flex justify-between mt-1">
+          <span className="px-2 py-1 text-xs font-medium text-white bg-red-500 rounded-full">
+            {product.category.name}
+          </span>
+          <p className="font-semibold text-md font-poppins">ARS {product.priceArs}</p>
+        </div>
       </Link>
-      <div>
-        <button>Agregar al carrito</button>
-        <button
-          onClick={toggleFavourite}
-          className={`absolute top-2 right-2 text-2xl transition-all duration-300 transform ${
-            hovered ? "opacity-100 translate-x-0" : "opacity-0 translate-x-4"
-          }`}
-          style={{ transitionProperty: "opacity, transform" }}
-        >
-          <Heart stroke={0} fill={isFavourite ? "#de3f3f" : "#d6d6d6"} />
-        </button>
-      </div>
     </div>
   );
 };

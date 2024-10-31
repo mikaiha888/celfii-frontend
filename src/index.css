@@ -6,13 +6,9 @@
 
 @layer components {
   .primary-btn {
-    @apply px-6 py-3 font-semibold text-white duration-200 bg-red-600 rounded-md font-poppins hover:bg-red-700;
+    @apply px-6 py-3 font-semibold text-white duration-200 bg-red-600 rounded-md hover:bg-red-700;
   }
   .text-btn {
-    @apply px-6 py-3 font-semibold text-red-600 duration-200 font-poppins hover:text-red-700;
+    @apply px-6 py-3 font-semibold text-red-600 duration-200 hover:text-red-700;
   }
-}
-
-h1, h2, h3, h4, h5, h6 {
-  @apply font-poppins leading-[120%]
 }
