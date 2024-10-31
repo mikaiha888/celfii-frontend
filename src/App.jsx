@@ -1,24 +1,10 @@
-import "./App.css";
 import { ToastContainer } from "react-toastify";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
-import NavBar from "./components/nav-bar/NavBar";
-
-import Home from "./view/home-page/Home";
-import Login from "./view/login-page/Login";
-import FAQPage from "./view/faq-page/FAQPage";
+import AppRoutes from "./routes/AppRoutes";
 import Footer from "./components/footer/Footer";
-import CartPage from "./view/cart-page/CartPage";
-import AboutUs from "./view/aboutus-page/AboutUs";
-import Contact from "./view/contact-page/Contact";
-import Profile from "./view/profile-page/Profile";
-import Settings from "./view/settings-page/Settings";
-import Products from "./view/products-page/Products";
-import FavouritePage from "./view/favourite-page/FavouritePage";
-import AdminDashboard from "./view/admin-dashboard-page/AdminDashboard";
-import TermsOfService from "./view/terms-of-service-page/TermsOfService";
-import PrivacyPolicyPage from "./view/privacy-policy-page/PrivacyPolicyPage";
-import ProductDetailPage from "./view/product-detail-page/ProductDetailPage";
+import NavBar from "./components/nav-bar/NavBar";
+import WhatsAppButton from "./components/whatsapp-button/WhatsAppButton";
 
 const App = () => {
   const location = useLocation();
@@ -26,33 +12,20 @@ const App = () => {
   return (
     <>
       <div className="App">
-          <ToastContainer
-            position="bottom-right"
-            autoClose={2000}
-            closeOnClick
-            pauseOnHover
-            draggable
-          />
-          {!isAdminRoute && <NavBar />}
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/faq" element={<FAQPage />} />
-            <Route path="/cart" element={<CartPage />} />
-            <Route path="/perfil" element={<Profile />} />
-            <Route path="/contacto" element={<Contact />} />
-            <Route path="/nosotros" element={<AboutUs />} />
-            <Route path="/productos" element={<Products />} />
-            <Route path="/configuracion" element={<Settings />} />
-            <Route path="/admin/*" element={<AdminDashboard />} />
-            <Route path="/favourites" element={<FavouritePage />} />
-            <Route path="/product/:id" element={<ProductDetailPage />} />
-            <Route path="/terminos-servicio" element={<TermsOfService />} />
-            <Route path="/politica-privacidad" element={<PrivacyPolicyPage />} />
-          </Routes>
+        <ToastContainer
+          position="bottom-right"
+          autoClose={2000}
+          closeOnClick
+          pauseOnHover
+          draggable
+        />
+        {!isAdminRoute && <NavBar />}
+        <AppRoutes />
+        <WhatsAppButton />
         <Footer />
       </div>
     </>
   );
 };
+
 export default App;

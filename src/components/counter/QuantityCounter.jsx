@@ -14,7 +14,7 @@ const QuantityCounter = ({ initialQuantity = 1, maxQuantity = 10, onChange, cart
         const newQuantity = quantity + 1;
         setQuantity(newQuantity);
         onChange(newQuantity);
-      } else if (quantity < maxQuantity && cartQuantity >= maxQuantity) {
+      } else if (quantity + cartQuantity < maxQuantity) {
         const newQuantity = quantity + 1;
         setQuantity(newQuantity);
         onChange(newQuantity);
@@ -54,7 +54,7 @@ const QuantityCounter = ({ initialQuantity = 1, maxQuantity = 10, onChange, cart
         </button>
       </div>
       {showText && (
-        <span className="text-red-500">Stock insuficiente para añadir más cantidad</span>
+        <span className="text-red-500">Stock insuficiente para añadir más unidades.</span>
       )}
     </div>
   );
