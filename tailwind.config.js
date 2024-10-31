@@ -15,10 +15,13 @@ export default {
         }
       },
       colors: {
-        primary: "rgb(220 38 38)", // Rojo
-        secondary: "#000000", // Negro
-        accent: "#FFFFFF", // Blanco
+        primary: "rgb(220 38 38)",
+        secondary: "#000000",
+        accent: "#FFFFFF",
       },
+      fontFamily: {
+        poppins: ["Poppins", "sans-serif"]
+      }
     },
   },
   plugins: [],

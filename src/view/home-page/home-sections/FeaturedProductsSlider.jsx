@@ -1,25 +1,25 @@
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { settings, products } from "../contants";
+import { settings } from "../contants";
+import { Link } from "react-router-dom";
 
 import Slider from "react-slick";
 
-const FeaturedProductsSlider = () => (
-  <section>
-    <h2 className="mb-4 text-2xl font-bold">Teléfonos celulares destacados</h2>
+const FeaturedProductsSlider = ({ products }) => (
+  <section className="container mt-20">
+    <h2 className="mx-4 mb-8 text-2xl font-semibold">Nuestros productos seleccionados</h2>
     <Slider {...settings}>
       {products.map((product) => (
-        <div key={product.id} className="p-2">
-          <div className="p-4 bg-white rounded-lg shadow-md">
+        <div key={product.id} className="pb-5">
+          <Link to={`/product/${product.id}`}>
             <img
-              src={product.image}
+              src={product.images[0].url}
               alt={product.name}
-              className="object-cover w-full h-48 rounded-md"
+              className="object-cover w-60 h-80 border-gray-50"
             />
-            <h3 className="mt-2 text-lg font-bold">{product.name}</h3>
-            <p className="text-gray-700">{product.description}</p>
-            <p className="font-semibold text-blue-600">Precio: ARS {product.price}</p>
-          </div>
+            <h3 className="my-3 text-sm text-gray-500 w-60">{product.name}</h3>
+            <p className="text-sm font-semibold font-poppins">ARS $ {product.priceArs}</p>
+          </Link>
         </div>
       ))}
     </Slider>

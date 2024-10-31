@@ -2,25 +2,25 @@ import { ToastContainer } from "react-toastify";
 import { useLocation } from "react-router-dom";
 
 import AppRoutes from "./routes/AppRoutes";
-import Footer from "./components/footer/Footer";
 import NavBar from "./components/nav-bar/NavBar";
+import Footer from "./components/footer/Footer";
 import WhatsAppButton from "./components/whatsapp-button/WhatsAppButton";
 
 const App = () => {
-  const location = useLocation();
-  const isAdminRoute = location.pathname.startsWith("/admin");
+  const { pathname } = useLocation();
+
   return (
     <>
-      <div className="App">
-        <ToastContainer
-          position="bottom-right"
-          autoClose={2000}
-          closeOnClick
-          pauseOnHover
-          draggable
-        />
-        {!isAdminRoute && <NavBar />}
-        <AppRoutes />
+    <div className="overflow-x-hidden">
+      <ToastContainer
+        position="bottom-right"
+        autoClose={2000}
+        closeOnClick
+        pauseOnHover
+        draggable
+      />
+      {!pathname.startsWith("/admin") && <NavBar />}
+      <AppRoutes />
         <WhatsAppButton />
         <Footer />
       </div>
