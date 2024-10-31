@@ -4,7 +4,7 @@ const HeroBanner = () => (
   <section className="px-8 mt-8 sm:px-20 lg:container grid grid-cols-1 lg:grid-cols-2 min-h-[650px] relative bg-red-50">
     <div className="flex flex-col justify-center py-4 md:py-0">
       <div className="space-y-6 text-center lg:text-left">
-        <h1 className="text-5xl font-bold leading-normal uppercase lg-text-6xl">
+        <h1 className="text-5xl font-bold leading-normal uppercase font-poppins lg-text-6xl">
           Conectando tecnología <span className="text-primary">innovadora.</span>{" "}
         </h1>
         <p className="pr-0 lg:pr-15 xl:pr-0 text-gray-600 xl-max-w-[400px]">
