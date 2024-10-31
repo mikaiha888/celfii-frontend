@@ -20,12 +20,16 @@ const HomePage = () => {
     dispatch(loadProducts());
   }, [dispatch]);
 
+  const handleCategoryClick = (categoryName) => {
+    localStorage.setItem("selectedCategory", categoryName);
+  };
+
   return (
     <div>
       <HeroBanner />
       <FeaturedProductsSlider products={products} />
       <MostPopular products={products} favourites={favourites} />
-      <CategoriesGrid categories={categories} />
+      <CategoriesGrid categories={categories} onCategoryClick={handleCategoryClick} />
       <PurchaseInstructions />
     </div>
   );

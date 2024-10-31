@@ -1,4 +1,3 @@
-import { debounce } from "lodash";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,19 +18,26 @@ const Products = () => {
     page: 1,
     perPage: 54,
     name: "",
-    category: new URLSearchParams(location.search).get("category") || "",
-    sort: "newest",
+    category:
+      localStorage.getItem("selectedCategory") ||
+      new URLSearchParams(location.search).get("category") ||
+      "",
+    sort: localStorage.getItem("sortOrder") || "newest",
+    minPrice: localStorage.getItem("minPrice") || "",
+    maxPrice: localStorage.getItem("maxPrice") || "",
   });
-
-  const debouncedUpdateProducts = debounce((params) => {
-    dispatch(loadProducts(params));
-  }, 300);
 
   const updateSearchParams = (newParams) => {
     setSearchParams((prevParams) => {
       const resetPage = "page" in newParams ? newParams.page : 1;
       const updatedParams = { ...prevParams, page: resetPage, ...newParams };
-      debouncedUpdateProducts(updatedParams);
+
+      if (newParams.category !== undefined)
+        localStorage.setItem("selectedCategory", newParams.category);
+      if (newParams.sort !== undefined) localStorage.setItem("sortOrder", newParams.sort);
+      if (newParams.minPrice !== undefined) localStorage.setItem("minPrice", newParams.minPrice);
+      if (newParams.maxPrice !== undefined) localStorage.setItem("maxPrice", newParams.maxPrice);
+
       return updatedParams;
     });
   };
