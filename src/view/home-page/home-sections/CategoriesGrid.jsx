@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
+import { categories } from "../contants";
 
-const CategoriesGrid = ({ categories }) => (
+const CategoriesGrid = () => (
   <section className="container flex justify-between mt-20">
     {categories.map((category) => (
       <Link
         key={category.name}
-        to={`/productos?category=${encodeURIComponent(category.name)}`}
+        to="/productos"
         onClick={() => {
           localStorage.setItem("selectedCategory", category.name);
           window.scrollTo(0, 0);
