@@ -17,31 +17,23 @@ const Card = ({ product, favourites }) => {
   };
 
   return (
-    <div
-      className="relative max-w-sm overflow-hidden transition-shadow duration-300 bg-white rounded-lg shadow-lg hover:shadow-xl"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-    >
-      <Link to={`/product/${product.id}`} className="block">
+    <div onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
+      <Link to={`/product/${product.id}`}>
         {product.images && product.images[0] && (
           <img
-            className="object-cover w-full rounded-t-lg h-60"
+            className="object-cover w-60 h-80 border-gray-50"
             src={product.images[0].url}
             alt={product.images[0].altText || product.name}
           />
         )}
-
-        <div className="px-6 py-4">
-          <h3 className="mb-2 text-xl font-bold">{product.name}</h3>
-          <p className="text-gray-700">Precio: ARS {product.priceArs}</p>
-          <p className="text-sm text-gray-600">{product.category.name}</p>
-          <p className="text-sm text-gray-600">{product.view.counter} vistas</p>
-        </div>
+        <span className="px-2 py-1 mt-3 text-xs font-semibold text-white bg-red-500 border rounded-full">
+          {product.category.name}
+        </span>
+        <h3 className="text-sm text-gray-500 w-60">{product.name}</h3>
+        <p className="text-sm font-semibold font-poppins">ARS {product.priceArs}</p>
       </Link>
-      <div className="px-6 pt-4 pb-2">
-        <button className="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">
-          Ver más
-        </button>
+      <div>
+        <button>Agregar al carrito</button>
         <button
           onClick={toggleFavourite}
           className={`absolute top-2 right-2 text-2xl transition-all duration-300 transform ${

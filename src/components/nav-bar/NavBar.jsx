@@ -1,53 +1,52 @@
-import { useState, useEffect } from "react";
-import { Disclosure } from "@headlessui/react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { Heart, ShoppingCart, Menu } from "lucide-react";
 
-import NavItems from "./NavItems";
-import NavMobileMenu from "./NavMobileMenu";
-import MobileMenuButton from "../mobile-menu/MobileMenuButton";
+import logo from "../../assets/logo-celfii.png";
+import OptionalNavBar from "./OptionalNavBar";
 
 const NavBar = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  const [links, setLinks] = useState([
-    { name: "Productos", href: "/productos", current: false },
-    { name: "Nosotros", href: "/nosotros", current: false },
-    { name: "Contacto", href: "/contacto", current: false },
-  ]);
-
-  const handleClick = (name, href) => {
-    setLinks(
-      links.map((item) => ({
-        ...item,
-        current: item.name === name,
-      }))
-    );
-    navigate(href);
-  };
-
-  useEffect(() => {
-    setLinks((prevLinks) =>
-      prevLinks.map((item) =>
-        location.pathname === item.href ? { ...item, current: true } : { ...item, current: false }
-      )
-    );
-  }, [location]);
+  const links = [
+    { name: "Productos", link: "/productos", current: false },
+    { name: "Nosotros", link: "/nosotros", current: false },
+    { name: "Contacto", link: "/contacto", current: false },
+  ];
 
   return (
-    <Disclosure
-      as="nav"
-      className="shadow-lg bg-gradient-to-r from-red-600 via-red-700 to-red-800 h-28"
-    >
-      <div className="px-4 mx-auto max-w-screen-2xl md:px-6">
-        <div className="relative flex items-center justify-between h-24">
-          <MobileMenuButton />
-          <NavItems links={links} onClick={handleClick} />
-          <NavMobileMenu links={links} onClick={handleClick} />
+    <nav>
+      <div className="flex items-center justify-between px-5 py-4 md:container">
+        <div className="mr-14 md:hidden">
+          <button className="p-2 text-2xl duration-200 rounded-full hover:bg-primary hover:text-white">
+            <Menu className="text-4xl" />
+          </button>
+        </div>
+        <div>
+          <Link to="/">
+            <img alt="Cel-Fii" src={logo} className="w-auto h-12" />
+          </Link>
+        </div>
+        <div className="hidden md:block">
+          <ul className="flex items-center gap-6 text-gray-600">
+            {links.map((item) => (
+              <li
+                key={item.name}
+                className="inline-block px-3 py-1 font-semibold duration-200 hover:text-primary"
+              >
+                <Link to={item.link}>{item.name}</Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="flex items-center gap-4">
+          <Link to="/favourites" className="p-2 text-2xl duration-200 rounded-full hover:bg-primary hover:text-white">
+            <Heart />
+          </Link>
+          <Link to="/cart" className="p-2 text-2xl duration-200 rounded-full hover:bg-primary hover:text-white">
+            <ShoppingCart />
+          </Link>
         </div>
       </div>
-    </Disclosure>
+      <OptionalNavBar />
+    </nav>
   );
 };
-
 export default NavBar;
