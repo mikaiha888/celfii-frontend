@@ -15,14 +15,14 @@ const FavouritePage = () => {
   }, []);
 
   return (
-    <div>
-      <h1 className="text-2xl font-bold">Mis productos favoritos</h1>
+    <div className="container mt-10">
+      <h1 className="text-2xl font-bold mb-10 text-center">Mis productos favoritos</h1>
       {favourites.length === 0 ? (
         <div className="flex flex-col items-center justify-center text-center text-gray-600">
-          <Heart className="w-16 h-16 mb-4 text-gray-400" />
-          <p className="mb-4 text-xl font-semibold">No tienes productos favoritos.</p>
+          <Heart className="w-24 h-24 mb-4 text-red-400 animate-pulse" />{" "}          
+          <p className="mb-4 text-xl font-semibold">¡Aún no tienes favoritos!</p>{" "}
           <p className="mb-6 text-gray-500">
-            Para añadir, haz click en el corazón dentro del detalle del producto.
+            Descubre productos increíbles y agrégalos a tu lista.
           </p>
           <Link to="/productos">
             <button className="px-6 py-3 text-white transition-all duration-300 bg-blue-500 rounded-md shadow hover:bg-blue-700">
@@ -31,7 +31,10 @@ const FavouritePage = () => {
           </Link>
         </div>
       ) : (
-        <Cards products={favourites} favourites={favourites} />
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-1 gap-4">
+          {" "}
+          <Cards products={favourites} favourites={favourites} />
+        </div>
       )}
     </div>
   );
