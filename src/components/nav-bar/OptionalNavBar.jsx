@@ -1,8 +1,11 @@
 import { Search } from "lucide-react";
-import { Link, useLocation } from "react-router-dom";
+import { useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const OptionalNavBar = () => {
-  const { pathname } = useLocation();
+  const navigate = useNavigate();
+  const { pathname, search } = useLocation();
+  const [searchTerm, setSearchTerm] = useState("");
 
   const categories = [
     {
@@ -25,6 +28,29 @@ const OptionalNavBar = () => {
         "https://electronicaonline.net/wp-content/uploads/2024/05/Historia-de-la-Electronica.jpg",
     },
   ];
+
+  const handleInputChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      const params = new URLSearchParams({
+        page: 1,
+        perPage: 54,
+        name: searchTerm,
+        category:
+          localStorage.getItem("selectedCategory") ||
+          new URLSearchParams(search).get("category") ||
+          "",
+        sort: localStorage.getItem("sortOrder") || "newest",
+        minPrice: localStorage.getItem("minPrice") || "",
+        maxPrice: localStorage.getItem("maxPrice") || "",
+      });
+
+      navigate(`/productos?${params.toString()}`);
+    }
+  };
 
   return (
     pathname === "/" && (
@@ -51,6 +77,9 @@ const OptionalNavBar = () => {
           </label>
           <input
             type="text"
+            value={searchTerm}
+            onChange={handleInputChange}
+            onKeyDown={handleKeyDown}
             placeholder="Buscar..."
             className="w-full outline-none lg:w-[100px] focus:w-[180px] focus:border-b-2 focus:border-accent placeholder:italic placeholder:text-base transition-all duration-200"
           />
