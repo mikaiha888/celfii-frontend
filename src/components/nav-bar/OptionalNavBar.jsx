@@ -28,8 +28,8 @@ const OptionalNavBar = () => {
 
   return (
     pathname === "/" && (
-      <div className="w-2/3 px-10 absolute left-1/2 transform -translate-x-1/2 bg-white shadow-md h-16 rounded-[10px] hidden lg:flex lg:items-center lg:justify-between z-50">
-        <ul className="flex gap-x-4">
+      <div className="w-2/3 px-10 absolute left-1/2 transform -translate-x-1/2 bg-white shadow-md h-16 rounded-[10px] hidden md:flex md:items-center md:justify-between z-50">
+        <ul className="hidden lg:flex lg:gap-x-4">
           {categories.map((category, index) => (
             <li key={index}>
               <Link
@@ -45,14 +45,14 @@ const OptionalNavBar = () => {
             </li>
           ))}
         </ul>
-        <form className="relative flex gap-x-[10px]">
+        <form className="w-full relative flex gap-x-[10px] lg:w-fit">
           <label className="flex items-center justify-center group">
             <Search />
           </label>
           <input
             type="text"
             placeholder="Buscar..."
-            className="outline-none w-[100px] focus:w-[180px] focus:border-b-2 focus:border-accent placeholder:italic placeholder:text-base transition-all duration-200"
+            className="w-full outline-none lg:w-[100px] focus:w-[180px] focus:border-b-2 focus:border-accent placeholder:italic placeholder:text-base transition-all duration-200"
           />
         </form>
       </div>
