@@ -61,7 +61,7 @@ const Products = () => {
   };
 
   return (
-    <div className="container mx-auto">
+    <div className="container">
       <SearchBar value={searchParams.name} onSearch={handleSearch} />
       <div className="flex">
         <aside>

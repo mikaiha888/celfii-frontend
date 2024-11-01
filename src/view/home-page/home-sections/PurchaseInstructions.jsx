@@ -20,10 +20,10 @@ const PurchaseInstructions = () => (
     </ul>
     <div className="text-center">
       <Link
-        to="/carrito"
+        to="/faq"
         className="px-4 py-2 font-bold text-white bg-green-500 rounded hover:bg-green-700"
       >
-        Ir al carrito de compras
+        Ver más detalles
       </Link>
       <WhatsAppButton />
     </div>
