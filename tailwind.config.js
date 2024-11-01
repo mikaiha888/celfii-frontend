@@ -5,14 +5,6 @@ export default {
     extend: {
       container: {
         center: true,
-        padding: {
-          DEFAULT: "1rem",
-          sm: "2rem",
-          md: "3rem",
-          lg: "4rem",
-          xl: "5rem",
-          "2xl": "6rem",
-        }
       },
       colors: {
         primary: "rgb(220 38 38)",
@@ -21,7 +13,10 @@ export default {
       },
       fontFamily: {
         poppins: ["Poppins", "sans-serif"]
-      }
+      },
+      backgroundImage: {
+        'custom-gradient': 'linear-gradient(0deg, rgb(220 38 38), 10px, transparent 10px)',
+      },
     },
   },
   plugins: [],

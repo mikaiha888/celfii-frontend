@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Heart, ShoppingCart, Menu } from "lucide-react";
 
-import logo from "../../assets/logo-celfii.png";
+import logo from "../../assets/logo-celfii2.png";
 import OptionalNavBar from "./OptionalNavBar";
 
 const NavBar = () => {
@@ -12,7 +12,7 @@ const NavBar = () => {
   ];
 
   return (
-    <nav>
+    <nav className="z-10">
       <div className="flex items-center justify-between px-5 py-4 md:container">
         <div className="mr-14 md:hidden">
           <button className="p-2 text-2xl duration-200 rounded-full hover:bg-primary hover:text-white">

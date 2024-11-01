@@ -14,18 +14,21 @@ const Products = () => {
   const { products, totalItems, loading } = useSelector((state) => state.products);
   const { favourites } = useSelector((state) => state.cartFavs);
 
-  const [searchParams, setSearchParams] = useState({
-    page: 1,
+  const query = new URLSearchParams(location.search);
+  const initialSearchParams = {
+    page: parseInt(query.get("page")) || 1,
     perPage: 54,
-    name: "",
+    name: query.get("name") || "",
     category:
       localStorage.getItem("selectedCategory") ||
-      new URLSearchParams(location.search).get("category") ||
+      query.get("category") ||
       "",
     sort: localStorage.getItem("sortOrder") || "newest",
     minPrice: localStorage.getItem("minPrice") || "",
     maxPrice: localStorage.getItem("maxPrice") || "",
-  });
+  };
+
+  const [searchParams, setSearchParams] = useState(initialSearchParams);
 
   const updateSearchParams = (newParams) => {
     setSearchParams((prevParams) => {

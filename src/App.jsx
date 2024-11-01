@@ -11,16 +11,18 @@ const App = () => {
 
   return (
     <>
-    <div className="overflow-x-hidden">
-      <ToastContainer
-        position="bottom-right"
-        autoClose={2000}
-        closeOnClick
-        pauseOnHover
-        draggable
-      />
-      {!pathname.startsWith("/admin") && <NavBar />}
-      <AppRoutes />
+      <div className="flex flex-col min-h-screen overflow-x-hidden">
+        <ToastContainer
+          position="bottom-right"
+          autoClose={2000}
+          closeOnClick
+          pauseOnHover
+          draggable
+        />
+        {!pathname.startsWith("/admin") && <NavBar />}
+        <div className="flex-1">
+          <AppRoutes />
+        </div>
         <WhatsAppButton />
         <Footer />
       </div>
