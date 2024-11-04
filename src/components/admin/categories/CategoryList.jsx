@@ -5,8 +5,8 @@ import {
   EditButton,
   DeleteButton,
   CreateButton,
-  ExportButton,
 } from "react-admin";
+import { ExportButton } from "../export-button/ExportButton";
 
 const CategoryList = () => {
   return (
