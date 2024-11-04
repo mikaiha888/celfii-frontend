@@ -6,20 +6,22 @@ const WhatsAppButton = ({ cartItems = [], isCartPage = false }) => {
   const phoneNumber = "+5492604545982";
 
   const buildCartMessage = () => {
-    if (cartItems.length === 0) return "Tu carrito está vacío.";
+    if (cartItems.length === 0) return "🛒 *Tu carrito está vacío.*";
 
     const cartDetails = cartItems
       .map((item) => {
         const totalPrice = item.quantity * item.priceArs;
-        return `Producto: ${item.name}, Cantidad: ${item.quantity}, Precio: ARS ${
-          item.priceArs
-        }, Total: ARS ${totalPrice.toFixed(2)}`;
+        return `*Producto:* ${item.name}\n*Cantidad:* ${
+          item.quantity
+        }\n*Precio unitario:* ARS ${item.priceArs}\n*Total:* ARS ${totalPrice.toFixed(2)}\n`;
       })
       .join("\n");
 
     const totalCompra = cartItems.reduce((acc, item) => acc + item.quantity * item.priceArs, 0);
 
-    return `${cartDetails}\nTotal de la compra: ARS ${totalCompra.toFixed(2)}`;
+    return `¡Hola! Me gustaría realizar la siguiente compra:\n\n${cartDetails}\n *Total de la compra:* ARS ${totalCompra.toFixed(
+      2
+    )}\n\n ¿Cómo debo proceder para realizar el pago?`;
   };
 
   const message = isCartPage
