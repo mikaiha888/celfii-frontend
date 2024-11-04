@@ -1,4 +1,5 @@
-import { List, Datagrid, TextField, ExportButton } from "react-admin";
+import { List, Datagrid, TextField } from "react-admin";
+import { ExportButton } from "../export-button/ExportButton";
 
 const RoleList = () => (
   <List
