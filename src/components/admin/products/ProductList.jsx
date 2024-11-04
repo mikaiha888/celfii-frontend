@@ -15,7 +15,7 @@ import RestoreIcon from "@mui/icons-material/Restore";
 import { Button } from "@mui/material";
 import dataProvider from "../../../view/admin-dashboard-page/dataProvider";
 import ProductFilterSidebar from "./ProductFilterSidebar";
-import { ExportButton } from "./ExportButton";
+import { ExportButton } from "../export-button/ExportButton";
 
 export const ProductList = (props) => {
   return (
