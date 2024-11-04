@@ -5,55 +5,66 @@ export const AdminField = ({ field }) => {
   switch (field.type) {
     case "textarea":
       return (
-        <TextInput
-          source={field.source}
-          label={field.label}
-          multiline
-          validate={field.validate ? [required()] : undefined}
-        />
+        <div className="mb-4">
+          <TextInput
+            source={field.source}
+            label={field.label}
+            multiline
+            validate={field.validate ? [required()] : undefined}
+            className="border p-2 rounded w-full"
+          />
+        </div>
       );
 
     case "select":
       return (
-        <SelectInput
-          source={field.source}
-          label={field.label}
-          validate={field.validate ? [required()] : undefined}
-          optionValue={field.optionValue}
-          optionText={field.optionText}
-          choices={field.options?.map((option) => ({
-            id: option.id,
-            name: option.name,
-          }))}
-        />
+        <div className="mb-4">
+          <SelectInput
+            source={field.source}
+            label={field.label}
+            validate={field.validate ? [required()] : undefined}
+            optionValue={field.optionValue}
+            optionText={field.optionText}
+            choices={field.options?.map((option) => ({
+              id: option.id,
+              name: option.name,
+            }))}
+            className="border p-2 rounded w-full"
+          />
+        </div>
       );
 
     case "file":
       return (
-        <FileInput
-          source={field.source}
-          label={field.label}
-          accept={field.accept}
-          multiple={field.multiple}
-          validate={field.validate ? [required()] : undefined}
-          onRemove={field.onImageRemove}
-          defaultValue={field.defaultValue?.map((image) => ({
-            src: image.url,
-            title: image.altText,
-            id: image.id,
-          }))}
-        >
-          <ImageField source="src" title="title" />
-        </FileInput>
+        <div className="mb-4">
+          <FileInput
+            source={field.source}
+            label={field.label}
+            accept={field.accept}
+            multiple={field.multiple}
+            validate={field.validate ? [required()] : undefined}
+            onRemove={field.onImageRemove}
+            defaultValue={field.defaultValue?.map((image) => ({
+              src: image.url,
+              title: image.altText,
+              id: image.id,
+            }))}
+          >
+            <ImageField source="src" title="title" />
+          </FileInput>
+        </div>
       );
 
     default:
       return (
-        <TextInput
-          source={field.source}
-          label={field.label}
-          validate={field.validate ? [required()] : undefined}
-        />
+        <div className="mb-4">
+          <TextInput
+            source={field.source}
+            label={field.label}
+            validate={field.validate ? [required()] : undefined}
+            className="border p-2 rounded w-full"
+          />
+        </div>
       );
   }
 };
