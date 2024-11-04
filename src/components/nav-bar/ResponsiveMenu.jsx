@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-import logo from "../../assets/logo-celfii.png";
+import logo from "../../assets/logo-celfii2.png";
 
 const ResponsiveMenu = ({ links }) => {
   return (
