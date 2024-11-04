@@ -19,7 +19,15 @@ export const putRequest = async (url, payload) => {
   return data;
 };
 
+export const patchRequest = async (url, payload) => {
+  const data = await axios.patch(url, payload, { headers: getAuthHeaders() });
+  return data;
+};
+
+
 export const deleteRequest = async (url) => {
   const data = await axios.delete(url, { headers: getAuthHeaders() });
   return data;
+
+  
 };
