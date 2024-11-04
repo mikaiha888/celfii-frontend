@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { getAuthHeaders } from "./authHelper";
+import { getAuthHeaders, getAuthHeadersForUsers } from "./authHelper";
 
 export const getRequest = async (url, params = {}) => {
   const data = await axios.get(url, { params, headers: getAuthHeaders() });
@@ -8,7 +8,9 @@ export const getRequest = async (url, params = {}) => {
 };
 
 export const postRequest = async (url, payload) => {
-  const data = await axios.post(url, payload, { headers: getAuthHeaders() });
+  const data = url.includes("users")
+    ? await axios.post(url, payload, { headers: getAuthHeadersForUsers() })
+    : await axios.post(url, payload, { headers: getAuthHeaders() });
   return data;
 };
 
