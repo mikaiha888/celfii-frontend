@@ -11,8 +11,6 @@ const Card = ({ product, favourites }) => {
   const isFavourite = favourites?.some((fav) => fav.id === product.id);
   const [hovered, setHovered] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [hoveringChevron, setHoveringChevron] = useState(false);
-  console.log(product.images)
 
   const handleToggleFavourite = (e) => {
     e.stopPropagation();
@@ -50,9 +48,7 @@ const Card = ({ product, favourites }) => {
       className="relative overflow-hidden"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}>
-      <Link
-        to={`/product/${product.id}`}
-        style={{ pointerEvents: hoveringChevron ? "none" : "auto" }}>
+      <Link to={`/product/${product.id}`}>
         {product.images && product.images[0] && (
           <div className="relative">
             <img
@@ -60,44 +56,40 @@ const Card = ({ product, favourites }) => {
               src={product.images[currentImageIndex].url}
               alt={product.images[currentImageIndex].altText || product.name}
             />
-            {product.images.length > 1 && (
-              <>
-                {currentImageIndex > 0 && (
-                  <button
-                    onMouseEnter={() => setHoveringChevron(true)}
-                    onMouseLeave={() => setHoveringChevron(false)}
-                    onClick={handlePreviousImage}
-                    className={`absolute top-1/2 left-0 transform -translate-y-1/2 bg-gray-800 p-1 rounded-full transition-opacity duration-300 ${
-                      hovered ? "opacity-100" : "opacity-0"
-                    }`}>
-                    <ChevronLeft className="text-white" />
-                  </button>
-                )}
-                {currentImageIndex < product.images.length - 1 && (
-                  <button
-                    onMouseEnter={() => setHoveringChevron(true)}
-                    onMouseLeave={() => setHoveringChevron(false)}
-                    onClick={handleNextImage}
-                    className={`absolute top-1/2 right-0 transform -translate-y-1/2 bg-gray-800 p-1 rounded-full transition-opacity duration-300 ${
-                      hovered ? "opacity-100" : "opacity-0"
-                    }`}>
-                    <ChevronRight className="text-white" />
-                  </button>
-                )}
-              </>
-            )}
           </div>
         )}
-        <div className="flex items-center justify-between mt-1">
-          <h3 className="w-40 text-sm text-gray-500 truncate">{product.name}</h3>
-        </div>
-        <div className="flex justify-between mt-1">
-          <span className="px-2 py-1 text-xs font-medium text-white bg-red-500 rounded-full">
-            {product.category.name}
-          </span>
-          <p className="font-semibold text-md font-poppins">ARS {product.priceArs}</p>
-        </div>
       </Link>
+      {product.images && product.images.length > 1 && (
+        <>
+          {currentImageIndex > 0 && (
+            <button
+              onClick={handlePreviousImage}
+              className={`absolute top-1/2 left-0 transform -translate-y-10 bg-gray-800 p-1 rounded-e-full transition-opacity duration-300 ${
+                hovered ? "opacity-100" : "opacity-0"
+              }`}>
+              <ChevronLeft className="text-white" />
+            </button>
+          )}
+          {currentImageIndex < product.images.length - 1 && (
+            <button
+              onClick={handleNextImage}
+              className={`absolute top-1/2 right-0 transform -translate-y-10 bg-gray-800 p-1 rounded-l-full transition-opacity duration-300 ${
+                hovered ? "opacity-100" : "opacity-0"
+              }`}>
+              <ChevronRight className="text-white" />
+            </button>
+          )}
+        </>
+      )}
+      <div className="flex items-center justify-between mt-1">
+        <h3 className="w-40 text-sm text-gray-500 truncate">{product.name}</h3>
+      </div>
+      <div className="flex justify-between mt-1">
+        <span className="px-2 py-1 text-xs font-medium text-white bg-red-500 rounded-full">
+          {product.category.name}
+        </span>
+        <p className="font-semibold text-md font-poppins">ARS {product.priceArs}</p>
+      </div>
       <div
         className={`absolute top-0 right-4 w-10 h-12 transition-transform duration-300 overflow-hidden flex items-center ${
           hovered ? "translate-y-0" : "-translate-y-12"

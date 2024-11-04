@@ -10,7 +10,6 @@ import WhatsAppButton from "../../components/whatsapp-button/WhatsAppButton";
 const CartPage = () => {
   const dispatch = useDispatch();
   const { cart } = useSelector((state) => state.cartFavs);
-  console.log(cart);
 
   useEffect(() => {
     dispatch(loadCartFavs("cart"));
