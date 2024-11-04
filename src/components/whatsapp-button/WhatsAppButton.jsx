@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { FaWhatsapp } from "react-icons/fa";
 
 const WhatsAppButton = ({ cartItems = [], isCartPage = false }) => {
+  const [isHovered, setIsHovered] = useState(false);
   const phoneNumber = "+5492604545982";
 
   const buildCartMessage = () => {
@@ -33,9 +35,16 @@ const WhatsAppButton = ({ cartItems = [], isCartPage = false }) => {
       className={`${
         isCartPage ? "w-full bg-blue-500 mt-4" : "fixed bottom-5 right-5 h-14 w-14"
       } bg-green-500 text-white p-3 rounded-full shadow-lg hover:bg-green-600 transition-all duration-300 ease-in-out flex items-center justify-center z-50`}
-      aria-label="Contactar por WhatsApp">
+      aria-label="Contactar por WhatsApp"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}>
       <FaWhatsapp size={24} />
       {isCartPage && <span className="ml-2">Continuar compra vía WhatsApp</span>}
+      {!isCartPage && isHovered && (
+        <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2 bg-white text-black text-center py-1 px-3 rounded-md shadow-md border border-gray-300">
+          Chatea con nosotros
+        </div>
+      )}
     </a>
   );
 };
