@@ -1,27 +1,24 @@
 import { createProductValidationSchema } from "./validations";
-
 import { AdminForm } from "./Form";
 
 const ProductForm = ({ product, categories, onSubmit, onImageRemove }) => {
   const initialValues = {
     id: product?.id || "",
     name: product?.name || "",
-    description: product?.description || "",
+    description: product?.description || "Sin descripción disponible",
     category: product?.category || "",
     priceArs: product?.priceArs || "",
     priceUsd: product?.priceUsd || "",
-    stock: product?.stock || "",
+    priceWholesale: product?.priceWholesale || "",
+    costUsd: product?.costUsd || "",
+    costArs: product?.costArs || "",
+    stock: product?.stock || 0,
     code: product?.code || "",
     imei: product?.imei || "",
     images: product?.images || [],
   };
 
   const fields = [
-    {
-      type: "text",
-      source: "id",
-      label: "Id del producto",
-    },
     {
       type: "text",
       source: "name",
@@ -42,13 +39,8 @@ const ProductForm = ({ product, categories, onSubmit, onImageRemove }) => {
     },
     {
       type: "number",
-      source: "priceArs",
-      label: "Precio (ARS)",
-    },
-    {
-      type: "number",
-      source: "priceUsd",
-      label: "Precio (USD)",
+      source: "costUsd",
+      label: "Costo (USD)",
     },
     {
       type: "number",
@@ -71,14 +63,16 @@ const ProductForm = ({ product, categories, onSubmit, onImageRemove }) => {
       accept: "image/*",
       label: "Imágenes",
       multiple: true,
-      defaultValue: product && product.images ? product.images : null,
+      defaultValue: product?.images || [],
       onImageRemove,
     },
   ];
 
   return (
-    <div>
-      <h1>{product ? "Actualizar Producto" : "Crear Producto"}</h1>
+    <div className="max-w-2xl mx-auto p-4">
+      <h1 className="text-2xl font-bold mb-4">
+        {product ? "Actualizar Producto" : "Crear Producto"}
+      </h1>
       <AdminForm
         initialValues={initialValues}
         validationSchema={createProductValidationSchema}
