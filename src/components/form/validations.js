@@ -18,13 +18,9 @@ export const createUserValidationSchema = Yup.object().shape({
 });
 
 export const loginValidationSchema = Yup.object().shape({
-  email: Yup.string()
-    .email("Debe ser un email válido")
-    .required("El email es obligatorio"),
-  password: Yup.string()
-    .required("La contraseña es obligatoria")
+  email: Yup.string().email("Debe ser un email válido").required("El email es obligatorio"),
+  password: Yup.string().required("La contraseña es obligatoria"),
 });
-
 
 export const validateWithYup = (schema) => async (values) => {
   try {

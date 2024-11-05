@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Edit, Loading, useNotify, useRedirect } from "react-admin";
 import { loadCategories, loadProduct } from "../../../redux/actions";
-import { createProductValidationSchema } from "../validations";
+import { updateProductValidationSchema } from "../validations";
 
 import ProductForm from "../../../components/form/ProductForm";
 
@@ -58,7 +58,8 @@ const ProductEdit = () => {
           categories={categories}
           onSubmit={handleSubmit}
           onImageRemove={handleImageRemove}
-          validationSchema={createProductValidationSchema}
+          isEdit={true}
+          validationSchema={updateProductValidationSchema}
         />
       )}
     </Edit>

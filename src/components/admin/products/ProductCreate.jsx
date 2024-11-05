@@ -34,6 +34,7 @@ const ProductEdit = () => {
         categories={categories}
         onSubmit={handleSubmit}
         validationSchema={createProductValidationSchema}
+        isEdit={false}
       />
     </Create>
   );

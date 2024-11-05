@@ -1,18 +1,32 @@
 import { AdminForm } from "./Form";
+import { useEffect, useState } from "react";
 import { validateWithYup } from "./validations";
+import { createProductValidationSchema, updateProductValidationSchema } from "../admin/validations";
 
-const ProductForm = ({ product, categories, onSubmit, onImageRemove, validationSchema }) => {
+const ProductForm = ({ product, categories, onSubmit, onImageRemove, isEdit }) => {
   const initialValues = {
     id: product?.id || "",
     name: product?.name || "",
     description: product?.description || "Sin descripción disponible",
-    category: product?.category || "",
+    category: product?.category?.name || "",
     costUsd: Number(product?.costUsd) === 0 ? "" : product?.costUsd,
     stock: product?.stock || 0,
     code: product?.code || "",
     imei: product?.imei || "",
     images: product?.images || [],
   };
+
+  const [selectedCategory, setSelectedCategory] = useState(initialValues.category);
+
+  useEffect(() => {
+    setSelectedCategory(initialValues.category);
+  }, [initialValues.category]);
+
+  const handleCategoryChange = (event) => {
+    setSelectedCategory(event.target.value);
+  };
+
+  const validationSchema = isEdit ? updateProductValidationSchema : createProductValidationSchema;
 
   const fields = [
     {
@@ -32,6 +46,7 @@ const ProductForm = ({ product, categories, onSubmit, onImageRemove, validationS
       options: categories,
       optionValue: "name",
       optionText: "name",
+      onChange: handleCategoryChange,
     },
     {
       type: "number",
@@ -48,11 +63,15 @@ const ProductForm = ({ product, categories, onSubmit, onImageRemove, validationS
       source: "code",
       label: "Código",
     },
-    {
-      type: "text",
-      source: "imei",
-      label: "IMEI",
-    },
+    ...(selectedCategory === "Equipos"
+      ? [
+          {
+            type: "text",
+            source: "imei",
+            label: "IMEI",
+          },
+        ]
+      : []),
     {
       type: "file",
       source: "images",
