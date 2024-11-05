@@ -71,3 +71,20 @@ export const updateArrayInLocalStorage = (key, item) => {
     console.error(`Error removing from array in ${key}`, error);
   }
 };
+
+export const saveToSessionStorage = (key, value) => {
+  try {
+    const serializedState = JSON.stringify(value);
+    sessionStorage.setItem(key, serializedState);
+  } catch (error) {
+    console.error(`Error saving ${key} to sessionStorage`, error);
+  }
+};
+
+export const removeFromSessionStorage = (key) => {
+  try {
+    sessionStorage.removeItem(key);
+  } catch (error) {
+    console.error(`Error removing ${key} from sessionStorage`, error);
+  }
+};

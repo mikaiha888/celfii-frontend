@@ -79,11 +79,18 @@ export const FormField = ({ field, form }) => {
 
   switch (field.type) {
     case "textarea":
-      return <Field as="textarea" name={field.name} placeholder={field.placeholder} />;
+      return (
+        <Field
+          as="textarea"
+          name={field.name}
+          placeholder={field.placeholder}
+          className="bg-white text-black p-2 rounded w-full border border-gray-300 focus:outline-none focus:ring focus:ring-red-300 mb-4"
+        />
+      );
 
     case "select":
       return (
-        <Field as="select" name={field.name}>
+        <Field as="select" name={field.name} className="bg-white text-black p-2 rounded w-full border border-gray-300 focus:outline-none focus:ring focus:ring-red-300 mb-4">
           {field.options.map((option) => (
             <option key={option.value} value={option.value}>
               {option.label}
@@ -94,18 +101,19 @@ export const FormField = ({ field, form }) => {
 
     case "file":
       return (
-        <div>
+        <div className="mb-4">
           <input
             type="file"
             name={field.name}
             accept={field.accept}
             multiple={field.multiple}
             onChange={handleFileChange}
+            className="bg-white text-black p-2 rounded w-full border border-gray-300 focus:outline-none focus:ring focus:ring-red-300"
           />
           {form.values[field.name] && form.values[field.name].length > 0 && (
-            <div className="image-preview">
+            <div className="image-preview flex flex-wrap mt-2">
               {form.values[field.name].map((file, index) => (
-                <img key={index} src={URL.createObjectURL(file)} alt={`preview-${index}`} />
+                <img key={index} src={URL.createObjectURL(file)} alt={`preview-${index}`} className="h-20 w-20 object-cover m-1 border border-gray-300 rounded" />
               ))}
             </div>
           )}
@@ -113,6 +121,11 @@ export const FormField = ({ field, form }) => {
       );
 
     default:
-      return <Field {...field} />;
+      return (
+        <Field
+          {...field}
+          className="bg-white text-black p-2 rounded w-full border border-gray-300 focus:outline-none focus:ring focus:ring-red-300 mb-4"
+        />
+      );
   }
 };
