@@ -25,7 +25,39 @@ export const ExportButton = (props: ExportButtonProps) => {
     dataProvider: any,
     resource: string
   ) => {
-    const worksheet = XLSX.utils.json_to_sheet(data);
+    const headers = {
+      id: "idArticulos",
+      code: "Código",
+      name: "Nombre del producto",
+      category: "Categoría",
+      stock: "Stock",
+      priceArs: "Precio en Pesos",
+      priceUsd: "Precio en Dólares",
+      priceWholesale: "Precio Mayorista",
+      costArs: "Costo en Pesos",
+      costUsd: "Costo en Dólares",
+      description: "Descripción producto",
+      view: "Vistas",
+    }
+
+    const dataWithHeaders = data.map(item => {
+      return {
+        [headers.id]: item.id,
+        [headers.code]: item.code,
+        [headers.name]: item.name,
+        [headers.category]: item.category.name,
+        [headers.stock]: item.stock,
+        [headers.priceArs]: item.priceArs,
+        [headers.priceUsd]: item.priceUsd,
+        [headers.priceWholesale]: item.priceWholesale,
+        [headers.costArs]: item.costArs,
+        [headers.costUsd]: item.costUsd,
+        [headers.description]: item.description,
+        [headers.view]: item.view.counter,
+      }
+    })
+    console.log(data)
+    const worksheet = XLSX.utils.json_to_sheet(dataWithHeaders);
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, "Datos");
 
