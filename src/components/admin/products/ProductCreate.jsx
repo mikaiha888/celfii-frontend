@@ -29,7 +29,7 @@ const ProductEdit = () => {
 
   return (
     <Create title="Crear producto">
-      <ProductForm categories={categories} onSubmit={handleSubmit} />
+      <ProductForm categories={categories} onSubmit={handleSubmit} isEdit={false} />
     </Create>
   );
 };

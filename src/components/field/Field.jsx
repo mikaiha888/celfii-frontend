@@ -23,13 +23,14 @@ export const AdminField = ({ field }) => {
             source={field.source}
             label={field.label}
             validate={field.validate ? [required()] : undefined}
-            optionValue={field.optionValue}
-            optionText={field.optionText}
+            optionValue={field.optionValue} 
+            optionText={field.optionText} 
             choices={field.options?.map((option) => ({
               id: option.id,
               name: option.name,
             }))}
             className="border p-2 rounded w-full"
+            onChange={field.onChange} 
           />
         </div>
       );
@@ -78,9 +79,7 @@ export const FormField = ({ field, form }) => {
 
   switch (field.type) {
     case "textarea":
-      return (
-        <Field as="textarea" name={field.name} placeholder={field.placeholder} />
-      );
+      return <Field as="textarea" name={field.name} placeholder={field.placeholder} />;
 
     case "select":
       return (
@@ -106,11 +105,7 @@ export const FormField = ({ field, form }) => {
           {form.values[field.name] && form.values[field.name].length > 0 && (
             <div className="image-preview">
               {form.values[field.name].map((file, index) => (
-                <img
-                  key={index}
-                  src={URL.createObjectURL(file)}
-                  alt={`preview-${index}`}
-                />
+                <img key={index} src={URL.createObjectURL(file)} alt={`preview-${index}`} />
               ))}
             </div>
           )}
@@ -121,4 +116,3 @@ export const FormField = ({ field, form }) => {
       return <Field {...field} />;
   }
 };
-

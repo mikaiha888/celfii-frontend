@@ -1,8 +1,6 @@
 import { SimpleForm } from "react-admin";
-import { Formik, Form, ErrorMessage, validateYupSchema } from "formik";
+import { Formik, Form, ErrorMessage } from "formik";
 import { AdminField, FormField } from "../field/Field";
-
-
 
 export const AdminForm = ({ initialValues, fields, onSubmit, validationSchema }) => {
   const validateWithYup = (schema) => async (values) => {
@@ -17,7 +15,11 @@ export const AdminForm = ({ initialValues, fields, onSubmit, validationSchema })
     }
   };
   return (
-    <SimpleForm onSubmit={onSubmit} initialValues={initialValues} validate={validateWithYup(validationSchema)}>
+    <SimpleForm
+      onSubmit={onSubmit}
+      initialValues={initialValues}
+      validate={validateWithYup(validationSchema)}
+    >
       {fields.map((field, index) => (
         <div key={index}>
           <AdminField field={field} />

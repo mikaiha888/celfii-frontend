@@ -57,6 +57,7 @@ const ProductEdit = () => {
           categories={categories}
           onSubmit={handleSubmit}
           onImageRemove={handleImageRemove}
+          isEdit={true}
         />
       )}
     </Edit>
