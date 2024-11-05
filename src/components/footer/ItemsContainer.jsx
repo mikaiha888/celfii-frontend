@@ -10,8 +10,8 @@ import Items from "./Items";
 
 const ItemsContainer = () => {
   return (
-    <div className="container flex gap-20 py-24">
-      <div className="w-1/5">
+    <div className="container flex flex-wrap gap-20 py-24">
+      <div className="w-full md:w-1/5">
         <button>
           <img src={logo} alt="Cel-Fii logo" className="w-32 h-auto" />
         </button>
@@ -20,8 +20,8 @@ const ItemsContainer = () => {
           mejorar tu vida digital.
         </p>
       </div>
-      <div className="border-l-2" />
-      <div className="grid flex-1 grid-cols-1 gap-6 sm:grid-cols-3 lg:grid-cols-4">
+      <div className="hidden md:border-l-2" />
+      <div className="grid grid-cols-1 gap-6 md:flex-1 sm:grid-cols-3 xl:grid-cols-4">
         <Items links={aboutUsLinks} title="Sobre Nosotros" />
         <Items links={customerServiceLinks} title="Servio al Cliente" />
         <Items links={popularCategoriesLinks} title="Categorías Populares" />
