@@ -2,8 +2,9 @@ import dataProvider from "../../../view/admin-dashboard-page/dataProvider";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { loadCategories, loadProduct } from "../../../redux/actions";
 import { Edit, Loading, useNotify, useRedirect } from "react-admin";
+import { loadCategories, loadProduct } from "../../../redux/actions";
+import { createProductValidationSchema } from "../validations";
 
 import ProductForm from "../../../components/form/ProductForm";
 
@@ -32,7 +33,7 @@ const ProductEdit = () => {
           priceArs: data.priceArs ? data.priceArs : null,
           priceUsd: data.priceUsd ? data.priceUsd : null,
           priceWholesale: data.priceWholesale ? data.priceWholesale : null,
-          ...data
+          ...data,
         },
       });
       notify("Producto actualizado exitosamente", { type: "info" });
@@ -57,6 +58,7 @@ const ProductEdit = () => {
           categories={categories}
           onSubmit={handleSubmit}
           onImageRemove={handleImageRemove}
+          validationSchema={createProductValidationSchema}
         />
       )}
     </Edit>
