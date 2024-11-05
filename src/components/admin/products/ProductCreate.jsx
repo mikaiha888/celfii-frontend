@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { loadCategories } from "../../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { Create, useNotify, useRedirect } from "react-admin";
+import { createProductValidationSchema } from "../validations";
 
 import ProductForm from "../../../components/form/ProductForm";
 
@@ -29,7 +30,12 @@ const ProductEdit = () => {
 
   return (
     <Create title="Crear producto">
-      <ProductForm categories={categories} onSubmit={handleSubmit} isEdit={false} />
+      <ProductForm
+        categories={categories}
+        onSubmit={handleSubmit}
+        validationSchema={createProductValidationSchema}
+        isEdit={false}
+      />
     </Create>
   );
 };
