@@ -1,9 +1,9 @@
 import { AdminForm } from "./Form";
 import { useEffect, useState } from "react";
-
 import { validateWithYup } from "./validations";
+import { createProductValidationSchema, updateProductValidationSchema } from "../admin/validations";
 
-const ProductForm = ({ product, categories, onSubmit, onImageRemove, validationSchema, isEdit }) => {
+const ProductForm = ({ product, categories, onSubmit, onImageRemove, isEdit }) => {
   const initialValues = {
     id: product?.id || "",
     name: product?.name || "",
@@ -25,6 +25,8 @@ const ProductForm = ({ product, categories, onSubmit, onImageRemove, validationS
   const handleCategoryChange = (event) => {
     setSelectedCategory(event.target.value);
   };
+
+  const validationSchema = isEdit ? updateProductValidationSchema : createProductValidationSchema;
 
   const fields = [
     {
