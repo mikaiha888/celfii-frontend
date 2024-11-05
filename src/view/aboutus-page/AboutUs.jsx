@@ -1,8 +1,8 @@
 import video from '../../assets/celfii-video.mp4'
 
 const AboutUs = () => {
-  return (    
-    <div className="max-w-3xl p-6 mx-auto mt-8 bg-white rounded-lg shadow-lg">      
+  return (
+    <div className="max-w-3xl p-6 mx-auto mt-8 bg-white rounded-lg shadow-lg">
       <video
         className="w-full mb-6 rounded-lg"
         controls
@@ -14,28 +14,22 @@ const AboutUs = () => {
         Your browser does not support the video tag.
       </video>
       <h1 className="mb-6 text-4xl font-bold text-gray-800">Sobre Nosotros</h1>
-      <p className="mb-4 text-lg leading-relaxed text-gray-700">
-        Bienvenido a <strong className="text-blue-600">Cel-Fii</strong>, tu tienda de confianza para
-        la compra de celulares, repuestos, accesorios y mucho más. Desde nuestra fundación en{" "}
-        <span className="font-semibold">[año]</span>, hemos trabajado arduamente para ofrecer los
-        mejores productos tecnológicos y servicios especializados.
-      </p>
-
-      <h2 className="mt-8 mb-4 text-2xl font-semibold text-gray-800">Misión y Visión</h2>
+      
+      <h2 id="mision-y-vision" className="mt-8 mb-4 text-2xl font-semibold text-gray-800">Misión y Visión</h2>
       <p className="mb-4 text-lg leading-relaxed text-gray-700">
         Nuestra misión es proporcionar productos de alta calidad a precios accesibles, asegurando la
         satisfacción total de nuestros clientes. Queremos ser el líder en la venta de dispositivos
         móviles y accesorios en la región.
       </p>
 
-      <h2 className="mt-8 mb-4 text-2xl font-semibold text-gray-800">Equipo de Trabajo</h2>
+      <h2 id="equipo-de-trabajo" className="mt-8 mb-4 text-2xl font-semibold text-gray-800">Equipo de Trabajo</h2>
       <p className="mb-4 text-lg leading-relaxed text-gray-700">
         Contamos con un equipo de profesionales dedicados que están siempre listos para ayudarte.
         Nuestros técnicos especializados en reparación de celulares garantizan un servicio rápido y
         eficiente.
       </p>
 
-      <h2 className="mt-8 mb-4 text-2xl font-semibold text-gray-800">Servicios Ofrecidos</h2>
+      <h2 id="servicios-ofrecidos" className="mt-8 mb-4 text-2xl font-semibold text-gray-800">Servicios Ofrecidos</h2>
       <ul className="mb-4 space-y-2 text-lg text-gray-700 list-disc list-inside">
         <li>Venta de celulares de última generación</li>
         <li>Reparación de dispositivos móviles</li>
@@ -43,7 +37,7 @@ const AboutUs = () => {
         <li>Asesoría en tecnología móvil</li>
       </ul>
 
-      <h2 className="mt-8 mb-4 text-2xl font-semibold text-gray-800">Horario de Atención</h2>
+      <h2 id="horario-de-atencion" className="mt-8 mb-4 text-2xl font-semibold text-gray-800">Horario de Atención</h2>
       <p className="text-lg leading-relaxed text-gray-700">
         Lunes a Viernes: <span className="font-semibold">9:00 AM - 6:00 PM</span>
         <br />
@@ -54,3 +48,4 @@ const AboutUs = () => {
 };
 
 export default AboutUs;
+

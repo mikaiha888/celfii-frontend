@@ -1,9 +1,10 @@
 export const aboutUsLinks = [
-  { name: "Misión y Visión", url: "/nosotros" },
-  { name: "Equipo de Trabajo", url: "/nosotros" },
-  { name: "Servicios Ofrecidos", url: "/nosotros" },
-  { name: "Horario de Atención", url: "/nosotros" },
+  { name: "Misión y Visión", url: "/nosotros#mision-y-vision" },
+  { name: "Equipo de Trabajo", url: "/nosotros#equipo-de-trabajo" },
+  { name: "Servicios Ofrecidos", url: "/nosotros#servicios-ofrecidos" },
+  { name: "Horario de Atención", url: "/nosotros#horario-de-atencion" },
 ];
+
 
 export const customerServiceLinks = [
   { name: "Centro de Ayuda", url: "/ayuda" },
