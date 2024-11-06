@@ -40,20 +40,18 @@ const QuantityCounter = ({ initialQuantity = 1, maxQuantity = 10, onChange, cart
         <button
           onClick={() => handleClick("decrement")}
           disabled={quantity <= 1}
-          className="px-3 py-1 text-white bg-gray-500 rounded disabled:opacity-50"
-        >
+          className="px-3 py-1 text-white bg-gray-500 rounded disabled:opacity-50">
           -
         </button>
         <span className="px-3 py-1 text-lg font-semibold">{quantity}</span>
         <button
           onClick={() => handleClick("increment")}
           disabled={isDisabled}
-          className="px-3 py-1 text-white bg-blue-500 rounded disabled:opacity-50"
-        >
+          className="px-3 py-1 text-white bg-blue-500 rounded disabled:opacity-50">
           +
         </button>
       </div>
-      {showText && (
+      {showText && pathname !== "/cart" && (
         <span className="text-red-500">Stock insuficiente para añadir más unidades.</span>
       )}
     </div>
