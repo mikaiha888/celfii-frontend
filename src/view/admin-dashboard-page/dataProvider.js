@@ -6,16 +6,23 @@ const dataProvider = {
       const { data } = await getRequest(`/${resource}`);
       return { data: [data], total: 1 };
     }
+    const defaultFilters = {
+      name: undefined,
+      minPrice: undefined,
+      maxPrice: undefined,
+      category: undefined,
+      sort: "",
+      onlyDeleted: undefined,
+    };
+
+    const filters = { ...defaultFilters, ...params.filter };
+
     const query = {
       page: params.pagination.page,
       perPage: params.pagination.perPage,
-      name: params.filter.name || undefined,
-      minPrice: params.filter.minPrice || undefined,
-      maxPrice: params.filter.maxPrice || undefined,
-      category: params.filter.category || undefined,
-      sort: params.filter.sort || "",
-      onlyDeleted: params.filter.onlyDeleted || undefined,
+      ...filters,
     };
+
     const { data, headers } = await getRequest(`/${resource}`, query);
     return {
       data: data.products ? data.products : data,
@@ -28,12 +35,10 @@ const dataProvider = {
       const response = await getRequest(`/${resource}/${params.id}`);
       return { data: response.data };
     }
-    
+
     const response = await getRequest(`/${resource}/${params.id}`);
     return response;
   },
-
-
 
   create: async (resource, params) => {
     const formData = new FormData();
@@ -59,9 +64,8 @@ const dataProvider = {
   },
 
   update: async (resource, params) => {
-
     if (resource === "dollar") {
-      const response = await patchRequest(`/${resource}`, params.data); 
+      const response = await patchRequest(`/${resource}`, params.data);
       return response;
     }
 

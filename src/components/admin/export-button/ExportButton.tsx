@@ -2,7 +2,10 @@ import * as React from "react";
 import { useCallback } from "react";
 import DownloadIcon from "@mui/icons-material/GetApp";
 import { fetchRelatedRecords, useDataProvider, useNotify, useListContext } from "ra-core";
-import { Button, ButtonProps } from "../../../../node_modules/react-admin/node_modules/ra-ui-materialui/src/button/Button";
+import {
+  Button,
+  ButtonProps,
+} from "../../../../node_modules/react-admin/node_modules/ra-ui-materialui/src/button/Button";
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
 
@@ -19,51 +22,105 @@ export const ExportButton = (props: ExportButtonProps) => {
   const dataProvider = useDataProvider();
   const notify = useNotify();
 
-  const exportToExcel = (
+  const exportToExcel = async (
     data: any[],
     fetchRelatedRecords: any,
     dataProvider: any,
     resource: string
   ) => {
-    const headers = {
+    const productHeaders = {
       id: "idArticulos",
-      code: "Código",
       name: "Nombre del producto",
       category: "Categoría",
-      stock: "Stock",
+      description: "Descripción producto",
       priceArs: "Precio en Pesos",
       priceUsd: "Precio en Dólares",
       priceWholesale: "Precio Mayorista",
       costArs: "Costo en Pesos",
       costUsd: "Costo en Dólares",
-      description: "Descripción producto",
+      stock: "Stock",
+      code: "Código",
+      imei: "IMEI",
       view: "Vistas",
-    }
+    };
 
-    const dataWithHeaders = data.map(item => {
+    const productData = data.map((item) => {
       return {
-        [headers.id]: item.id,
-        [headers.code]: item.code,
-        [headers.name]: item.name,
-        [headers.category]: item.category.name,
-        [headers.stock]: item.stock,
-        [headers.priceArs]: item.priceArs,
-        [headers.priceUsd]: item.priceUsd,
-        [headers.priceWholesale]: item.priceWholesale,
-        [headers.costArs]: item.costArs,
-        [headers.costUsd]: item.costUsd,
-        [headers.description]: item.description,
-        [headers.view]: item.view.counter,
-      }
-    })
-    console.log(data)
-    const worksheet = XLSX.utils.json_to_sheet(dataWithHeaders);
+        [productHeaders.id]: item.id,
+        [productHeaders.name]: item.name,
+        [productHeaders.category]: item.category?.name || "N/A",
+        [productHeaders.description]: item.description,
+        [productHeaders.priceArs]: item.priceArs,
+        [productHeaders.priceUsd]: item.priceUsd,
+        [productHeaders.priceWholesale]: item.priceWholesale,
+        [productHeaders.costArs]: item.costArs,
+        [productHeaders.costUsd]: item.costUsd,
+        [productHeaders.stock]: item.stock,
+        [productHeaders.code]: item.code,
+        [productHeaders.imei]: item.imei,
+        [productHeaders.view]: item.view?.counter || 0,
+      };
+    });
+
+    const categoriesResponse = await dataProvider.getList("categories", {
+      pagination: { page: 1, perPage: 1000 },
+    });
+    const categoryData = categoriesResponse.data.map((cat) => ({
+      Nombre: cat.name,
+    }));
+
+    const roleResponse = await dataProvider.getList("roles", {
+      pagination: { page: 1, perPage: 1000 },
+    });
+    const roleData = await roleResponse.data.map((role) => ({
+      Nombre: role.name,
+    }));
+
+    const userResponse = await dataProvider.getList("users", {
+      pagination: { page: 1, perPage: 1000 },
+    });
+    const userData = await userResponse.data.map((user) => ({
+      Nombre: user.username,
+      Email: user.email,
+    }));
+    const dollarResponse = await dataProvider.getList("dollar", {
+      pagination: { page: 1, perPage: 1000 },
+    });
+
+    const dollarData = await dollarResponse.data.map((dollar) => {
+      const formattedDate = new Intl.DateTimeFormat("es-ES", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+      }).format(new Date(dollar.updatedAt));
+
+      return {
+        Nombre: dollar.rate,
+        "Última actualización": formattedDate,
+      };
+    });
+
     const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, "Datos");
+    const productSheet = XLSX.utils.json_to_sheet(productData);
+    XLSX.utils.book_append_sheet(workbook, productSheet, "Productos");
+
+    const categorySheet = XLSX.utils.json_to_sheet(categoryData);
+    XLSX.utils.book_append_sheet(workbook, categorySheet, "Categorías");
+
+    const userSheet = XLSX.utils.json_to_sheet(userData);
+    XLSX.utils.book_append_sheet(workbook, userSheet, "Usuarios");
+
+    const roleSheet = XLSX.utils.json_to_sheet(roleData);
+    XLSX.utils.book_append_sheet(workbook, roleSheet, "Roles");
+
+    const dollarSheet = XLSX.utils.json_to_sheet(dollarData);
+    XLSX.utils.book_append_sheet(workbook, dollarSheet, "Dólar");
 
     const excelBuffer = XLSX.write(workbook, { bookType: "xlsx", type: "array" });
     const dataBlob = new Blob([excelBuffer], { type: "application/octet-stream" });
-    saveAs(dataBlob, `${resource}.xlsx`);
+    saveAs(dataBlob, "DatosExportados.xlsx");
   };
 
   const handleClick = useCallback(

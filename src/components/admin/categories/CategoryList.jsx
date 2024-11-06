@@ -5,7 +5,6 @@ import {
   EditButton,
   DeleteButton,
   CreateButton,
-  ExportButton
 } from "react-admin";
 
 const CategoryList = () => {
@@ -17,7 +16,6 @@ const CategoryList = () => {
         actions={
           <div>
             <CreateButton label="Crear Categoria" />
-            <ExportButton label="Exportar Categorias" />
           </div>
         }
       >

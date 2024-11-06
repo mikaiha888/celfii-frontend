@@ -6,7 +6,6 @@ import {
   DeleteButton,
   CreateButton,
 } from "react-admin";
-import { ExportButton } from "../export-button/ExportButton";
 
 const UserList = () => {
   return (
@@ -17,7 +16,6 @@ const UserList = () => {
         actions={
           <div>
             <CreateButton label="Crear Usuario" />
-            <ExportButton label="Exportar Usuarios" />
           </div>
         }
       >
