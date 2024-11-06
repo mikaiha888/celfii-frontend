@@ -25,7 +25,6 @@ const PurchaseInstructions = () => (
       >
         Ver más detalles
       </Link>
-      <WhatsAppButton />
     </div>
   </section>
 );
