@@ -21,12 +21,16 @@ const ProductDetail = ({ product, cart, isFavourite }) => {
   };
 
   const handleCartClick = (product) => {
-    const newQuantity = item && item.length ? item.quantity + product.quantity : product.quantity;    
+    const newQuantity = item && item.length ? item.quantity + product.quantity : product.quantity;
     if (newQuantity <= product.stock) {
       dispatch(addCartFavs("cart", product));
       toast.success("Producto agregado al carrito");
     } else toast.error(`Has alcanzado el límite de stock, no puedes agregar más productos.`);
   };
+
+  const phoneNumber = "+5492604545982";
+  const message = `¡Hola! Quería consultar por el producto ${product.name}, ¿sigue disponible?`;
+  const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
   return (
     <>
@@ -46,13 +50,11 @@ const ProductDetail = ({ product, cart, isFavourite }) => {
         <div className="flex flex-col justify-center">
           <h1 className="mb-4 text-3xl font-bold">{product.name}</h1>
           <p className="mb-2 text-xl text-gray-700">Precio: ARS {product.priceArs}</p>
-          <p className="mb-6 text-xl text-gray-700">Precio: USD {product.priceUsd}</p>
           {item && item.quantity >= product.stock ? (
             <button
               onClick={() => handleCartClick({ ...product, quantity })}
               disabled={item && item.quantity >= product.stock}
-              className="px-4 py-2 mt-4 text-white transition bg-gray-500 rounded"
-            >
+              className="px-4 py-2 mt-4 text-white transition bg-gray-500 rounded">
               Sin stock
             </button>
           ) : (
@@ -71,21 +73,29 @@ const ProductDetail = ({ product, cart, isFavourite }) => {
                   cartQuantity={item ? item.quantity : 0}
                 />
               )}
-              <button
-                onClick={() => handleCartClick({ ...product, quantity })}
-                disabled={item && item.quantity >= product.stock}
-                className="px-4 py-2 mt-4 text-white transition bg-blue-500 rounded hover:bg-blue-700"
-              >
-                Agregar al carrito
-              </button>
+              {product.stock === 0 ? (
+                <a href={whatsappLink} target="_blank" rel="noopener noreferrer">
+                  <button className="px-4 py-2 mt-4 text-white transition bg-green-500 rounded hover:bg-green-700">
+                    Consultar disponibilidad por WhatsApp
+                  </button>
+                </a>
+              ) : (
+                <button
+                  onClick={() => handleCartClick({ ...product, quantity })}
+                  disabled={item && item.quantity >= product.stock}
+                  className="px-4 py-2 mt-4 text-white transition bg-blue-500 rounded hover:bg-blue-700">
+                  Agregar al carrito
+                </button>
+              )}
             </>
           )}
-          <Link
-            to="/cart"
-            className="px-4 py-2 mt-4 text-center text-white transition bg-red-700 rounded hover:bg-red-900"
-          >
-            Ver Carrito
-          </Link>
+          {cart && cart.length ? (
+            <Link
+              to="/cart"
+              className="px-4 py-2 mt-4 text-center text-white transition bg-red-700 rounded hover:bg-red-900">
+              Ver Carrito
+            </Link>
+          ) : null}
         </div>
       </div>
       <hr className="mt-6" />
