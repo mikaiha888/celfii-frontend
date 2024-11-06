@@ -16,7 +16,9 @@ const CartPage = () => {
   }, [dispatch]);
 
   const calculateTotal = () => {
-    return cart.reduce((total, item) => total + item.priceArs * item.quantity, 0).toFixed(2);
+    return cart && cart.length > 0
+      ? cart.reduce((total, item) => total + item.priceArs * item.quantity, 0).toFixed(2)
+      : "0.00";
   };
 
   const handleClearCart = () => {
@@ -58,8 +60,8 @@ const CartPage = () => {
             onClick={handleClearCart}
             className="mt-4 w-full py-2 text-white bg-red-600 rounded-md hover:bg-red-700 transition-colors duration-300">
             Vaciar Carrito
-            </button>
-            
+          </button>
+
           <div className="text-center mt-6 text-gray-500">
             ¿Quieres descubrir más?{" "}
             <Link to="/productos" className="text-blue-500 hover:underline">

@@ -23,7 +23,7 @@ const App = () => {
         <div className="flex-1">
           <AppRoutes />
         </div>
-        <WhatsAppButton />
+        {!pathname.startsWith("/admin") && <WhatsAppButton />}
         <Footer />
       </div>
     </>
