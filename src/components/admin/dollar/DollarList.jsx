@@ -1,7 +1,7 @@
 import { List, Datagrid, TextField, EditButton, DateField } from "react-admin";
 
 const DollarList = () => (
-  <List>
+  <List title="Dólar" pagination={false} actions={false}>
     <Datagrid>
       <TextField source="id" label="ID" />
       <TextField source="rate" label="Valor del dólar" />

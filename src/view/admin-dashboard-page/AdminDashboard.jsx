@@ -24,7 +24,7 @@ import CategoryEdit from "../../components/admin/categories/CategoryEdit";
 
 import RoleList from "../../components/admin/roles/RoleList";
 
-import Charts from "../../components/admin/charts/Charts";
+// import Charts from "../../components/admin/charts/Charts";
 
 import DollarList from "../../components/admin/dollar/DollarList";
 import DollarEdit from "../../components/admin/dollar/DollarEdit";
@@ -43,7 +43,7 @@ const CustomAppBar = (props) => {
       <UserMenu />
       <Button color="inherit" startIcon={<ExitToAppIcon />} onClick={handleLogout}>
         Salir
-      </Button>
+      </Button>      
     </AppBar>
   );
 };
@@ -88,9 +88,14 @@ const AdminDashboard = () => (
         create={UserCreate}
         edit={UserEdit}
       />
-      <Resource name="charts" options={{ label: "Gráficos" }} list={Charts} />
-      <Resource name="charts" options={{ label: "Gráficos" }} list={Charts} />
-      <Resource name="dollar" options={{ label: "Dólar" }} list={DollarList} edit={DollarEdit} />
+      {/* <Resource name="charts" options={{ label: "Gráficos" }} list={Charts} />
+      <Resource name="charts" options={{ label: "Gráficos" }} list={Charts} /> */}
+      <Resource
+        name="dollar"
+        options={{ label: "Dólar" }}
+        list={DollarList} 
+        edit={DollarEdit}
+      />
     </Admin>
   </ThemeProvider>
 );

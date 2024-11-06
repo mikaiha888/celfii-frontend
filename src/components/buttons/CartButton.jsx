@@ -3,8 +3,11 @@ import { ShoppingCart } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const CartButton = () => {
-  const { cart } = useSelector((state) => state.cartFavs); 
-  const totalItems = cart.reduce((total, item) => total + item.quantity, 0); 
+  const { cart } = useSelector((state) => state.cartFavs);
+
+  const totalItems = cart && cart.length > 0 
+    ? cart.reduce((total, item) => total + item.quantity, 0)
+    : 0;
 
   return (
     <Link to="/cart" className="relative flex items-center">
