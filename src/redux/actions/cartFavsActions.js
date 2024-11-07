@@ -1,15 +1,11 @@
-import {
-  CART_FAVS_REQUEST,
-  CART_FAVS_SUCCESS,
-  CART_FAVS_FAILURE,
-  UPDATE_CART_FAV
-} from "../types";
+import { CART_FAVS_REQUEST, CART_FAVS_SUCCESS, CART_FAVS_FAILURE, UPDATE_CART_FAV } from "../types";
 
 import {
   loadFromLocalStorage,
   addToArrayInLocalStorage,
   removeFromArrayInLocalStorage,
-  updateArrayInLocalStorage
+  updateArrayInLocalStorage,
+  removeFromLocalStorage,
 } from "../../helpers";
 
 export const addCartFavs = (key, product) => (dispatch) => {
@@ -41,6 +37,22 @@ export const removeCartFavs = (key, product) => (dispatch) => {
         payload: { [key]: updatedKey },
       });
     }
+  } catch (error) {
+    dispatch({
+      type: CART_FAVS_FAILURE,
+      payload: error.message,
+    });
+  }
+};
+
+export const clearCartFavs = (key) => (dispatch) => {
+  try {
+    dispatch({ type: CART_FAVS_REQUEST });
+    removeFromLocalStorage(key);
+    dispatch({
+      type: UPDATE_CART_FAV,
+      payload: { [key]: [] },
+    });
   } catch (error) {
     dispatch({
       type: CART_FAVS_FAILURE,

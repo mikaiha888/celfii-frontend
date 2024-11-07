@@ -6,9 +6,9 @@ const WhatsAppButton = ({ cartItems = [], isCartPage = false }) => {
   const phoneNumber = "+5492604545982";
 
   const buildCartMessage = () => {
-    if (cartItems.length === 0) return "🛒 *Tu carrito está vacío.*";
+    if (!cartItems || cartItems.length === 0) return "🛒 *Tu carrito está vacío.*";
 
-    const cartDetails = cartItems
+    const cartDetails = cartItems && cartItems
       .map((item) => {
         const totalPrice = item.quantity * item.priceArs;
         return `*Producto:* ${item.name}\n*Cantidad:* ${item.quantity}\n*Precio unitario:* ARS ${
@@ -17,7 +17,9 @@ const WhatsAppButton = ({ cartItems = [], isCartPage = false }) => {
       })
       .join("\n");
 
-    const totalCompra = cartItems.reduce((acc, item) => acc + item.quantity * item.priceArs, 0);
+    const totalCompra = cartItems && cartItems.length > 0
+      ? cartItems.reduce((acc, item) => acc + item.quantity * item.priceArs, 0)
+      : 0;
 
     return `¡Hola! Me gustaría realizar la siguiente compra:\n\n${cartDetails}\n *Total de la compra:* ARS ${totalCompra.toFixed(
       2
