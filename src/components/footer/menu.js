@@ -7,26 +7,28 @@ export const aboutUsLinks = [
 
 
 export const customerServiceLinks = [
-  { name: "Centro de Ayuda", url: "/ayuda" },
-  { name: "Política de Devoluciones", url: "/ayuda" },
-  { name: "Envío y Entrega", url: "/ayuda" },
-  { name: "Garantía", url: "/ayuda" },
+  { name: "Centro de Ayuda", url: "/faq/0" },
+  { name: "Política de Devoluciones", url: "/faq/12" },
+  { name: "Envío y Entrega", url: "/faq/13" },
+  { name: "Garantía", url: "/faq/14" },
   { name: "Contacto", url: "/contacto" },
 ];
 
+
 export const popularCategoriesLinks = [
-  { name: "Reparaciones", url: "/categorias/ofertas-especiales" },
-  { name: "Accesorios", url: "/categorias/smartphones" },
-  { name: "Respuestos", url: "/categorias/computadoras-laptops" },
-  { name: "Equipos", url: "/categorias/gaming" },
-  { name: "Otros", url: "/categorias/accesorios" },
+  { name: "Reparaciones", url: "/productos" },
+  { name: "Accesorios", url: "/productos" },
+  { name: "Respuestos", url: "/productos" },
+  { name: "Equipos", url: "/productos" },
+  { name: "Otros", url: "/productos" },
 ];
 
 export const paymentMethodsLinks = [
-  { name: "Tarjetas de Crédito/Débito", url: "/metodos-de-pago/tarjetas" },
-  { name: "Transferencias Bancarias", url: "/metodos-de-pago/transferencias" },
-  { name: "Pago en Cuotas", url: "/metodos-de-pago/cuotas" },
-  { name: "Pagos Digitales", url: "/metodos-de-pago/pagos-digitales" },
+  { name: "Tarjetas de Crédito/Débito", url: "/faq/3" },
+  { name: "Transferencias Bancarias", url: "/faq/4" },
+  { name: "Pago en Cuotas", url: "/faq/5" },
+  { name: "Pagos Digitales", url: "/faq/6" },
+  { name: "Link de pagos", url: "/faq/7" },
 ];
 
 export const socialMediaIcons = [
@@ -34,3 +36,4 @@ export const socialMediaIcons = [
   { name: "FaInstagram", url: "https://www.instagram.com/cel.fii/?hl=es" },
   { name: "FaTiktok", url: "https://www.tiktok.com/@celfii.celulares" },
 ];
+

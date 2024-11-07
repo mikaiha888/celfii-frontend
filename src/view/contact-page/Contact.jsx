@@ -1,6 +1,18 @@
-import { Facebook, Instagram, Phone } from "lucide-react";
+import { Phone } from "lucide-react";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import { socialMediaIcons } from "../../components/footer/menu";
+import SocialIcons from "../../components/footer/SocialIcons";
 
 const Contact = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname === "/contacto") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, [location]);
+
   return (
     <div className="max-w-3xl mx-auto p-6 bg-white rounded-lg shadow-lg mt-8 space-y-6">
       <h1 className="text-4xl font-bold text-gray-800 mb-4">Contáctanos</h1>
@@ -15,12 +27,15 @@ const Contact = () => {
         href="https://wa.me/5492604545982"
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex items-center space-x-2 text-green-600 hover:text-green-700 transition">
+        className="inline-flex items-center space-x-2 text-green-600 hover:text-green-700 transition"
+      >
         <Phone size={24} />
         <span className="text-lg font-semibold">Enviar mensaje por WhatsApp</span>
       </a>
-      <p className="text-lg text-gray-700">Email: contacto@celfii.com</p>
-      <p className="text-lg text-gray-700">Dirección: Calle Falsa 123, Mendoza, Argentina</p>
+      <p className="text-lg text-gray-700">Email: cel-fii@cel-fii.com</p>
+      <p className="text-lg text-gray-700">
+        Dirección: Av. Ing. Julio Balloffet 1488, M5600 San Rafael, Mendoza{" "}
+      </p>
       <p className="text-lg text-gray-700">Encuéntranos en la siguiente dirección:</p>
 
       <div className="mt-4 rounded overflow-hidden shadow-lg">
@@ -32,26 +47,12 @@ const Contact = () => {
           allowFullScreen=""
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
-          title="Ubicación de Cel-Fii"></iframe>
+          title="Ubicación de Cel-Fii"
+        ></iframe>
       </div>
 
       <h2 className="text-2xl font-semibold text-gray-800 mt-8 mb-4">Síguenos en Redes Sociales</h2>
-      <div className="flex space-x-4 text-gray-700">
-        <a
-          href="https://www.facebook.com/profile.php?id=100018858458649"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hover:text-blue-600 transition">
-          <Facebook size={32} />
-        </a>
-        <a
-          href="https://www.instagram.com/cel.fii/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hover:text-pink-500 transition">
-          <Instagram size={32} />
-        </a>
-      </div>
+      <SocialIcons icons={socialMediaIcons} customClass="text-gray-700 hover:text-blue-600" />
     </div>
   );
 };

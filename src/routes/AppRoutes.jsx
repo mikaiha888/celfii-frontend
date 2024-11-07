@@ -19,7 +19,7 @@ const AppRoutes = () => (
   <Routes>
     <Route path="/" element={<HomePage />} />
     <Route path="/login" element={<Login />} />
-    <Route path="/faq" element={<FAQPage />} />
+    <Route path="/faq/:faqId?" element={<FAQPage />} />
     <Route path="/cart" element={<CartPage />} />
     <Route path="/perfil" element={<Profile />} />
     <Route path="/contacto" element={<Contact />} />
