@@ -19,10 +19,7 @@ const Products = () => {
     page: parseInt(query.get("page")) || 1,
     perPage: 54,
     name: query.get("name") || "",
-    category:
-      localStorage.getItem("selectedCategory") ||
-      query.get("category") ||
-      "",
+    category: localStorage.getItem("selectedCategory") || query.get("category") || "",
     sort: localStorage.getItem("sortOrder") || "newest",
     minPrice: localStorage.getItem("minPrice") || "",
     maxPrice: localStorage.getItem("maxPrice") || "",
@@ -46,7 +43,19 @@ const Products = () => {
   };
 
   const handleSearch = (searchTerm) => {
-    updateSearchParams({ name: searchTerm, page: 1 });
+    setSearchParams({
+      page: 1,
+      perPage: 54,
+      name: searchTerm,
+      category: "",
+      sort: "newest",
+      minPrice: "",
+      maxPrice: "",
+    });
+    localStorage.removeItem("selectedCategory");
+    localStorage.removeItem("sortOrder");
+    localStorage.removeItem("minPrice");
+    localStorage.removeItem("maxPrice");
   };
 
   useEffect(() => {
@@ -65,7 +74,7 @@ const Products = () => {
       <SearchBar value={searchParams.name} onSearch={handleSearch} />
       <div className="flex">
         <aside>
-          <Filter updateSearchParams={updateSearchParams} />
+          <Filter updateSearchParams={updateSearchParams} searchParams={searchParams} />
         </aside>
         <main>
           {loading ? (

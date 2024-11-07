@@ -1,22 +1,16 @@
-import { useDispatch } from "react-redux";
 import Selector from "./Selector";
 import { useEffect, useState } from "react";
-import { loadCategories } from "../../redux/actions/categoriesActions";
 import Sort from "./Sort";
-import { Accordion, AccordionSummary, AccordionDetails } from "@mui/material";
+import { Accordion, AccordionSummary, AccordionDetails, Badge } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
-const Filter = ({ updateSearchParams }) => {
-  const dispatch = useDispatch();
-
+const Filter = ({ updateSearchParams, searchParams }) => {
   const [refreshKey, setRefreshKey] = useState(0);
 
-  const [selectedCategory, setSelectedCategories] = useState(
-    localStorage.getItem("selectedCategory") || ""
-  );
-  const [sortOrder, setSortOrder] = useState(localStorage.getItem("sortOrder") || "newest");
-  const [minPrice, setMinPrice] = useState(localStorage.getItem("minPrice") || "");
-  const [maxPrice, setMaxPrice] = useState(localStorage.getItem("maxPrice") || "");
+  const [selectedCategory, setSelectedCategories] = useState(searchParams.category || "");
+  const [sortOrder, setSortOrder] = useState(searchParams.sort || "newest");
+  const [minPrice, setMinPrice] = useState(searchParams.minPrice || "");
+  const [maxPrice, setMaxPrice] = useState(searchParams.maxPrice || "");
   const [isCategoryAccordionOpen, setIsCategoryAccordionOpen] = useState(
     JSON.parse(localStorage.getItem("isCategoryAccordionOpen")) || false
   );
@@ -27,8 +21,11 @@ const Filter = ({ updateSearchParams }) => {
   const [resetSortCount, setResetSortCount] = useState(0);
 
   useEffect(() => {
-    dispatch(loadCategories());
-  }, [dispatch]);
+    setSelectedCategories(searchParams.category || "");
+    setSortOrder(searchParams.sort || "newest");
+    setMinPrice(searchParams.minPrice || "");
+    setMaxPrice(searchParams.maxPrice || "");
+  }, [searchParams]);
 
   const handleCategoryChange = (select) => {
     setSelectedCategories(select);
@@ -114,6 +111,10 @@ const Filter = ({ updateSearchParams }) => {
     localStorage.setItem("isSortAccordionOpen", JSON.stringify(newState));
   };
 
+  // Verificación si hay filtros activos
+  const isCategoryFilterActive = selectedCategory !== "";
+  const isSortFilterActive = sortOrder !== "newest";
+
   return (
     <div key={refreshKey} className="bg-white shadow-md rounded-lg p-4">
       <div className="flex flex-col gap-4 mt-4">
@@ -156,6 +157,12 @@ const Filter = ({ updateSearchParams }) => {
             aria-controls="panel1a-content"
             id="panel1a-header"
           >
+            <Badge
+              color="error"
+              variant="dot"
+              invisible={!isCategoryFilterActive}
+              sx={{ marginRight: 1 }}
+            />
             <h2 className="font-bold text-black">Categorías</h2>
           </AccordionSummary>
           <AccordionDetails className="bg-gray-100 rounded-b-lg">
@@ -173,6 +180,12 @@ const Filter = ({ updateSearchParams }) => {
             aria-controls="panel2a-content"
             id="panel2a-header"
           >
+            <Badge
+              color="error"
+              variant="dot"
+              invisible={!isSortFilterActive}
+              sx={{ marginRight: 1 }}
+            />
             <h2 className="font-bold text-black">Ordenar por</h2>
           </AccordionSummary>
           <AccordionDetails className="bg-gray-100 rounded-b-lg">
