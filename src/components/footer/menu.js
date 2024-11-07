@@ -8,9 +8,9 @@ export const aboutUsLinks = [
 
 export const customerServiceLinks = [
   { name: "Centro de Ayuda", url: "/faq/0" },
-  { name: "Política de Devoluciones", url: "/faq/8" },
-  { name: "Envío y Entrega", url: "/faq/9" },
-  { name: "Garantía", url: "/faq/10" },
+  { name: "Política de Devoluciones", url: "/faq/12" },
+  { name: "Envío y Entrega", url: "/faq/13" },
+  { name: "Garantía", url: "/faq/14" },
   { name: "Contacto", url: "/contacto" },
 ];
 
@@ -24,10 +24,11 @@ export const popularCategoriesLinks = [
 ];
 
 export const paymentMethodsLinks = [
-  { name: "Tarjetas de Crédito/Débito", url: "/metodos-de-pago/tarjetas" },
-  { name: "Transferencias Bancarias", url: "/metodos-de-pago/transferencias" },
-  { name: "Pago en Cuotas", url: "/metodos-de-pago/cuotas" },
-  { name: "Pagos Digitales", url: "/metodos-de-pago/pagos-digitales" },
+  { name: "Tarjetas de Crédito/Débito", url: "/faq/3" },
+  { name: "Transferencias Bancarias", url: "/faq/4" },
+  { name: "Pago en Cuotas", url: "/faq/5" },
+  { name: "Pagos Digitales", url: "/faq/6" },
+  { name: "Link de pagos", url: "/faq/7" },
 ];
 
 export const socialMediaIcons = [
