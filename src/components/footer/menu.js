@@ -7,12 +7,13 @@ export const aboutUsLinks = [
 
 
 export const customerServiceLinks = [
-  { name: "Centro de Ayuda", url: "/ayuda" },
-  { name: "Política de Devoluciones", url: "/ayuda" },
-  { name: "Envío y Entrega", url: "/ayuda" },
-  { name: "Garantía", url: "/ayuda" },
+  { name: "Centro de Ayuda", url: "/faq/0" },
+  { name: "Política de Devoluciones", url: "/faq/8" },
+  { name: "Envío y Entrega", url: "/faq/9" },
+  { name: "Garantía", url: "/faq/10" },
   { name: "Contacto", url: "/contacto" },
 ];
+
 
 export const popularCategoriesLinks = [
   { name: "Reparaciones", url: "/categorias/ofertas-especiales" },
