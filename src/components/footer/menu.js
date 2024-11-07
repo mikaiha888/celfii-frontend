@@ -34,3 +34,4 @@ export const socialMediaIcons = [
   { name: "FaInstagram", url: "https://www.instagram.com/cel.fii/?hl=es" },
   { name: "FaTiktok", url: "https://www.tiktok.com/@celfii.celulares" },
 ];
+
