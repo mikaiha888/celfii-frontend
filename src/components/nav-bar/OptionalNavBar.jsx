@@ -4,7 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const OptionalNavBar = () => {
   const navigate = useNavigate();
-  const { pathname, search } = useLocation();
+  const { pathname } = useLocation();
   const [searchTerm, setSearchTerm] = useState("");
 
   const categories = [
@@ -35,21 +35,43 @@ const OptionalNavBar = () => {
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
+      localStorage.removeItem("selectedCategory");
+      localStorage.removeItem("sortOrder");
+      localStorage.removeItem("minPrice");
+      localStorage.removeItem("maxPrice");
+
       const params = new URLSearchParams({
         page: 1,
         perPage: 54,
         name: searchTerm,
-        category:
-          localStorage.getItem("selectedCategory") ||
-          new URLSearchParams(search).get("category") ||
-          "",
-        sort: localStorage.getItem("sortOrder") || "newest",
-        minPrice: localStorage.getItem("minPrice") || "",
-        maxPrice: localStorage.getItem("maxPrice") || "",
+        category: "",
+        sort: "newest",
+        minPrice: "",
+        maxPrice: "",
       });
 
       navigate(`/productos?${params.toString()}`);
     }
+  };
+
+  const handleCategoryClick = (category) => {
+    localStorage.removeItem("sortOrder");
+    localStorage.removeItem("minPrice");
+    localStorage.removeItem("maxPrice");
+
+    localStorage.setItem("selectedCategory", category);
+
+    const params = new URLSearchParams({
+      page: 1,
+      perPage: 54,
+      category: category,
+      sort: "newest",
+      minPrice: "",
+      maxPrice: "",
+    });
+
+    navigate(`/productos?${params.toString()}`);
+    window.scrollTo(0, 0);
   };
 
   return (
@@ -60,10 +82,7 @@ const OptionalNavBar = () => {
             <li key={index}>
               <Link
                 to="/productos"
-                onClick={() => {
-                  localStorage.setItem("selectedCategory", category.name);
-                  window.scrollTo(0, 0);
-                }}
+                onClick={() => handleCategoryClick(category.name)}
                 className="pr-4 font-medium transition-all duration-200 border-r text-md text-secondary hover:text-primary"
               >
                 {category.name}
