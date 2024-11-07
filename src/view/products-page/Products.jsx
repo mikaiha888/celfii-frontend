@@ -2,6 +2,7 @@ import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loadCartFavs, loadProducts } from "../../redux/actions";
+import { removeFromLocalStorage } from "../../helpers/storageHelper";
 
 import Cards from "../../components/cards/Cards";
 import Filter from "../../components/filter/Filter";
@@ -19,10 +20,7 @@ const Products = () => {
     page: parseInt(query.get("page")) || 1,
     perPage: 54,
     name: query.get("name") || "",
-    category:
-      localStorage.getItem("selectedCategory") ||
-      query.get("category") ||
-      "",
+    category: localStorage.getItem("selectedCategory") || query.get("category") || "",
     sort: localStorage.getItem("sortOrder") || "newest",
     minPrice: localStorage.getItem("minPrice") || "",
     maxPrice: localStorage.getItem("maxPrice") || "",
@@ -46,6 +44,11 @@ const Products = () => {
   };
 
   const handleSearch = (searchTerm) => {
+    removeFromLocalStorage("selectedCategory");
+    removeFromLocalStorage("sortOrder");
+    removeFromLocalStorage("minPrice");
+    removeFromLocalStorage("maxPrice");
+
     updateSearchParams({ name: searchTerm, page: 1 });
   };
 
