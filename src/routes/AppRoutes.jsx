@@ -18,6 +18,7 @@ import ProductDetailPage from "../view/product-detail-page/ProductDetailPage";
 const AppRoutes = () => (
   <Routes>
     <Route path="/" element={<HomePage />} />
+    <Route path="*" element={<HomePage />} />
     <Route path="/login" element={<Login />} />
     <Route path="/faq" element={<FAQPage />} />
     <Route path="/cart" element={<CartPage />} />
