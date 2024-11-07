@@ -2,7 +2,6 @@ import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loadCartFavs, loadProducts } from "../../redux/actions";
-import { removeFromLocalStorage } from "../../helpers/storageHelper";
 
 import Cards from "../../components/cards/Cards";
 import Filter from "../../components/filter/Filter";
@@ -44,12 +43,19 @@ const Products = () => {
   };
 
   const handleSearch = (searchTerm) => {
-    removeFromLocalStorage("selectedCategory");
-    removeFromLocalStorage("sortOrder");
-    removeFromLocalStorage("minPrice");
-    removeFromLocalStorage("maxPrice");
-
-    updateSearchParams({ name: searchTerm, page: 1 });
+    setSearchParams({
+      page: 1,
+      perPage: 54,
+      name: searchTerm,
+      category: "",
+      sort: "newest",
+      minPrice: "",
+      maxPrice: "",
+    });
+    localStorage.removeItem("selectedCategory");
+    localStorage.removeItem("sortOrder");
+    localStorage.removeItem("minPrice");
+    localStorage.removeItem("maxPrice");
   };
 
   useEffect(() => {
@@ -68,7 +74,7 @@ const Products = () => {
       <SearchBar value={searchParams.name} onSearch={handleSearch} />
       <div className="flex">
         <aside>
-          <Filter updateSearchParams={updateSearchParams} />
+          <Filter updateSearchParams={updateSearchParams} searchParams={searchParams} />
         </aside>
         <main>
           {loading ? (
