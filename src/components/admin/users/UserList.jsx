@@ -20,8 +20,8 @@ const UserList = () => {
         }
       >
         <Datagrid>
-          <TextField source="username" label="Nombre de Usuario" />
-          <TextField source="email" label="Correo Electrónico" />
+          <TextField source="username" label="Nombre de Usuario" sortable={false} />
+          <TextField source="email" label="Correo Electrónico"  sortable={false}/>
           <EditButton label="Editar" />
           <DeleteButton label="Eliminar" />
         </Datagrid>

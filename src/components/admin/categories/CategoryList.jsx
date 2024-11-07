@@ -20,7 +20,7 @@ const CategoryList = () => {
         }
       >
         <Datagrid>
-          <TextField source="name" label="Nombre de la Categoría" />
+          <TextField source="name" label="Nombre de la Categoría" sortable={false} />
           <EditButton label="Editar" />
           <DeleteButton label="Eliminar" />
         </Datagrid>

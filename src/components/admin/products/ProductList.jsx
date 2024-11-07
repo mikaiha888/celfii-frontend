@@ -15,7 +15,6 @@ import RestoreIcon from "@mui/icons-material/Restore";
 import { Button } from "@mui/material";
 import dataProvider from "../../../view/admin-dashboard-page/dataProvider";
 import ProductFilterSidebar from "./ProductFilterSidebar";
-import { ExportButton } from "../export-button/ExportButton";
 
 export const ProductList = (props) => {
   return (
@@ -27,9 +26,9 @@ export const ProductList = (props) => {
       actions={
         <>
           <CreateButton label="Crear Producto" />
-          <ExportButton label="Exportar Productos" />
         </>
-      }>
+      }
+    >
       <ProductDataGrid />
     </List>
   );
@@ -55,13 +54,13 @@ const ProductDataGrid = () => {
     <div style={{ marginRight: "20px" }}>
       {" "}
       <Datagrid>
-        <TextField source="name" label="Nombre del Producto" />
-        <ImageField source="images[0].url" label="Imagen" />
-        <TextField source="category.name" label="Categoría" />
-        <NumberField source="priceArs" label="Precio (ARS)" />
-        <NumberField source="stock" label="Stock" />
-        <TextField source="code" label="Código" />
-        <NumberField source="view.counter" label="Vistas" />
+        <TextField source="name" label="Nombre del Producto" sortable={false} />
+        <ImageField source="images[0].url" label="Imagen" sortable={false} />
+        <TextField source="category.name" label="Categoría" sortable={false} />
+        <NumberField source="priceArs" label="Precio (ARS)" sortable={false} />
+        <NumberField source="stock" label="Stock" sortable={false} />
+        <TextField source="code" label="Código" sortable={false} />
+        <NumberField source="view.counter" label="Vistas" sortable={false} />
 
         {showDeleted ? (
           <FunctionField
@@ -78,7 +77,8 @@ const ProductDataGrid = () => {
                   padding: 0,
                   minWidth: "auto",
                   color: "#1976d2",
-                }}>
+                }}
+              >
                 Recuperar
               </Button>
             )}
