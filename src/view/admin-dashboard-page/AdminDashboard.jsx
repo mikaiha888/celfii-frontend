@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
 import { logoutUser } from "../../redux/actions";
+import { useDataProvider } from "react-admin";
 
 import dataProvider from "./dataProvider";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
@@ -28,22 +29,36 @@ import RoleList from "../../components/admin/roles/RoleList";
 
 import DollarList from "../../components/admin/dollar/DollarList";
 import DollarEdit from "../../components/admin/dollar/DollarEdit";
+import ExportButton from "../../components/admin/export-button/ExportButton";
 
 const CustomAppBar = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const dataProvider = useDataProvider();
 
   const handleLogout = () => {
     dispatch(logoutUser());
     navigate("/");
   };
 
+  const resource = "products";
+  const filterValues = {};
+  const sort = { field: "name", order: "ASC" };
+  const total = 100;
+
   return (
     <AppBar {...props}>
       <UserMenu />
+      <ExportButton
+        resource={resource}
+        filterValues={filterValues}
+        sort={sort}
+        total={total}
+        dataProvider={dataProvider}
+      />
       <Button color="inherit" startIcon={<ExitToAppIcon />} onClick={handleLogout}>
         Salir
-      </Button>      
+      </Button>
     </AppBar>
   );
 };
@@ -90,12 +105,7 @@ const AdminDashboard = () => (
       />
       {/* <Resource name="charts" options={{ label: "Gráficos" }} list={Charts} />
       <Resource name="charts" options={{ label: "Gráficos" }} list={Charts} /> */}
-      <Resource
-        name="dollar"
-        options={{ label: "Dólar" }}
-        list={DollarList} 
-        edit={DollarEdit}
-      />
+      <Resource name="dollar" options={{ label: "Dólar" }} list={DollarList} edit={DollarEdit} />
     </Admin>
   </ThemeProvider>
 );
