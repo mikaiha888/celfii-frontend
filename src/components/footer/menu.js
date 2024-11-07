@@ -16,11 +16,11 @@ export const customerServiceLinks = [
 
 
 export const popularCategoriesLinks = [
-  { name: "Reparaciones", url: "/categorias/ofertas-especiales" },
-  { name: "Accesorios", url: "/categorias/smartphones" },
-  { name: "Respuestos", url: "/categorias/computadoras-laptops" },
-  { name: "Equipos", url: "/categorias/gaming" },
-  { name: "Otros", url: "/categorias/accesorios" },
+  { name: "Reparaciones", url: "/productos" },
+  { name: "Accesorios", url: "/productos" },
+  { name: "Respuestos", url: "/productos" },
+  { name: "Equipos", url: "/productos" },
+  { name: "Otros", url: "/productos" },
 ];
 
 export const paymentMethodsLinks = [
