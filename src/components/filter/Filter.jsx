@@ -1,7 +1,7 @@
 import Selector from "./Selector";
 import { useEffect, useState } from "react";
 import Sort from "./Sort";
-import { Accordion, AccordionSummary, AccordionDetails } from "@mui/material";
+import { Accordion, AccordionSummary, AccordionDetails, Badge } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 const Filter = ({ updateSearchParams, searchParams }) => {
@@ -111,6 +111,10 @@ const Filter = ({ updateSearchParams, searchParams }) => {
     localStorage.setItem("isSortAccordionOpen", JSON.stringify(newState));
   };
 
+  // Verificación si hay filtros activos
+  const isCategoryFilterActive = selectedCategory !== "";
+  const isSortFilterActive = sortOrder !== "newest";
+
   return (
     <div key={refreshKey} className="bg-white shadow-md rounded-lg p-4">
       <div className="flex flex-col gap-4 mt-4">
@@ -153,6 +157,12 @@ const Filter = ({ updateSearchParams, searchParams }) => {
             aria-controls="panel1a-content"
             id="panel1a-header"
           >
+            <Badge
+              color="error"
+              variant="dot"
+              invisible={!isCategoryFilterActive}
+              sx={{ marginRight: 1 }}
+            />
             <h2 className="font-bold text-black">Categorías</h2>
           </AccordionSummary>
           <AccordionDetails className="bg-gray-100 rounded-b-lg">
@@ -170,6 +180,12 @@ const Filter = ({ updateSearchParams, searchParams }) => {
             aria-controls="panel2a-content"
             id="panel2a-header"
           >
+            <Badge
+              color="error"
+              variant="dot"
+              invisible={!isSortFilterActive}
+              sx={{ marginRight: 1 }}
+            />
             <h2 className="font-bold text-black">Ordenar por</h2>
           </AccordionSummary>
           <AccordionDetails className="bg-gray-100 rounded-b-lg">
