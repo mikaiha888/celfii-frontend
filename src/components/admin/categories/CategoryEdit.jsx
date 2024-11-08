@@ -7,13 +7,6 @@ const CategoryEdit = (props) => {
   const fields = [
     {
       type: "text",
-      source: "id",
-      disabled: "false",
-      label: "Id",
-      validate: [],
-    },
-    {
-      type: "text",
       source: "name",
       placeholder: "Nombre de la categoría",
       label: "Nombre",
