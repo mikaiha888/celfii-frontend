@@ -10,6 +10,10 @@ const number = () => (value) => {
   if (regex.test(valueStr)) return undefined;
   else return "Debe ser un número válido (puede usar punto o coma decimal)";
 };
+const stockNumber = () => (value) =>
+  value === undefined || value === "" || value === null || /^[0-9]+$/.test(Number(value))
+    ? undefined
+    : "Debe ser un número válido";
 const minValue = (min) => (value) => value >= min ? undefined : `Debe ser al menos ${min}`;
 const maxImages = (max) => (value) => {
   if (value === null) return;
@@ -22,10 +26,10 @@ const maxPrice = (max) => (value) => {
 
 export const productUpdateValidations = {
   name: [required(), minLength(1), maxLength(100)],
-  stock: [number(), minValue(0)],
+  stock: [required(), stockNumber(), minValue(0)],
   imei: [minLength(15), maxLength(15)],
   description: [],
-  category: [],
+  category: [required()],
   costUsd: [number(), maxPrice(9999)],
   costArs: [number(), maxPrice(9999999)],
   priceUsd: [number(), maxPrice(999999999)],
@@ -37,7 +41,7 @@ export const productUpdateValidations = {
 
 export const productCreateValidations = {
   name: [required(), minLength(1), maxLength(100)],
-  stock: [number(), minValue(0)],
+  stock: [stockNumber(), minValue(0)],
   imei: [minLength(15), maxLength(15)],
   description: [],
   category: [],
