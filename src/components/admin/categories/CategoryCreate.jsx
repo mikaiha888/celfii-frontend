@@ -1,31 +1,47 @@
-import { useDispatch } from "react-redux";
-import { createCategory } from "../../../redux/actions";
-import { Create, SimpleForm, TextInput, useRedirect } from "react-admin";
+import dataProvider from "../../../view/admin-dashboard-page/dataProvider";
+import { AdminForm } from "../../form/Form";
+import { categoryUpdateValidations } from "../validations";
+import { Create, useRedirect, FileInput, ImageField, useNotify } from "react-admin";
 
-const CategoryCreate = (props) => {
-  const dispatch = useDispatch();
+const CategoryEdit = (props) => {
+  const notify = useNotify();
   const redirect = useRedirect();
+  const fields = [
+    {
+      type: "text",
+      source: "name",
+      placeholder: "Nombre de la categoría",
+      label: "Nombre",
+      validate: categoryUpdateValidations.name,
+    },
+  ];
 
-  const required = (value) => (value ? undefined : "El nombre es obligatorio");
-  const validateLetters = (value) =>
-    /^[A-Za-z\s]+$/.test(value) ? undefined : "El nombre solo puede contener letras y espacios";
-
-  const handleSubmit = (data) => {
-    dispatch(createCategory(data));
-    redirect("/admin/categories");
+  const handleSubmit = async (data) => {
+    try {
+      await dataProvider.create("categories", { data });
+      notify("Categoría creada exitosamente", { type: "info" });
+      redirect("/admin/categories");
+    } catch (error) {
+      notify(`Error creando categoría: ${error}`, { type: "warning" });
+    }
   };
 
   return (
     <Create title="Crear categoria" {...props}>
-      <SimpleForm onSubmit={handleSubmit}>
-        <TextInput
-          source="name"
-          label="Nombre de la Categoría"
-          validate={[required, validateLetters]}
-        />
-      </SimpleForm>
+      <AdminForm fields={fields} onSubmit={handleSubmit}>
+        <div className="mb-4 w-72">
+          <FileInput
+            source="image"
+            label="Imagen"
+            placeholder="Suelta los archivos para cargar o haz click para seleccionar"
+            validate={categoryUpdateValidations.image}
+          >
+            <ImageField source="image" title="name" />
+          </FileInput>
+        </div>
+      </AdminForm>
     </Create>
   );
 };
 
-export default CategoryCreate;
+export default CategoryEdit;
