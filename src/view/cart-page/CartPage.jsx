@@ -6,12 +6,15 @@ import { loadCartFavs, clearCartFavs } from "../../redux/actions";
 
 import CartItem from "../../components/cart-item/CartItem";
 import WhatsAppButton from "../../components/whatsapp-button/WhatsAppButton";
+import { saveToLocalStorage } from "../../helpers";
 
 const CartPage = () => {
   const dispatch = useDispatch();
   const { cart } = useSelector((state) => state.cartFavs);
 
   useEffect(() => {
+    const storedCart = localStorage.getItem("cart");
+    if (!storedCart) saveToLocalStorage("cart", []);
     dispatch(loadCartFavs("cart"));
   }, [dispatch]);
 
