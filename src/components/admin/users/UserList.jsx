@@ -1,11 +1,4 @@
-import {
-  List,
-  Datagrid,
-  TextField,
-  EditButton,
-  DeleteButton,
-  CreateButton,
-} from "react-admin";
+import { List, Datagrid, TextField, EditButton, CreateButton } from "react-admin";
 
 const UserList = () => {
   return (
@@ -21,9 +14,8 @@ const UserList = () => {
       >
         <Datagrid>
           <TextField source="username" label="Nombre de Usuario" sortable={false} />
-          <TextField source="email" label="Correo Electrónico"  sortable={false}/>
+          <TextField source="email" label="Correo Electrónico" sortable={false} />
           <EditButton label="Editar" />
-          <DeleteButton label="Eliminar" />
         </Datagrid>
       </List>
     </div>
