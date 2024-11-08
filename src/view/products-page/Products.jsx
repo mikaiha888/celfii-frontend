@@ -9,13 +9,13 @@ import SearchBar from "../../components/filter/SearchBar";
 import Pagination from "../../components/pagination/Pagination";
 
 const Products = () => {
-  const location = useLocation();
   const dispatch = useDispatch();
+  const location = useLocation();
+  const query = new URLSearchParams(location.search);
   const { products, totalItems, loading } = useSelector((state) => state.products);
   const { favourites } = useSelector((state) => state.cartFavs);
 
-  const query = new URLSearchParams(location.search);
-  const initialSearchParams = {
+  const [searchParams, setSearchParams] = useState({
     page: parseInt(query.get("page")) || 1,
     perPage: 54,
     name: query.get("name") || "",
@@ -23,9 +23,7 @@ const Products = () => {
     sort: localStorage.getItem("sortOrder") || "newest",
     minPrice: localStorage.getItem("minPrice") || "",
     maxPrice: localStorage.getItem("maxPrice") || "",
-  };
-
-  const [searchParams, setSearchParams] = useState(initialSearchParams);
+  });
 
   const updateSearchParams = (newParams) => {
     setSearchParams((prevParams) => {
