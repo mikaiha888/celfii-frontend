@@ -10,6 +10,7 @@ const NavBar = () => {
     { name: "Productos", link: "/productos", current: false },
     { name: "Nosotros", link: "/nosotros", current: false },
     { name: "Contacto", link: "/contacto", current: false },
+    { name: "Reparaciones", link: "/reparaciones", current: false },
   ];
 
   return (

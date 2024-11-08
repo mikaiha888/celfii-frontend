@@ -111,37 +111,36 @@ const Filter = ({ updateSearchParams, searchParams }) => {
     localStorage.setItem("isSortAccordionOpen", JSON.stringify(newState));
   };
 
-  // Verificación si hay filtros activos
   const isCategoryFilterActive = selectedCategory !== "";
   const isSortFilterActive = sortOrder !== "newest";
 
   return (
-    <div key={refreshKey} className="bg-white shadow-md rounded-lg p-4">
-      <div className="flex flex-col gap-4 mt-4">
+    <div key={refreshKey} className="mr-5 overflow-hidden">
+      <div className="flex flex-col gap-6">
         <input
           type="number"
           value={minPrice}
           onChange={handlePriceChange(setMinPrice, "minPrice")}
           placeholder="Precio mínimo"
-          className="border border-gray-300 px-4 py-2 rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-500"
+          className="border border-gray-300 px-4 py-2 rounded-full text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-500"
         />
         <input
           type="number"
           value={maxPrice}
           onChange={handlePriceChange(setMaxPrice, "maxPrice")}
           placeholder="Precio máximo"
-          className="border border-gray-300 px-4 py-2 rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-500"
+          className="border border-gray-300 px-4 py-2 rounded-full text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-500"
         />
-        <div className="flex gap-2">
+        <div className="flex gap-4">
           <button
             onClick={applyPriceFilter}
-            className="flex-1 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors"
+            className="flex-1 px-4 py-2 bg-red-500 text-white rounded-full hover:bg-red-600 transition-all shadow-md"
           >
             Aplicar
           </button>
           <button
             onClick={clearPriceFilter}
-            className="flex-1 px-4 py-2 bg-gray-300 text-gray-800 rounded-md hover:bg-gray-400 transition-colors"
+            className="flex-1 px-4 py-2 bg-gray-300 text-gray-800 rounded-full hover:bg-gray-400 transition-all shadow-md"
           >
             Limpiar
           </button>
@@ -150,22 +149,36 @@ const Filter = ({ updateSearchParams, searchParams }) => {
         <Accordion
           expanded={isCategoryAccordionOpen}
           onChange={toggleCategoryAccordion}
-          className="rounded-lg border border-gray-300"
+          sx={{
+            borderRadius: "30px",
+            "&.MuiAccordion-root:before": { display: "none" },
+            "&:hover": {
+              backgroundColor: "#f5f5f5",
+            },
+          }}
         >
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1a-content"
             id="panel1a-header"
+            sx={{
+              borderRadius: "30px",
+            }}
           >
+            <h2 className="font-semibold text-gray-800">Categorías</h2>
             <Badge
               color="error"
               variant="dot"
               invisible={!isCategoryFilterActive}
-              sx={{ marginRight: 1 }}
+              sx={{ marginLeft: 3, marginTop: 1 }}
             />
-            <h2 className="font-bold text-black">Categorías</h2>
           </AccordionSummary>
-          <AccordionDetails className="bg-gray-100 rounded-b-lg">
+          <AccordionDetails
+            sx={{
+              padding: "16px",
+              borderRadius: "30px",
+            }}
+          >
             <Selector onCategoryChange={handleCategoryChange} selectedCategory={selectedCategory} />
           </AccordionDetails>
         </Accordion>
@@ -173,29 +186,47 @@ const Filter = ({ updateSearchParams, searchParams }) => {
         <Accordion
           expanded={isSortAccordionOpen}
           onChange={toggleSortAccordion}
-          className="rounded-lg border border-gray-300 mt-2"
+          sx={{
+            borderRadius: "30px",
+            "&.MuiAccordion-root:before": { display: "none" },
+            "&:last-of-type": {
+              borderBottomLeftRadius: "30px",
+              borderBottomRightRadius: "30px",
+            },
+            "&:hover": {
+              backgroundColor: "#f5f5f5",
+            },
+          }}
         >
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel2a-content"
             id="panel2a-header"
+            sx={{
+              borderRadius: "30px",
+            }}
           >
+            <h2 className="font-semibold text-gray-800 text-center">Ordenar por</h2>
             <Badge
               color="error"
               variant="dot"
               invisible={!isSortFilterActive}
-              sx={{ marginRight: 1 }}
+              sx={{ marginLeft: 2, marginTop: 1 }}
             />
-            <h2 className="font-bold text-black">Ordenar por</h2>
           </AccordionSummary>
-          <AccordionDetails className="bg-gray-100 rounded-b-lg">
+          <AccordionDetails
+            sx={{
+              padding: "16px",
+              borderRadius: "30px",
+            }}
+          >
             <Sort onSortChange={handleSortChange} resetSortCount={resetSortCount} />
           </AccordionDetails>
         </Accordion>
 
         <button
           onClick={clearAllFilters}
-          className="mt-4 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors"
+          className="mt-6 px-4 py-3 bg-red-500 text-white rounded-full hover:bg-red-600 transition-all shadow-lg"
         >
           Limpiar todos los filtros
         </button>
