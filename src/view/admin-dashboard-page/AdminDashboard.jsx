@@ -72,41 +72,53 @@ const CustomLayout = (props) => {
   );
 };
 
-const AdminDashboard = () => (
-  <ThemeProvider theme={lightTheme}>
-    <Admin
-      dataProvider={dataProvider}
-      basename="/admin"
-      layout={CustomLayout}
-      theme={lightTheme}
-      darkTheme={darkTheme}
-    >
-      <Resource
-        name="products"
-        options={{ label: "Productos" }}
-        list={ProductList}
-        show={ProductShow}
-        edit={ProductEdit}
-        create={ProductCreate}
-      />
-      <Resource
-        name="categories"
-        options={{ label: "Categorias" }}
-        list={CategoryList}
-        edit={CategoryEdit}
-        create={CategoryCreate}
-      />
-      <Resource name="roles" options={{ label: "Roles" }} list={RoleList} />
-      <Resource
-        name="users"
-        options={{ label: "Usuarios" }}
-        list={UserList}
-        create={UserCreate}
-        edit={UserEdit}
-      />
-      <Resource name="dollar" options={{ label: "Dólar" }} list={DollarList} edit={DollarEdit} />
-    </Admin>
-  </ThemeProvider>
-);
+const AdminDashboard = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const userData = loadFromSessionStorage("userData");
+    if (!userData) {
+      navigate("/login");
+      toast.error("La sesión ha expirado. Vuelve a iniciar sesión para continuar.")
+    }
+  }, [navigate]);
+
+  return (
+    <ThemeProvider theme={lightTheme}>
+      <Admin
+        dataProvider={dataProvider}
+        basename="/admin"
+        layout={CustomLayout}
+        theme={lightTheme}
+        darkTheme={darkTheme}
+      >
+        <Resource
+          name="products"
+          options={{ label: "Productos" }}
+          list={ProductList}
+          show={ProductShow}
+          edit={ProductEdit}
+          create={ProductCreate}
+        />
+        <Resource
+          name="categories"
+          options={{ label: "Categorias" }}
+          list={CategoryList}
+          edit={CategoryEdit}
+          create={CategoryCreate}
+        />
+        <Resource name="roles" options={{ label: "Roles" }} list={RoleList} />
+        <Resource
+          name="users"
+          options={{ label: "Usuarios" }}
+          list={UserList}
+          create={UserCreate}
+          edit={UserEdit}
+        />
+        <Resource name="dollar" options={{ label: "Dólar" }} list={DollarList} edit={DollarEdit} />
+      </Admin>
+    </ThemeProvider>
+  );
+};
 
 export default AdminDashboard;

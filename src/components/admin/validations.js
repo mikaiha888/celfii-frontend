@@ -1,4 +1,4 @@
-const required = () => (value) => value ? undefined : "Este campo es obligatorio";
+const required = () => (value) => value || value === 0 ? undefined : "Este campo es obligatorio";
 const minLength = (min) => (value) =>
   value && value.length >= min ? undefined : `Debe tener al menos ${min} caracteres`;
 const maxLength = (max) => (value) =>
