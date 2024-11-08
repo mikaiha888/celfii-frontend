@@ -3,6 +3,9 @@ export default {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      scale: {
+        400: "4"
+      },
       container: {
         center: true,
       },

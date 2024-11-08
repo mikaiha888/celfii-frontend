@@ -15,9 +15,13 @@ const ProductDetail = ({ product, cart, isFavourite }) => {
 
   const toggleFavourite = (e) => {
     e.stopPropagation();
-    isFavourite
-      ? dispatch(removeCartFavs("favourites", product))
-      : dispatch(addCartFavs("favourites", product));
+    if (isFavourite) {
+      dispatch(removeCartFavs("favourites", product));
+      toast.info("Producto eliminado de favoritos");
+    } else {
+      dispatch(addCartFavs("favourites", product));
+      toast.success("Producto agregado a favoritos");
+    }
   };
 
   const handleCartClick = (product) => {
