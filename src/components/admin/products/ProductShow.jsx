@@ -1,9 +1,21 @@
 import { Show, SimpleShowLayout, TextField, NumberField, ImageField } from "react-admin";
 import { useTheme } from "@mui/material/styles";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { loadProduct } from '../../../redux/actions'
 
 const ProductShow = (props) => {
   const theme = useTheme();
   const isDarkMode = theme.palette.mode === "dark";
+  const { id } = useParams()
+  const { product } = useSelector(state => state.products)
+  const dispatch = useDispatch()
+
+
+  useEffect(() => {
+    dispatch(loadProduct(id))
+  }, [dispatch])
 
   return (
     <Show title="Detalles del Producto" {...props}>
@@ -78,6 +90,23 @@ const ProductShow = (props) => {
           </div>
         </div>
 
+        <div className="mb-6 border-b pb-4">
+          <h2
+            className={`text-2xl font-semibold ${
+              isDarkMode ? "text-secondary.main" : "text-red-600"
+            } mb-4`}>
+            Imágenes
+          </h2>
+          <div className="grid grid-cols-3 gap-4">
+            {product && product.images && product.images.length && product.images.map((_, index) => (
+              <ImageField
+                key={index}
+                source={`images[${index}].url`}
+                className="w-full h-32 m-0 flex justify-center items-center object-cover border-2"
+              />
+            ))}
+          </div>
+        </div>
         <div className="border-b pb-4">
           <h2
             className={`text-2xl font-semibold ${
@@ -109,24 +138,6 @@ const ProductShow = (props) => {
           </div>
         </div>
 
-        <div className="mb-6 border-b pb-4">
-          <h2
-            className={`text-2xl font-semibold ${
-              isDarkMode ? "text-secondary.main" : "text-red-600"
-            } mb-4`}>
-            Imágenes
-          </h2>
-          <div className="grid grid-cols-5 gap-4">
-            {Array.from({ length: 10 }).map((_, index) => (
-              <ImageField
-                key={index}
-                source={`images[${index}].url`}
-                label=""
-                className="w-full h-32 content-center object-cover rounded-3xl shadow-lg transform transition-transform duration-300 ease-in-out hover:scale-400 hover:translate-x-1/2 hover:translate-y-1/2"
-              />
-            ))}
-          </div>
-        </div>
       </SimpleShowLayout>
     </Show>
   );
