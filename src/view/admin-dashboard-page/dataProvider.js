@@ -1,4 +1,10 @@
-import { getRequest, postRequest, putRequest, deleteRequest , patchRequest} from "../../helpers/apiHelper";
+import {
+  getRequest,
+  postRequest,
+  putRequest,
+  deleteRequest,
+  patchRequest,
+} from "../../helpers/apiHelper";
 
 const dataProvider = {
   getList: async (resource, params) => {
@@ -68,23 +74,29 @@ const dataProvider = {
       const response = await patchRequest(`/${resource}`, params.data);
       return response;
     }
-
-    const formData = new FormData();
-    if (params.data.imagesToDelete && Array.isArray(params.data.imagesToDelete))
-      params.data.imagesToDelete.forEach((image, index) =>
-        formData.append(`imagesToDelete[${index}]`, JSON.stringify(image))
-      );
-    if (params.data.images)
-      params.data.images.forEach(
-        (image) =>
-          image.rawFile && image.rawFile instanceof File && formData.append("images", image.rawFile)
-      );
-    if (params.data.category && typeof params.data.category === "object")
-      params.data.category = params.data.category.name;
-    for (const key in params.data)
-      if (key !== "images" && key !== "imagesToDelete") formData.append(key, params.data[key]);
-    const response = await putRequest(`/${resource}/${params.id}`, formData);
-    return response;
+    if (resource === "products" || resource === "categories") {
+      const formData = new FormData();
+      if (params.data.imagesToDelete && Array.isArray(params.data.imagesToDelete))
+        params.data.imagesToDelete.forEach((image, index) =>
+          formData.append(`imagesToDelete[${index}]`, JSON.stringify(image))
+        );
+      if (params.data.images)
+        params.data.images.forEach(
+          (image) =>
+            image.rawFile &&
+            image.rawFile instanceof File &&
+            formData.append("images", image.rawFile)
+        );
+      if (params.data.image) formData.append("image", params.data.image.rawFile);
+      if (params.data.category && typeof params.data.category === "object")
+        params.data.category = params.data.category.name;
+      for (const key in params.data)
+        if (key !== "images" && key !== "imagesToDelete" && key !== "image")
+          formData.append(key, params.data[key]);
+      return await putRequest(`/${resource}/${params.id}`, formData);
+    } else {
+      return await putRequest(`/${resource}`, params.data);
+    }
   },
 
   delete: async (resource, params) => {

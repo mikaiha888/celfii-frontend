@@ -53,3 +53,9 @@ export const productCreateValidations = {
   code: [required()],
   images: [maxImages(10)],
 };
+
+
+export const categoryUpdateValidations = {
+  name: [required(), minLength(1), maxLength(100)],
+  image: [required()],
+};

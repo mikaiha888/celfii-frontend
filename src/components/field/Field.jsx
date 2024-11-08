@@ -68,12 +68,13 @@ export const AdminField = ({ field }) => {
       return (
         <div className="mb-4 w-72">
           <TextInput
-            source={field.source}
             label={field.label}
+            source={field.source}
+            disabled={field.disabled}
+            validate={field.validate}
             placeholder={field.placeholder}
             className="w-full p-2 border rounded"
             resettable="true"
-            validate={field.validate}
           />
         </div>
       );

@@ -2,13 +2,14 @@ import { SimpleForm } from "react-admin";
 import { Formik, Form, ErrorMessage } from "formik";
 import { AdminField, FormField } from "../field/Field";
 
-export const AdminForm = ({ initialvalues, fields, onSubmit }) => (
+export const AdminForm = ({ initialvalues, fields, onSubmit, children }) => (
   <SimpleForm onSubmit={onSubmit} initialvalues={initialvalues}>
-    {fields.map((field, index) => (
-      <div key={index}>
-        <AdminField field={field} />
-      </div>
-    ))}
+    <div>
+      {fields.map((field, index) => (
+        <AdminField key={index} field={field} />
+      ))}
+      {children}
+    </div>
   </SimpleForm>
 );
 
