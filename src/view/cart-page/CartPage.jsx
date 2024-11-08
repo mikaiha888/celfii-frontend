@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { ShoppingCart } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { loadCartFavs } from "../../redux/actions";
+import { loadCartFavs, clearCartFavs } from "../../redux/actions";
 
 import CartItem from "../../components/cart-item/CartItem";
 import WhatsAppButton from "../../components/whatsapp-button/WhatsAppButton";
@@ -16,7 +16,13 @@ const CartPage = () => {
   }, [dispatch]);
 
   const calculateTotal = () => {
-    return cart.reduce((total, item) => total + item.priceArs * item.quantity, 0).toFixed(2);
+    return cart && cart.length > 0
+      ? cart.reduce((total, item) => total + item.priceArs * item.quantity, 0).toFixed(2)
+      : "0.00";
+  };
+
+  const handleClearCart = () => {
+    dispatch(clearCartFavs("cart"));
   };
 
   return (
@@ -28,7 +34,8 @@ const CartPage = () => {
           <ShoppingCart className="w-16 h-16 mb-4 text-gray-400" />
           <p className="mb-4 text-xl font-semibold">Tu carrito está vacío.</p>
           <p className="mb-6 text-gray-500">
-            Para añadir productos, haz click en el botón de "Agregar al carrito" dentro del detalle del producto.
+            Para añadir productos, haz click en el botón de "Agregar al carrito" dentro del detalle
+            del producto.
           </p>
           <Link to="/productos">
             <button className="px-6 py-3 text-white transition-all duration-300 bg-blue-500 rounded-md shadow hover:bg-blue-700">
@@ -48,6 +55,13 @@ const CartPage = () => {
           </div>
 
           <WhatsAppButton cartItems={cart} isCartPage={true} />
+
+          <button
+            onClick={handleClearCart}
+            className="mt-4 w-full py-2 text-white bg-red-600 rounded-md hover:bg-red-700 transition-colors duration-300">
+            Vaciar Carrito
+          </button>
+
           <div className="text-center mt-6 text-gray-500">
             ¿Quieres descubrir más?{" "}
             <Link to="/productos" className="text-blue-500 hover:underline">

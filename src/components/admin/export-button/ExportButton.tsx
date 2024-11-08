@@ -1,33 +1,25 @@
-import * as React from "react";
-import { useCallback } from "react";
+import React, { useCallback } from "react";
 import DownloadIcon from "@mui/icons-material/GetApp";
-import { fetchRelatedRecords, useDataProvider, useNotify, useListContext } from "ra-core";
-import {
-  Button,
-  ButtonProps,
-} from "../../../../node_modules/react-admin/node_modules/ra-ui-materialui/src/button/Button";
+import { useNotify } from "react-admin";
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
+import { Button } from "@mui/material";
 
-export const ExportButton = (props: ExportButtonProps) => {
-  const {
-    maxResults = 1000,
-    onClick,
-    label = "ra.action.export",
-    icon = defaultIcon,
-    meta,
-    ...rest
-  } = props;
-  const { filter, filterValues, resource, sort, total } = useListContext();
-  const dataProvider = useDataProvider();
+const ExportButton = ({
+  maxResults = 1000,
+  onClick,
+  label = "ra.action.export",
+  icon = <DownloadIcon />,
+  resource,
+  filterValues,
+  sort,
+  total,
+  dataProvider,
+  ...rest
+}) => {
   const notify = useNotify();
 
-  const exportToExcel = async (
-    data: any[],
-    fetchRelatedRecords: any,
-    dataProvider: any,
-    resource: string
-  ) => {
+  const exportToExcel = async (data) => {
     const productHeaders = {
       id: "idArticulos",
       name: "Nombre del producto",
@@ -44,79 +36,63 @@ export const ExportButton = (props: ExportButtonProps) => {
       view: "Vistas",
     };
 
-    const productData = data.map((item) => {
-      return {
-        [productHeaders.id]: item.id,
-        [productHeaders.name]: item.name,
-        [productHeaders.category]: item.category?.name || "N/A",
-        [productHeaders.description]: item.description,
-        [productHeaders.priceArs]: item.priceArs,
-        [productHeaders.priceUsd]: item.priceUsd,
-        [productHeaders.priceWholesale]: item.priceWholesale,
-        [productHeaders.costArs]: item.costArs,
-        [productHeaders.costUsd]: item.costUsd,
-        [productHeaders.stock]: item.stock,
-        [productHeaders.code]: item.code,
-        [productHeaders.imei]: item.imei,
-        [productHeaders.view]: item.view?.counter || 0,
-      };
-    });
-
-    const categoriesResponse = await dataProvider.getList("categories", {
-      pagination: { page: 1, perPage: 1000 },
-    });
-    const categoryData = categoriesResponse.data.map((cat) => ({
-      Nombre: cat.name,
+    const productData = data.map((item) => ({
+      [productHeaders.id]: item.id,
+      [productHeaders.name]: item.name,
+      [productHeaders.category]: item.category?.name || "N/A",
+      [productHeaders.description]: item.description,
+      [productHeaders.priceArs]: item.priceArs,
+      [productHeaders.priceUsd]: item.priceUsd,
+      [productHeaders.priceWholesale]: item.priceWholesale,
+      [productHeaders.costArs]: item.costArs,
+      [productHeaders.costUsd]: item.costUsd,
+      [productHeaders.stock]: item.stock,
+      [productHeaders.code]: item.code,
+      [productHeaders.imei]: item.imei,
+      [productHeaders.view]: item.view?.counter || 0,
     }));
 
-    const roleResponse = await dataProvider.getList("roles", {
-      pagination: { page: 1, perPage: 1000 },
-    });
-    const roleData = await roleResponse.data.map((role) => ({
-      Nombre: role.name,
-    }));
+    const categoryData = await dataProvider
+      .getList("categories", {
+        pagination: { page: 1, perPage: 1000 },
+      })
+      .then((res) => res.data.map((cat) => ({ Nombre: cat.name })));
 
-    const userResponse = await dataProvider.getList("users", {
-      pagination: { page: 1, perPage: 1000 },
-    });
-    const userData = await userResponse.data.map((user) => ({
-      Nombre: user.username,
-      Email: user.email,
-    }));
-    const dollarResponse = await dataProvider.getList("dollar", {
-      pagination: { page: 1, perPage: 1000 },
-    });
+    const roleData = await dataProvider
+      .getList("roles", {
+        pagination: { page: 1, perPage: 1000 },
+      })
+      .then((res) => res.data.map((role) => ({ Nombre: role.name })));
 
-    const dollarData = await dollarResponse.data.map((dollar) => {
-      const formattedDate = new Intl.DateTimeFormat("es-ES", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
-      }).format(new Date(dollar.updatedAt));
+    const userData = await dataProvider
+      .getList("users", {
+        pagination: { page: 1, perPage: 1000 },
+      })
+      .then((res) => res.data.map((user) => ({ Nombre: user.username, Email: user.email })));
 
-      return {
-        Nombre: dollar.rate,
-        "Última actualización": formattedDate,
-      };
-    });
+    const dollarData = await dataProvider
+      .getList("dollar", {
+        pagination: { page: 1, perPage: 1000 },
+      })
+      .then((res) =>
+        res.data.map((dollar) => ({
+          Nombre: dollar.rate,
+          "Última actualización": new Intl.DateTimeFormat("es-ES", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+          }).format(new Date(dollar.updatedAt)),
+        }))
+      );
 
     const workbook = XLSX.utils.book_new();
-    const productSheet = XLSX.utils.json_to_sheet(productData);
-    XLSX.utils.book_append_sheet(workbook, productSheet, "Productos");
-
-    const categorySheet = XLSX.utils.json_to_sheet(categoryData);
-    XLSX.utils.book_append_sheet(workbook, categorySheet, "Categorías");
-
-    const userSheet = XLSX.utils.json_to_sheet(userData);
-    XLSX.utils.book_append_sheet(workbook, userSheet, "Usuarios");
-
-    const roleSheet = XLSX.utils.json_to_sheet(roleData);
-    XLSX.utils.book_append_sheet(workbook, roleSheet, "Roles");
-
-    const dollarSheet = XLSX.utils.json_to_sheet(dollarData);
-    XLSX.utils.book_append_sheet(workbook, dollarSheet, "Dólar");
+    XLSX.utils.book_append_sheet(workbook, XLSX.utils.json_to_sheet(productData), "Productos");
+    XLSX.utils.book_append_sheet(workbook, XLSX.utils.json_to_sheet(categoryData), "Categorías");
+    XLSX.utils.book_append_sheet(workbook, XLSX.utils.json_to_sheet(userData), "Usuarios");
+    XLSX.utils.book_append_sheet(workbook, XLSX.utils.json_to_sheet(roleData), "Roles");
+    XLSX.utils.book_append_sheet(workbook, XLSX.utils.json_to_sheet(dollarData), "Dólar");
 
     const excelBuffer = XLSX.write(workbook, { bookType: "xlsx", type: "array" });
     const dataBlob = new Blob([excelBuffer], { type: "application/octet-stream" });
@@ -128,14 +104,11 @@ export const ExportButton = (props: ExportButtonProps) => {
       dataProvider
         .getList(resource, {
           sort,
-          filter: filter ? { ...filterValues, ...filter } : filterValues,
+          filter: filterValues,
           pagination: { page: 1, perPage: maxResults },
-          meta,
         })
         .then(({ data }) => {
-          if (exportToExcel) {
-            exportToExcel(data, fetchRelatedRecords(dataProvider), dataProvider, resource);
-          }
+          exportToExcel(data);
         })
         .catch((error) => {
           console.error(error);
@@ -146,30 +119,14 @@ export const ExportButton = (props: ExportButtonProps) => {
         onClick(event);
       }
     },
-    [dataProvider, filter, filterValues, maxResults, notify, onClick, resource, sort, meta]
+    [dataProvider, filterValues, maxResults, notify, onClick, resource, sort]
   );
 
   return (
-    <Button onClick={handleClick} label={label} disabled={total === 0} {...sanitizeRestProps(rest)}>
+    <Button onClick={handleClick} disabled={total === 0} {...rest}>
       {icon}
     </Button>
   );
 };
 
-const defaultIcon = <DownloadIcon />;
-
-const sanitizeRestProps = ({
-  resource,
-  ...rest
-}: Omit<ExportButtonProps, "maxResults" | "label" | "meta">) => rest;
-
-interface Props {
-  icon?: JSX.Element;
-  label?: string;
-  maxResults?: number;
-  onClick?: (e: React.MouseEvent) => void;
-  resource?: string;
-  meta?: any;
-}
-
-export type ExportButtonProps = Props & ButtonProps;
+export default ExportButton;

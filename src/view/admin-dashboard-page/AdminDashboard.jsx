@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { toast } from "react-toastify";
 import { Button } from "@mui/material";
 import { useDispatch } from "react-redux";
+import { useDataProvider } from "react-admin";
 import { useNavigate } from "react-router-dom";
 import { logoutUser } from "../../redux/actions";
 import { ThemeProvider } from "@mui/material/styles";
@@ -29,19 +30,33 @@ import RoleList from "../../components/admin/roles/RoleList";
 
 import DollarList from "../../components/admin/dollar/DollarList";
 import DollarEdit from "../../components/admin/dollar/DollarEdit";
+import ExportButton from "../../components/admin/export-button/ExportButton";
 
 const CustomAppBar = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const dataProvider = useDataProvider();
 
   const handleLogout = () => {
     dispatch(logoutUser());
     navigate("/");
   };
 
+  const resource = "products";
+  const filterValues = {};
+  const sort = { field: "name", order: "ASC" };
+  const total = 100;
+
   return (
     <AppBar {...props}>
       <UserMenu />
+      <ExportButton
+        resource={resource}
+        filterValues={filterValues}
+        sort={sort}
+        total={total}
+        dataProvider={dataProvider}
+      />
       <Button color="inherit" startIcon={<ExitToAppIcon />} onClick={handleLogout}>
         Salir
       </Button>
@@ -57,53 +72,41 @@ const CustomLayout = (props) => {
   );
 };
 
-const AdminDashboard = () => {
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const userData = loadFromSessionStorage("userData");
-    if (!userData) {
-      navigate("/login");
-      toast.error("La sesión ha expirado. Vuelve a iniciar sesión para continuar.")
-    }
-  }, [navigate]);
-
-  return (
-    <ThemeProvider theme={lightTheme}>
-      <Admin
-        dataProvider={dataProvider}
-        basename="/admin"
-        layout={CustomLayout}
-        theme={lightTheme}
-        darkTheme={darkTheme}
-      >
-        <Resource
-          name="products"
-          options={{ label: "Productos" }}
-          list={ProductList}
-          show={ProductShow}
-          edit={ProductEdit}
-          create={ProductCreate}
-        />
-        <Resource
-          name="categories"
-          options={{ label: "Categorias" }}
-          list={CategoryList}
-          edit={CategoryEdit}
-          create={CategoryCreate}
-        />
-        <Resource name="roles" options={{ label: "Roles" }} list={RoleList} />
-        <Resource
-          name="users"
-          options={{ label: "Usuarios" }}
-          list={UserList}
-          create={UserCreate}
-          edit={UserEdit}
-        />
-        <Resource name="dollar" options={{ label: "Dólar" }} list={DollarList} edit={DollarEdit} />
-      </Admin>
-    </ThemeProvider>
-  );
-};
+const AdminDashboard = () => (
+  <ThemeProvider theme={lightTheme}>
+    <Admin
+      dataProvider={dataProvider}
+      basename="/admin"
+      layout={CustomLayout}
+      theme={lightTheme}
+      darkTheme={darkTheme}
+    >
+      <Resource
+        name="products"
+        options={{ label: "Productos" }}
+        list={ProductList}
+        show={ProductShow}
+        edit={ProductEdit}
+        create={ProductCreate}
+      />
+      <Resource
+        name="categories"
+        options={{ label: "Categorias" }}
+        list={CategoryList}
+        edit={CategoryEdit}
+        create={CategoryCreate}
+      />
+      <Resource name="roles" options={{ label: "Roles" }} list={RoleList} />
+      <Resource
+        name="users"
+        options={{ label: "Usuarios" }}
+        list={UserList}
+        create={UserCreate}
+        edit={UserEdit}
+      />
+      <Resource name="dollar" options={{ label: "Dólar" }} list={DollarList} edit={DollarEdit} />
+    </Admin>
+  </ThemeProvider>
+);
 
 export default AdminDashboard;
