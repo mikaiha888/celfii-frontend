@@ -7,7 +7,7 @@ import { GenericForm } from "./Form";
 const UserForm = () => {
   const dispatch = useDispatch();
 
-  const initialValues = {
+  const initialvalues = {
     username: "",
     email: "",
     password: "",
@@ -38,7 +38,7 @@ const UserForm = () => {
     <div>
       <h1>Crear Nuevo Usuario</h1>
       <GenericForm
-        initialValues={initialValues}
+        initialvalues={initialvalues}
         validationSchema={createUserValidationSchema}
         fields={fields}
         onSubmit={(formData) => dispatch(createUser(formData))}

@@ -2,8 +2,8 @@ import { SimpleForm } from "react-admin";
 import { Formik, Form, ErrorMessage } from "formik";
 import { AdminField, FormField } from "../field/Field";
 
-export const AdminForm = ({ initialValues, fields, onSubmit, validationSchema }) => (
-  <SimpleForm onSubmit={onSubmit} initialValues={initialValues} validate={validationSchema}>
+export const AdminForm = ({ initialvalues, fields, onSubmit }) => (
+  <SimpleForm onSubmit={onSubmit} initialvalues={initialvalues}>
     {fields.map((field, index) => (
       <div key={index}>
         <AdminField field={field} />
@@ -31,13 +31,9 @@ export const GenericForm = ({
             <FormField
               field={field}
               form={form}
-              className="w-full px-4 py-3 text-gray-900 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:border-red-500 focus:ring focus:ring-red-500 focus:ring-opacity-50 transition-all"
+              className="w-full px-4 py-3 text-gray-900 transition-all bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:border-red-500 focus:ring focus:ring-red-500 focus:ring-opacity-50"
             />
-            <ErrorMessage
-              name={field.name}
-              component="div"
-              className="mt-1 text-sm text-red-500"
-            />
+            <ErrorMessage name={field.name} component="div" className="mt-1 text-sm text-red-500" />
           </div>
         ))}
         {children}

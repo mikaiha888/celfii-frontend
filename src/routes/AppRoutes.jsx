@@ -19,6 +19,7 @@ import Reparaciones from "../view/repair-page/repair";
 const AppRoutes = () => (
   <Routes>
     <Route path="/" element={<HomePage />} />
+    <Route path="*" element={<HomePage />} />
     <Route path="/login" element={<Login />} />
     <Route path="/faq/:faqId?" element={<FAQPage />} />
     <Route path="/cart" element={<CartPage />} />

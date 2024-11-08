@@ -1,9 +1,9 @@
 import dataProvider from "../../../view/admin-dashboard-page/dataProvider";
 import { useEffect } from "react";
-import { loadCategories } from "../../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
+import { loadCategories } from "../../../redux/actions";
+import { productCreateValidations } from "../validations";
 import { Create, useNotify, useRedirect } from "react-admin";
-import { createProductValidationSchema } from "../validations";
 
 import ProductForm from "../../../components/form/ProductForm";
 
@@ -33,8 +33,7 @@ const ProductEdit = () => {
       <ProductForm
         categories={categories}
         onSubmit={handleSubmit}
-        validationSchema={createProductValidationSchema}
-        isEdit={false}
+        validate={productCreateValidations}
       />
     </Create>
   );
