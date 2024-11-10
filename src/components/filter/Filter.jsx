@@ -151,6 +151,8 @@ const Filter = ({ updateSearchParams, searchParams }) => {
           onChange={toggleCategoryAccordion}
           sx={{
             borderRadius: "30px",
+            boxShadow: "none",      
+            border: "none",         
             "&.MuiAccordion-root:before": { display: "none" },
             "&:hover": {
               backgroundColor: "#f5f5f5",
@@ -188,15 +190,14 @@ const Filter = ({ updateSearchParams, searchParams }) => {
           onChange={toggleSortAccordion}
           sx={{
             borderRadius: "30px",
+            boxShadow: "none",       
+            border: "none",         
             "&.MuiAccordion-root:before": { display: "none" },
-            "&:last-of-type": {
-              borderBottomLeftRadius: "30px",
-              borderBottomRightRadius: "30px",
-            },
             "&:hover": {
               backgroundColor: "#f5f5f5",
             },
           }}
+        
         >
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
