@@ -41,7 +41,7 @@ const CartPage = () => {
             del producto.
           </p>
           <Link to="/productos">
-            <button className="px-6 py-3 text-white transition-all duration-300 bg-red-500 rounded-md shadow hover:bg-red-700">
+            <button className="px-6 py-3 text-white transition-all duration-300 bg-gray-500 rounded-md shadow hover:bg-gray-600">
               Explorar productos
             </button>
           </Link>

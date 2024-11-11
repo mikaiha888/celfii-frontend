@@ -87,7 +87,7 @@ const ProductDetail = ({ product, cart, isFavourite }) => {
                 <button
                   onClick={() => handleCartClick({ ...product, quantity })}
                   disabled={item && item.quantity >= product.stock}
-                  className="px-4 py-2 mt-4 text-white transition bg-blue-500 rounded hover:bg-blue-700">
+                  className="px-4 py-2 mt-4 text-white transition bg-red-600 rounded hover:bg-red-500">
                   Agregar al carrito
                 </button>
               )}
@@ -96,7 +96,7 @@ const ProductDetail = ({ product, cart, isFavourite }) => {
           {cart && cart.length ? (
             <Link
               to="/cart"
-              className="px-4 py-2 mt-4 text-center text-white transition bg-red-700 rounded hover:bg-red-900">
+              className="px-4 py-2 mt-4 text-center text-white transition bg-black rounded hover:bg-gray-800">
               Ver Carrito
             </Link>
           ) : null}
