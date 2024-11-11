@@ -70,6 +70,12 @@ const dataProvider = {
   },
 
   update: async (resource, params) => {
+    if (resource === "users") {
+      if (!params.data.password) {
+        delete params.data.password;
+      }
+      return await putRequest(`/users/${params.id}`, params.data);
+    }
     if (resource === "dollar") {
       const response = await patchRequest(`/${resource}`, params.data);
       return response;
