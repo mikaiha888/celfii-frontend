@@ -29,6 +29,8 @@ const QuantityCounter = ({ initialQuantity = 1, maxQuantity = 10, onChange, cart
     }
   };
 
+  const availableQuantities = maxQuantity > 5 ? 5 : maxQuantity;
+
   return (
     <div className="relative inline-block text-left">
       <div className="flex items-center space-x-2">
@@ -49,7 +51,7 @@ const QuantityCounter = ({ initialQuantity = 1, maxQuantity = 10, onChange, cart
       {isOpen && (
         <div className="absolute mt-2 w-full max-w-[100px] bg-white border border-gray-300 rounded shadow-lg z-10">
           <ul className="py-1">
-            {Array.from({ length: 5 }, (_, i) => i + 1).map((num) => (
+            {Array.from({ length: availableQuantities }, (_, i) => i + 1).map((num) => (
               <li key={num}>
                 <button
                   onClick={() => handleSelectQuantity(num)}
@@ -61,15 +63,17 @@ const QuantityCounter = ({ initialQuantity = 1, maxQuantity = 10, onChange, cart
                 </button>
               </li>
             ))}
-            <li className="px-4 py-2">
-              <input
-                type="number"
-                min="6"
-                placeholder="Más de 5"
-                className="w-full px-2 py-1 border border-gray-300 rounded"
-                onChange={handleManualInput}
-              />
-            </li>
+            {maxQuantity > 5 && (
+              <li className="px-4 py-2">
+                <input
+                  type="number"
+                  min="6"
+                  placeholder="Más de 5"
+                  className="w-full px-2 py-1 border border-gray-300 rounded"
+                  onChange={handleManualInput}
+                />
+              </li>
+            )}
           </ul>
         </div>
       )}
