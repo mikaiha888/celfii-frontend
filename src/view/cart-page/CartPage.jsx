@@ -41,7 +41,7 @@ const CartPage = () => {
             del producto.
           </p>
           <Link to="/productos">
-            <button className="px-6 py-3 text-white transition-all duration-300 bg-gray-500 rounded-md shadow hover:bg-gray-600">
+            <button className="px-6 py-3 text-white transition-all duration-300 bg-gray-500 rounded-full shadow hover:bg-gray-600">
               Explorar productos
             </button>
           </Link>
@@ -61,7 +61,7 @@ const CartPage = () => {
 
           <button
             onClick={handleClearCart}
-            className="mt-4 w-full py-2 text-white bg-red-600 rounded-md hover:bg-red-700 transition-colors duration-300">
+            className="mt-4 w-full py-2 text-white bg-red-600 rounded-full hover:bg-red-700 transition-colors duration-300">
             Vaciar Carrito
           </button>
 

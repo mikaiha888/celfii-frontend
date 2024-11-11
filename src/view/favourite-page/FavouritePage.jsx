@@ -28,7 +28,7 @@ const FavouritePage = () => {
             Descubre productos increíbles y agrégalos a tu lista.
           </p>
           <Link to="/productos">
-            <button className="px-6 py-3 text-white transition-all duration-300 bg-gray-500 rounded-md shadow hover:bg-gray-600">
+            <button className="px-6 py-3 text-white transition-all duration-300 bg-gray-500 rounded-full shadow hover:bg-gray-600">
               Explorar productos
             </button>
           </Link>
