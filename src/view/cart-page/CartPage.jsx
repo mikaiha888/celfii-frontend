@@ -41,7 +41,7 @@ const CartPage = () => {
             del producto.
           </p>
           <Link to="/productos">
-            <button className="px-6 py-3 text-white transition-all duration-300 bg-blue-500 rounded-md shadow hover:bg-blue-700">
+            <button className="px-6 py-3 text-white transition-all duration-300 bg-gray-500 rounded-md shadow hover:bg-gray-600">
               Explorar productos
             </button>
           </Link>
@@ -67,7 +67,7 @@ const CartPage = () => {
 
           <div className="text-center mt-6 text-gray-500">
             ¿Quieres descubrir más?{" "}
-            <Link to="/productos" className="text-blue-500 hover:underline">
+            <Link to="/productos" className="text-red-600 hover:underline">
               Explora otros productos de nuestra tienda aquí
             </Link>
           </div>

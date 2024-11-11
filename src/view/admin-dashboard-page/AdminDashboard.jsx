@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { Button } from "@mui/material";
 import { useDispatch } from "react-redux";
@@ -73,13 +73,17 @@ const CustomLayout = (props) => {
 };
 
 const AdminDashboard = () => {
+  const [isMaster, setIsMaster] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     const userData = loadFromSessionStorage("userData");
+
     if (!userData) {
       navigate("/login");
-      toast.error("La sesión ha expirado. Vuelve a iniciar sesión para continuar.")
+      toast.error("La sesión ha expirado. Vuelve a iniciar sesión para continuar.");
+    } else if (userData.role && userData.role.name === "Master") {
+      setIsMaster(true);
     }
   }, [navigate]);
 
@@ -108,13 +112,15 @@ const AdminDashboard = () => {
           create={CategoryCreate}
         />
         <Resource name="roles" options={{ label: "Roles" }} list={RoleList} />
-        <Resource
-          name="users"
-          options={{ label: "Usuarios" }}
-          list={UserList}
-          create={UserCreate}
-          edit={UserEdit}
-        />
+        {isMaster && (
+          <Resource
+            name="users"
+            options={{ label: "Usuarios" }}
+            list={UserList}
+            create={UserCreate}
+            edit={UserEdit}
+          />
+        )}
         <Resource name="dollar" options={{ label: "Dólar" }} list={DollarList} edit={DollarEdit} />
       </Admin>
     </ThemeProvider>
