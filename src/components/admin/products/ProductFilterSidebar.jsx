@@ -7,10 +7,11 @@ import {
   Accordion,
   AccordionSummary,
   AccordionDetails,
+  Badge,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { loadCategories } from "../../../redux/actions";
-import { FilterLiveSearch, FilterListItem, useListContext } from "react-admin";
+import { FilterListItem, useListContext } from "react-admin";
 
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import CategoryIcon from "@mui/icons-material/LocalOffer";
@@ -22,6 +23,7 @@ const ProductFilterSidebar = () => {
   const { setFilters, filterValues } = useListContext();
   const { categories } = useSelector((state) => state.categories);
 
+  const [searchTerm, setSearchTerm] = useState("");
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
 
@@ -42,19 +44,56 @@ const ProductFilterSidebar = () => {
   };
 
   const clearFilters = () => {
+    setSearchTerm("");
     setMinPrice("");
     setMaxPrice("");
     setFilters({
-      ...filterValues,
+      name: undefined,
       minPrice: undefined,
       maxPrice: undefined,
+      category: undefined,
+      sort: undefined,
+      onlyDeleted: undefined,
     });
   };
+
+  const handleSearch = () => {
+    setFilters({
+      name: searchTerm,
+      minPrice: undefined,
+      maxPrice: undefined,
+      category: undefined,
+      sort: undefined,
+      onlyDeleted: undefined,
+    });
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
+
+  const isPriceFilterActive = minPrice || maxPrice;
+  const isSortFilterActive = filterValues.sort;
+  const isCategoryFilterActive = filterValues.category;
+  const isStatusFilterActive = filterValues.onlyDeleted;
 
   return (
     <Card sx={{ order: -1, mr: 2, mt: 9, width: 250 }}>
       <CardContent>
-        <FilterLiveSearch label="Buscar" source="name" />
+        <TextField
+          label="Buscar"
+          variant="outlined"
+          fullWidth
+          margin="normal"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          onKeyDown={handleKeyDown}
+        />
+        <Button variant="contained" color="primary" onClick={handleSearch} fullWidth sx={{ mt: 1 }}>
+          Buscar
+        </Button>
 
         <Accordion>
           <AccordionSummary
@@ -62,7 +101,14 @@ const ProductFilterSidebar = () => {
             aria-controls="price-content"
             id="price-header"
           >
-            <span style={{ marginLeft: 8 }}>Filtros de Precio</span>
+            <Badge
+              color="error"
+              variant="dot"
+              invisible={!isPriceFilterActive}
+              sx={{ marginRight: 1 }}
+            >
+              <span>Filtros de Precio</span>
+            </Badge>
           </AccordionSummary>
           <AccordionDetails>
             <TextField
@@ -108,7 +154,15 @@ const ProductFilterSidebar = () => {
             aria-controls="sort-content"
             id="sort-header"
           >
-            <SortIcon /> <span style={{ marginLeft: 8 }}>Ordenar por</span>
+            <Badge
+              color="error"
+              variant="dot"
+              invisible={!isSortFilterActive}
+              sx={{ marginRight: 1 }}
+            >
+              <SortIcon />
+              <span style={{ marginLeft: 8 }}>Ordenar por</span>
+            </Badge>
           </AccordionSummary>
           <AccordionDetails>
             <FilterListItem label="Más Popular" value={{ sort: "most popular" }} />
@@ -124,7 +178,15 @@ const ProductFilterSidebar = () => {
             aria-controls="categories-content"
             id="categories-header"
           >
-            <CategoryIcon /> <span style={{ marginLeft: 8 }}>Categoría</span>
+            <Badge
+              color="error"
+              variant="dot"
+              invisible={!isCategoryFilterActive}
+              sx={{ marginRight: 1 }}
+            >
+              <CategoryIcon />
+              <span style={{ marginLeft: 8 }}>Categoría</span>
+            </Badge>
           </AccordionSummary>
           <AccordionDetails>
             {(Array.isArray(categories) ? categories : []).map(({ id, name }) => (
@@ -139,7 +201,15 @@ const ProductFilterSidebar = () => {
             aria-controls="status-content"
             id="status-header"
           >
-            <DeleteIcon /> <span style={{ marginLeft: 8 }}>Estado</span>
+            <Badge
+              color="error"
+              variant="dot"
+              invisible={!isStatusFilterActive}
+              sx={{ marginRight: 1 }}
+            >
+              <DeleteIcon />
+              <span style={{ marginLeft: 8 }}>Estado</span>
+            </Badge>
           </AccordionSummary>
           <AccordionDetails>
             <FilterListItem label="Mostrar Eliminados" value={{ onlyDeleted: true }} />

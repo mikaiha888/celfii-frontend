@@ -1,92 +1,61 @@
-import * as Yup from "yup";
+const required = () => (value) => value || value === 0 ? undefined : "Este campo es obligatorio";
+const minLength = (min) => (value) =>
+  value && value.length >= min ? undefined : `Debe tener al menos ${min} caracteres`;
+const maxLength = (max) => (value) =>
+  value && value.length <= max ? undefined : `Debe tener como máximo ${max} caracteres`;
+const number = () => (value) => {
+  if (value === undefined || value === null) return undefined;
+  const valueStr = String(value);
+  const regex = /^[0-9]+([.,]?[0-9]+)?$/;
+  if (regex.test(valueStr)) return undefined;
+  else return "Debe ser un número válido (puede usar punto o coma decimal)";
+};
+const stockNumber = () => (value) =>
+  value === undefined || value === "" || value === null || /^[0-9]+$/.test(Number(value))
+    ? undefined
+    : "Debe ser un número válido";
+const minValue = (min) => (value) => value >= min ? undefined : `Debe ser al menos ${min}`;
+const maxImages = (max) => (value) => {
+  if (value === null) return;
+  return value && value.length <= max ? undefined : `Solo puedes subir hasta ${max} imágenes`;
+};
+const maxPrice = (max) => (value) => {
+  if (value === undefined) return undefined;
+  return value <= max ? undefined : `El precio no puede superar ${max}`;
+};
 
-export const createProductValidationSchema = Yup.object().shape({
-  name: Yup.string()
-    .required("El nombre es obligatorio")
-    .min(1, "El nombre debe tener al menos 1 carácter")
-    .max(100, "El nombre no puede superar los 100 caracteres"),
+export const productUpdateValidations = {
+  name: [required(), minLength(1), maxLength(100)],
+  stock: [required(), stockNumber(), minValue(0)],
+  imei: [minLength(15), maxLength(15)],
+  description: [],
+  category: [required()],
+  costUsd: [number(), maxPrice(9999)],
+  costArs: [number(), maxPrice(9999999)],
+  priceUsd: [number(), maxPrice(999999999)],
+  priceArs: [number(), maxPrice(999999999)],
+  priceWholesale: [number(), maxPrice(999999999)],
+  code: [required()],
+  images: [maxImages(10)],
+};
 
-  description: Yup.string().optional(),
+export const productCreateValidations = {
+  name: [required(), minLength(1), maxLength(100)],
+  stock: [stockNumber(), minValue(0)],
+  imei: [minLength(15), maxLength(15)],
+  description: [],
+  category: [],
+  costUsd: [number(), maxPrice(9999)],
+  costArs: [number(), maxPrice(9999999)],
+  priceUsd: [number(), maxPrice(999999999)],
+  priceArs: [number(), maxPrice(999999999)],
+  priceWholesale: [number(), maxPrice(999999999)],
+  code: [required()],
+  images: [maxImages(10)],
+};
 
-  priceArs: Yup.number()
-    .required("El precio en ARS es obligatorio")
-    .positive("El precio en ARS debe ser positivo")
-    .max(9999999999.99, "El precio en ARS no puede superar los 10 dígitos")
-    .optional(),
 
-  priceUsd: Yup.number()
-    .required("El precio en USD es obligatorio")
-    .positive("El precio en USD debe ser positivo")
-    .max(9999999999.99, "El precio en USD no puede superar los 10 dígitos")
-    .optional(),
-
-  priceWholesale: Yup.number()
-    .required("El precio mayorista es obligatorio")
-    .positive("El precio mayorista debe ser positivo")
-    .max(9999999999.99, "El precio mayorista no puede superar los 10 dígitos")
-    .optional(),
-
-  costUsd: Yup.number()
-    .required("El costo en USD es obligatorio")
-    .positive("El costo en USD debe ser positivo")
-    .max(9999.99, "El costo en USD no puede superar los 4 dígitos"),
-
-  costArs: Yup.number()
-    .required("El costo en ARS es obligatorio")
-    .positive("El costo en ARS debe ser positivo")
-    .max(9999999999.99, "El costo en ARS no puede superar los 10 dígitos")
-    .optional(),
-
-  stock: Yup.number()
-    .required("El stock es obligatorio")
-    .integer("El stock debe ser un número entero")
-    .min(0, "El stock no puede ser negativo"),
-
-  code: Yup.string(),
-
-  imei: Yup.string().length(15, "El IMEI debe tener 15 caracteres").optional(),
-});
-
-export const updateProductValidationSchema = Yup.object()
-  .shape({
-    name: Yup.string().min(1, "El nombre debe tener al menos 1 carácter").optional(),
-
-    description: Yup.string().optional(),
-
-    priceArs: Yup.number()
-      .positive("El precio en ARS debe ser positivo")
-      .max(9999999999.99, "El precio en ARS no puede superar los 10 dígitos")
-      .optional(),
-
-    priceUsd: Yup.number()
-      .positive("El precio en USD debe ser positivo")
-      .max(9999999999.99, "El precio en USD no puede superar los 10 dígitos")
-      .optional(),
-
-    priceWholesale: Yup.number()
-      .positive("El precio mayorista debe ser positivo")
-      .max(9999999999.99, "El precio mayorista no puede superar los 10 dígitos")
-      .optional(),
-
-    costUsd: Yup.number()
-      .positive("El costo en USD debe ser positivo")
-      .max(9999.99, "El costo en USD no puede superar los 4 dígitos")
-      .optional(),
-
-    costArs: Yup.number()
-      .positive("El costo en ARS debe ser positivo")
-      .max(9999999999.99, "El costo en ARS no puede superar los 10 dígitos")
-      .optional(),
-
-    stock: Yup.number()
-      .integer("El stock debe ser un número entero")
-      .min(0, "El stock no puede ser negativo")
-      .optional(),
-
-    code: Yup.string().optional(),
-
-    imei: Yup.string().nullable().length(15, "El IMEI debe tener 15 caracteres").optional(),
-  })
-  .test("at-least-one-field", "Debes proporcionar al menos un campo para actualizar", (value) =>
-    Object.keys(value).some((key) => value[key] !== undefined)
-  );
+export const categoryUpdateValidations = {
+  name: [required(), minLength(1), maxLength(100)],
+  image: [required()],
+};

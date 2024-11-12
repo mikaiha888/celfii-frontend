@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { Heart, ShoppingCart, Menu } from "lucide-react";
+import { Heart, Menu } from "lucide-react";
+import CartButton from "../buttons/CartButton";
 
 import logo from "../../assets/logo-celfii2.png";
 import OptionalNavBar from "./OptionalNavBar";
@@ -9,6 +10,7 @@ const NavBar = () => {
     { name: "Productos", link: "/productos", current: false },
     { name: "Nosotros", link: "/nosotros", current: false },
     { name: "Contacto", link: "/contacto", current: false },
+    { name: "Reparaciones", link: "/reparaciones", current: false },
   ];
 
   return (
@@ -37,12 +39,13 @@ const NavBar = () => {
           </ul>
         </div>
         <div className="flex items-center gap-4">
-          <Link to="/favourites" className="p-2 text-2xl duration-200 rounded-full hover:bg-primary hover:text-white">
+          <Link
+            to="/favourites"
+            className="p-2 text-2xl duration-200 rounded-full hover:bg-primary hover:text-white"
+          >
             <Heart />
           </Link>
-          <Link to="/cart" className="p-2 text-2xl duration-200 rounded-full hover:bg-primary hover:text-white">
-            <ShoppingCart />
-          </Link>
+          <CartButton />
         </div>
       </div>
       <OptionalNavBar />

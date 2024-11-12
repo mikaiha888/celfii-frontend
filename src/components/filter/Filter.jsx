@@ -32,10 +32,7 @@ const Filter = ({ updateFilters, filters }) => {
   return (
     <div>
       <div>
-        <PriceFilter
-          filters={filters}
-          handleApply={(value) => updateFilters({ price: value })}
-        />
+        <PriceFilter filters={filters} handleApply={(value) => updateFilters({ price: value })} />
 
         <AccordionFilter
           title="Categorías"

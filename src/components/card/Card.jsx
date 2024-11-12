@@ -1,10 +1,10 @@
+import "react-toastify/dist/ReactToastify.css";
 import { useState } from "react";
-import { Heart, ChevronLeft, ChevronRight } from "lucide-react";
+import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { Heart, ChevronLeft, ChevronRight } from "lucide-react";
 import { addCartFavs, removeCartFavs } from "../../redux/actions";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 const Card = ({ product, favourites }) => {
   const dispatch = useDispatch();

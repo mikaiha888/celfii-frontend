@@ -1,12 +1,4 @@
-import {
-  List,
-  Datagrid,
-  TextField,
-  EditButton,
-  DeleteButton,
-  CreateButton,
-} from "react-admin";
-import { ExportButton } from "../export-button/ExportButton";
+import { List, Datagrid, TextField, EditButton, CreateButton } from "react-admin";
 
 const UserList = () => {
   return (
@@ -17,15 +9,13 @@ const UserList = () => {
         actions={
           <div>
             <CreateButton label="Crear Usuario" />
-            <ExportButton label="Exportar Usuarios" />
           </div>
         }
       >
         <Datagrid>
-          <TextField source="username" label="Nombre de Usuario" />
-          <TextField source="email" label="Correo Electrónico" />
+          <TextField source="username" label="Nombre de Usuario" sortable={false} />
+          <TextField source="email" label="Correo Electrónico" sortable={false} />
           <EditButton label="Editar" />
-          <DeleteButton label="Eliminar" />
         </Datagrid>
       </List>
     </div>

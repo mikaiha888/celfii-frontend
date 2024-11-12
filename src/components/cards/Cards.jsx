@@ -1,6 +1,6 @@
 import Card from "../card/Card";
 
-const Cards = ({ products, favourites }) => {
+const Cards = ({ products, favourites = [] }) => {
   return (
     <div className="flex flex-wrap gap-9">
       {products.map((product) => (

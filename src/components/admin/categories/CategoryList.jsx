@@ -3,9 +3,7 @@ import {
   Datagrid,
   TextField,
   EditButton,
-  DeleteButton,
   CreateButton,
-  ExportButton
 } from "react-admin";
 
 const CategoryList = () => {
@@ -17,14 +15,12 @@ const CategoryList = () => {
         actions={
           <div>
             <CreateButton label="Crear Categoria" />
-            <ExportButton label="Exportar Categorias" />
           </div>
         }
       >
         <Datagrid>
-          <TextField source="name" label="Nombre de la Categoría" />
+          <TextField source="name" label="Nombre de la Categoría" sortable={false} />
           <EditButton label="Editar" />
-          <DeleteButton label="Eliminar" />
         </Datagrid>
       </List>
     </div>

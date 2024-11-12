@@ -1,13 +1,14 @@
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../../redux/actions";
 import { useNavigate } from "react-router-dom";
 import { loginValidationSchema } from "./validations";
-
 import { GenericForm } from "./Form";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState("");
 
   const initialValues = {
     email: "",
@@ -29,20 +30,29 @@ const LoginForm = () => {
     },
   ];
 
+  const handleSubmit = async (formData) => {
+    setErrorMessage("");
+    const success = await dispatch(loginUser(formData));
+    success
+      ? navigate("/admin")
+      : setErrorMessage("Credenciales inválidas. Por favor, verifica tu email y contraseña.");
+  };
+
   return (
-    <div>
-      <h1>Iniciar sesión</h1>
-      <GenericForm
-        initialValues={initialValues}
-        validationSchema={loginValidationSchema}
-        fields={fields}
-        onSubmit={(formData) => {
-          dispatch(loginUser(formData));
-          navigate("/");
-        }}
-        buttonLabel="Iniciar Sesión"
-      />
+    <div className="flex items-center justify-center min-h-screen">
+      <div className="w-full max-w-md p-8 space-y-6 bg-gray-100 rounded-lg shadow-lg">
+        <h1 className="text-3xl font-bold text-center text-black">Iniciar sesión</h1>
+        {errorMessage && <div className="text-center text-red-500">{errorMessage}</div>}
+        <GenericForm
+          initialValues={initialValues}
+          validationSchema={loginValidationSchema}
+          fields={fields}
+          onSubmit={handleSubmit}
+          buttonLabel="Iniciar Sesión"
+        />
+      </div>
     </div>
   );
 };
+
 export default LoginForm;

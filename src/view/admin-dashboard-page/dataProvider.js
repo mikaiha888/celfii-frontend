@@ -1,4 +1,10 @@
-import { getRequest, postRequest, putRequest, deleteRequest , patchRequest} from "../../helpers/apiHelper";
+import {
+  getRequest,
+  postRequest,
+  putRequest,
+  deleteRequest,
+  patchRequest,
+} from "../../helpers/apiHelper";
 
 const dataProvider = {
   getList: async (resource, params) => {
@@ -6,16 +12,23 @@ const dataProvider = {
       const { data } = await getRequest(`/${resource}`);
       return { data: [data], total: 1 };
     }
+    const defaultFilters = {
+      name: undefined,
+      minPrice: undefined,
+      maxPrice: undefined,
+      category: undefined,
+      sort: "",
+      onlyDeleted: undefined,
+    };
+
+    const filters = { ...defaultFilters, ...params.filter };
+
     const query = {
       page: params.pagination.page,
       perPage: params.pagination.perPage,
-      name: params.filter.name || undefined,
-      minPrice: params.filter.minPrice || undefined,
-      maxPrice: params.filter.maxPrice || undefined,
-      category: params.filter.category || undefined,
-      sort: params.filter.sort || "",
-      onlyDeleted: params.filter.onlyDeleted || undefined,
+      ...filters,
     };
+
     const { data, headers } = await getRequest(`/${resource}`, query);
     return {
       data: data.products ? data.products : data,
@@ -28,12 +41,10 @@ const dataProvider = {
       const response = await getRequest(`/${resource}/${params.id}`);
       return { data: response.data };
     }
-    
+
     const response = await getRequest(`/${resource}/${params.id}`);
     return response;
   },
-
-
 
   create: async (resource, params) => {
     const formData = new FormData();
@@ -59,28 +70,39 @@ const dataProvider = {
   },
 
   update: async (resource, params) => {
-
+    if (resource === "users") {
+      if (!params.data.password) {
+        delete params.data.password;
+      }
+      return await putRequest(`/users/${params.id}`, params.data);
+    }
     if (resource === "dollar") {
-      const response = await patchRequest(`/${resource}`, params.data); 
+      const response = await patchRequest(`/${resource}`, params.data);
       return response;
     }
-
-    const formData = new FormData();
-    if (params.data.imagesToDelete && Array.isArray(params.data.imagesToDelete))
-      params.data.imagesToDelete.forEach((image, index) =>
-        formData.append(`imagesToDelete[${index}]`, JSON.stringify(image))
-      );
-    if (params.data.images)
-      params.data.images.forEach(
-        (image) =>
-          image.rawFile && image.rawFile instanceof File && formData.append("images", image.rawFile)
-      );
-    if (params.data.category && typeof params.data.category === "object")
-      params.data.category = params.data.category.name;
-    for (const key in params.data)
-      if (key !== "images" && key !== "imagesToDelete") formData.append(key, params.data[key]);
-    const response = await putRequest(`/${resource}/${params.id}`, formData);
-    return response;
+    if (resource === "products" || resource === "categories") {
+      const formData = new FormData();
+      if (params.data.imagesToDelete && Array.isArray(params.data.imagesToDelete))
+        params.data.imagesToDelete.forEach((image, index) =>
+          formData.append(`imagesToDelete[${index}]`, JSON.stringify(image))
+        );
+      if (params.data.images)
+        params.data.images.forEach(
+          (image) =>
+            image.rawFile &&
+            image.rawFile instanceof File &&
+            formData.append("images", image.rawFile)
+        );
+      if (params.data.image) formData.append("image", params.data.image.rawFile);
+      if (params.data.category && typeof params.data.category === "object")
+        params.data.category = params.data.category.name;
+      for (const key in params.data)
+        if (key !== "images" && key !== "imagesToDelete" && key !== "image")
+          formData.append(key, params.data[key]);
+      return await putRequest(`/${resource}/${params.id}`, formData);
+    } else {
+      return await putRequest(`/${resource}`, params.data);
+    }
   },
 
   delete: async (resource, params) => {
