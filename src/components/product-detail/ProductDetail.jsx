@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { Heart } from "lucide-react";
 import { toast } from "react-toastify";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addCartFavs, removeCartFavs } from "../../redux/actions";
 
 import QuantityCounter from "../counter/QuantityCounter";
+import FeaturedProductsSlider from "../../view/home-page/home-sections/FeaturedProductsSlider";
 import ImageCarousel from "../../components/image-carousel/ImageCarousel";
 import { Link } from "react-router-dom";
 
@@ -12,6 +13,9 @@ const ProductDetail = ({ product, cart, isFavourite }) => {
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(1);
   const item = cart && cart.find((item) => item.id === product.id);
+  const { products } = useSelector((state) => state.products);
+
+  const featuredProducts = products.slice(0, 10);
 
   const toggleFavourite = (e) => {
     e.stopPropagation();
@@ -58,7 +62,8 @@ const ProductDetail = ({ product, cart, isFavourite }) => {
             <button
               onClick={() => handleCartClick({ ...product, quantity })}
               disabled={item && item.quantity >= product.stock}
-              className="px-4 py-2 mt-4 text-white transition bg-gray-500 rounded">
+              className="px-4 py-2 mt-4 text-white transition bg-gray-500 rounded"
+            >
               Sin stock
             </button>
           ) : (
@@ -78,16 +83,18 @@ const ProductDetail = ({ product, cart, isFavourite }) => {
                 />
               )}
               {product.stock === 0 ? (
-                <a href={whatsappLink} target="_blank" rel="noopener noreferrer">
-                  <button className="px-4 py-2 mt-4 text-white transition bg-green-500 rounded hover:bg-green-700">
-                    Consultar disponibilidad por WhatsApp
-                  </button>
-                </a>
+                <button
+                  onClick={() => window.open(whatsappLink, "_blank")}
+                  className="px-4 py-2 mt-4 w-full text-white bg-green-500 rounded hover:bg-green-700 transition"
+                >
+                  Consultar disponibilidad por WhatsApp
+                </button>
               ) : (
                 <button
                   onClick={() => handleCartClick({ ...product, quantity })}
                   disabled={item && item.quantity >= product.stock}
-                  className="px-4 py-2 mt-4 text-white transition bg-red-600 rounded hover:bg-red-500">
+                  className="px-4 py-2 mt-4 text-white transition bg-red-600 rounded hover:bg-red-500"
+                >
                   Agregar al carrito
                 </button>
               )}
@@ -96,7 +103,8 @@ const ProductDetail = ({ product, cart, isFavourite }) => {
           {cart && cart.length ? (
             <Link
               to="/cart"
-              className="px-4 py-2 mt-4 text-center text-white transition bg-black rounded hover:bg-gray-800">
+              className="px-4 py-2 mt-4 text-center text-red-600 border border-red-600 bg-gray-100 rounded hover:bg-gray-200 transition"
+            >
               Ver Carrito
             </Link>
           ) : null}
@@ -105,8 +113,10 @@ const ProductDetail = ({ product, cart, isFavourite }) => {
       <hr className="mt-6" />
       <div className="mt-6">
         <h2 className="mb-2 text-2xl font-bold">Descripción del Producto</h2>
-        <p className="text-gray-600">{product.description}</p>
+        <p className="text-gray-600 whitespace-pre-line">{product.description}</p>
+
       </div>
+      <FeaturedProductsSlider products={featuredProducts} />
     </>
   );
 };
