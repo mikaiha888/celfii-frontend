@@ -1,17 +1,32 @@
 import logo from "../../assets/logo-celfii1.png";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { loadCategories } from "../../redux/actions";
 import {
   aboutUsLinks,
   customerServiceLinks,
   paymentMethodsLinks,
-  popularCategoriesLinks,
 } from "./menu";
 
 import Items from "./Items";
 
 const ItemsContainer = () => {
+  const dispatch = useDispatch();
+  const { categories } = useSelector((state) => state.categories);
+  
+  const popularCategoriesLinks = categories && categories.map((category) => ({
+    name: category.name,
+    url: `/productos`,
+    isCategory: true,
+  }));
+
+  useEffect(() => {
+    dispatch(loadCategories());
+  }, [dispatch]);
+
   return (
-    <div className="container flex flex-wrap gap-20 py-24">
-      <div className="w-full md:w-1/5">
+    <div className="container flex flex-wrap gap-20 py-24 md:justify-around">
+      <div className="w-full lg:w-1/5">
         <button>
           <img src={logo} alt="Cel-Fii logo" className="w-32 h-auto" />
         </button>

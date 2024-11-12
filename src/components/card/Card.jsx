@@ -52,7 +52,7 @@ const Card = ({ product, favourites }) => {
         {product.images && product.images[0] && (
           <div className="relative">
             <img
-              className="object-cover w-60 h-80 border-gray-50 rounded-lg shadow-md"
+              className="object-cover w-60 h-80 border-gray-50"
               src={product.images[currentImageIndex].url}
               alt={product.images[currentImageIndex].altText || product.name}
             />
