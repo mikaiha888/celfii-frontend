@@ -39,9 +39,9 @@ const AboutUs = () => {
 
       <h2 id="horario-de-atencion" className="mt-8 mb-4 text-2xl font-semibold text-gray-800">Horario de Atención</h2>
       <p className="text-lg leading-relaxed text-gray-700">
-        Lunes a Viernes: <span className="font-semibold">9:00 AM - 6:00 PM</span>
+        Lunes a Viernes: <span className="font-semibold">9:00 - 13:00 y 16:45 - 20:45   </span>
         <br />
-        Sábados: <span className="font-semibold">9:00 AM - 1:00 PM</span>
+        Sábados: <span className="font-semibold">9:30 - 13:00 </span>
       </p>
     </div>
   );

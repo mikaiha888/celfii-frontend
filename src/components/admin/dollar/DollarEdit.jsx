@@ -11,7 +11,7 @@ const CustomToolbar = () => (
 
 const DollarEdit = (props) => (
   <Edit {...props} className="flex justify-center items-center pt-10">
-    <SimpleForm toolbar={<CustomToolbar />} className="max-w-md p-6 border border-gray-300 rounded-lg shadow-md bg-white">
+    <SimpleForm toolbar={<CustomToolbar />} className="max-w-md p-6 border border-gray-300 rounded-lg shadow-md ">
       <TextInput source="rate" label="Valor del dólar" className="w-full" />
     </SimpleForm>
   </Edit>
