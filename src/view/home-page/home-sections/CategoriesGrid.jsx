@@ -17,7 +17,7 @@ const CategoriesGrid = () => {
         <>
           <Link
             key={category.name}
-            to="/productos"
+            to={`/productos/${category.name.toLowerCase()}`}
             onClick={() => {
               localStorage.setItem("selectedCategory", category.name);
               window.scrollTo(0, 0);

@@ -9,11 +9,13 @@ import Items from "./Items";
 const ItemsContainer = () => {
   const dispatch = useDispatch();
   const { categories } = useSelector((state) => state.categories);
-  const popularCategoriesLinks = categories && categories.map((category) => ({
-    name: category.name,
-    url: "/productos",
-    isCategory: true,
-  }));
+  const popularCategoriesLinks =
+    categories &&
+    categories.map((category) => ({
+      name: category.name,
+      url: "/productos",
+      isCategory: true,
+    }));
 
   useEffect(() => {
     dispatch(loadCategories());
@@ -22,7 +24,7 @@ const ItemsContainer = () => {
   return (
     <div className="container flex flex-wrap gap-20 py-24 md:justify-around">
       <div className="w-full lg:w-1/5">
-        <button>
+        <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
           <img src={logo} alt="Cel-Fii logo" className="w-32 h-auto" />
         </button>
         <p className="mt-5 text-sm font-medium text-gray-400">
