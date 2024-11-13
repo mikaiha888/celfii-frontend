@@ -1,12 +1,8 @@
 import { Search } from "lucide-react";
 import { useState } from "react";
 
-const SearchBar = ({ onSearch }) => {
+const SearchBar = ({ onSearch, variant = "default" }) => {
   const [searchTerm, setSearchTerm] = useState("");
-
-  const handleInputChange = (e) => {
-    setSearchTerm(e.target.value);
-  };
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
@@ -14,30 +10,36 @@ const SearchBar = ({ onSearch }) => {
     }
   };
 
-  const handleSearchClick = () => {
-    onSearch(searchTerm);
-  };
-
   return (
-    <div className="relative flex items-center mt-4 mb-4">
-      <input
-        type="text"
-        value={searchTerm}
-        onChange={handleInputChange}
-        onKeyDown={handleKeyDown}
-        className="w-full py-2 pl-10 pr-4 text-gray-800 transition-all duration-300 ease-in-out bg-white border border-gray-300 rounded-full focus:ring-2 focus:ring-red-500 focus:outline-none"
-        placeholder="Buscar..."
-      />
-      <span className="absolute text-gray-400 left-3 top-2">
-        <Search size={20} />
-      </span>
-      <button
-        onClick={handleSearchClick}
-        className="ml-2 px-4 py-2 bg-red-500 text-white font-semibold rounded-full hover:bg-red-600 transition-colors"
-      >
-        Buscar
-      </button>
-    </div>
+    <>
+      {variant === "card" ? (
+        <div className="w-full relative flex gap-x-[10px] lg:w-fit">
+          <span className="flex items-center justify-center">
+            <Search />
+          </span>
+          <input
+            type="text"
+            placeholder="Buscar..."
+            onKeyDown={(e) => handleKeyDown(e)}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="w-full py-1 outline-none lg:w-[200px] focus:w-[300px] border-b-2 border-gray-100 focus:border-gray-200 placeholder:italic placeholder:text-base transition-all duration-200"
+          />
+        </div>
+      ) : (
+        <div className="w-full relative flex gap-x-[10px] lg:w-fit">
+          <span className="flex items-center justify-center group">
+            <Search />
+          </span>
+          <input
+            type="text"
+            placeholder="Buscar..."
+            onKeyDown={(e) => handleKeyDown(e)}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="w-full outline-none lg:w-[100px] focus:w-[180px] focus:border-b-2 focus:border-accent placeholder:italic placeholder:text-base transition-all duration-200"
+          />
+        </div>
+      )}
+    </>
   );
 };
 

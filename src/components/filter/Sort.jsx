@@ -12,10 +12,10 @@ const Sort = ({ handleApply, filters }) => {
         <div key={option.value} className="relative">
           <button
             onClick={() => handleApply(option.value)}
-            className={`p-2 rounded-md text-left transition-colors duration-200 ${
+            className={`p-2 font-medium rounded-sm transition-colors duration-200 ${
               filters.sort === option.value
-                ? "bg-red-500 text-white"
-                : "bg-white text-gray-700 hover:bg-gray-200"
+                ? "bg-gray-100"
+                : "text-gray-700 hover:bg-gray-50"
             } w-full flex justify-between items-center`}
           >
             {option.label}

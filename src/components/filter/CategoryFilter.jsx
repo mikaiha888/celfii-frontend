@@ -15,24 +15,21 @@ const CategoryFilter = ({ handleApply, filters }) => {
     <div className="flex flex-col gap-4">
       {categories.length > 0 ? (
         categories.map((category) => (
-          <div key={category.id} className="relative">
-            <button
-              value={category.name}
-              onClick={() => handleApply(category.name)}
-              className={`p-2 rounded-md text-left transition-colors duration-200 ${
-                filters.category === category.name
-                  ? "bg-red-500 text-white"
-                  : "bg-white text-gray-700 hover:bg-gray-200"
-              } w-full flex justify-between items-center`}
-            >
+          <div
+            key={category.id}
+            className={`p-2 font-medium rounded-sm transition-colors duration-200 ${
+              filters.category === category.name.toLowerCase() ? "bg-gray-100" : "hover:bg-gray-50"
+            } flex items-center justify-between`}
+          >
+            <button className="flex-1 text-left" value={category.name} onClick={() => handleApply(category.name)}>
               {category.name}
             </button>
-            {filters.category === category.name && (
+            {filters.category === category.name.toLowerCase() && (
               <button
                 onClick={() => handleApply("")}
-                className="absolute text-gray-400 transform -translate-y-1/2 right-2 top-1/2 hover:text-red-500"
+                className="text-gray-400 transform hover:text-gray-500"
               >
-                <X size={20} aria-label="Remove category" />
+                <X size={16} aria-label="Remove category" />
               </button>
             )}
           </div>

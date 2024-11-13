@@ -32,6 +32,7 @@ const AppRoutes = () => (
     <Route path="/favourites" element={<FavouritePage />} />
     <Route path="/product/:id" element={<ProductDetailPage />} />
     <Route path="/terminos-servicio" element={<TermsOfService />} />
+    <Route path="/productos/:categoria" element={<ProductsPage />} />
     <Route path="/politica-privacidad" element={<PrivacyPolicyPage />} />
     <Route path="/reparaciones" element={<Reparaciones />} />
   </Routes>

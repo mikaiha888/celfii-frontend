@@ -7,7 +7,7 @@ import OptionalNavBar from "./OptionalNavBar";
 
 const NavBar = () => {
   const links = [
-    { name: "Productos", link: "/productos", current: false },
+    { name: "Productos", link: "/productos?page=1", current: false },
     { name: "Nosotros", link: "/nosotros", current: false },
     { name: "Contacto", link: "/contacto", current: false },
     { name: "Reparaciones", link: "/reparaciones", current: false },
@@ -15,7 +15,7 @@ const NavBar = () => {
 
   return (
     <nav className="z-10">
-      <div className="flex items-center justify-between px-5 py-4 md:container">
+      <div className="flex items-center justify-between py-4 md:mx-12">
         <div className="mr-14 md:hidden">
           <button className="p-2 text-2xl duration-200 rounded-full hover:bg-primary hover:text-white">
             <Menu className="text-4xl" />

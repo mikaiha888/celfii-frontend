@@ -18,7 +18,14 @@ const HomePage = () => {
   useEffect(() => {
     dispatch(loadCategories());
     dispatch(loadCartFavs());
-    dispatch(loadProducts());
+    dispatch(loadProducts({
+      page: 1,
+      perPage: 10,
+      name: "",
+      category: "",
+      sort: "newest",
+      price: { min: "", max: "" },
+    }));
   }, [dispatch]);
 
   const handleCategoryClick = (categoryName) => {
