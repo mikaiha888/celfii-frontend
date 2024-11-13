@@ -26,12 +26,11 @@ const Footer = () => {
             está disponible para ayudarte y responder a tus inquietudes de manera rápida y
             eficiente. ¡Escríbenos y hablemos!
           </p>
-          <a
-            href={whatsappLink}
-            className="px-6 py-3 mt-8 text-sm rounded-full primary-btn md:text-base"
-          >
-            Abrir Chat
-          </a>
+          <button className="px-6 py-3 mt-8 text-sm rounded-full primary-btn" >
+            <a href={whatsappLink}>
+              Abrir Chat
+            </a>
+          </button>
         </div>
       )}
       <div className="px-20 2xl:px-0">
