@@ -44,7 +44,7 @@ const FeaturedProductsSlider = ({ products }) => {
       {
         breakpoint: 768,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 1,
         },
       },
       {
@@ -57,21 +57,21 @@ const FeaturedProductsSlider = ({ products }) => {
   };
 
   return (
-    <section className="container relative px-2 mt-20">
+    <section className="relative px-2 mt-20">
       <h2 className="mx-4 mb-8 text-xl font-semibold md:text-2xl">
         Nuestros productos seleccionados
       </h2>
       <Slider {...settings}>
         {products.map((product) => (
-          <div key={product.id} className="px-2">
+          <div key={product.id}>
             <Link
               to={`/product/${product.id}`}
-              className="flex flex-col items-center justify-center mt-6 mb-6 transition-transform duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg"
+              className="flex flex-col items-center justify-center py-8 mb-12 transition-transform duration-300 ease-in-out transform hover:scale-105 hover:shadow-md"
             >
               <img
                 src={product.images[0].url}
                 alt={product.name}
-                className="object-cover w-48 h-64 rounded md:w-60 md:h-80 border-gray-50"
+                className="object-cover lg:w-48 lg:h-64 md:w-60 md:h-80 border-gray-50"
               />
               <h3 className="w-full mt-2 text-sm text-center text-gray-500 truncate md:w-max">
                 {product.name}

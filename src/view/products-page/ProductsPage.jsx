@@ -30,7 +30,7 @@ const ProductsPage = () => {
   });
 
   const title = categoria
-    ? categoria.charAt(0).toUpperCase() + categoria.slice(1).toLowerCase()
+    ? `${categoria.charAt(0).toUpperCase() + categoria.slice(1).toLowerCase()} (${totalItems})`
     : `Todos los productos (${totalItems})`;
 
   const updateFilters = (newFilters) => {
@@ -81,7 +81,7 @@ const ProductsPage = () => {
   }, [dispatch, filters]);
 
   return (
-    <div className="mt-5">
+    <div className="min-h-screen mt-5">
       <div className="flex items-center justify-between gap-10 mb-10 font-medium">
         <h1 className="text-2xl font-poppins lg:text-3xl">{title}</h1>
         <div className="flex items-center gap-6">
@@ -103,7 +103,7 @@ const ProductsPage = () => {
         >
           <Filter updateFilters={updateFilters} filters={filters} isOpen={isFilterOpen} />
         </aside>
-        <div className={`flex-1 transition-all duration-300 ${isFilterOpen ? "ml-80" : "ml-0"}`}>
+        <div className={`h-full flex-1 transition-all duration-300 ${isFilterOpen ? "ml-80" : "ml-0"}`}>
           {loading ? (
             <p>Cargando productos...</p>
           ) : products.length === 0 ? (

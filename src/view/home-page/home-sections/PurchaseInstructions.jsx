@@ -1,9 +1,7 @@
 import { Link } from "react-router-dom";
 
-import WhatsAppButton from "../../../components/whatsapp-button/WhatsAppButton";
-
 const PurchaseInstructions = () => (
-  <section className="p-6 mt-10 bg-gray-100 rounded-lg shadow-md">
+  <section className="p-6 mt-10 bg-gray-100 rounded-lg">
     <h2 className="mb-4 text-2xl font-semibold">¿Cómo realizar tu compra?</h2>
     <p className="mb-4 text-gray-700">
       Nuestro e-commerce acepta pagos con cualquier tarjeta de crédito o débito. Sigue estos pasos

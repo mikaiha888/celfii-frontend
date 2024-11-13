@@ -20,7 +20,7 @@ const App = () => {
           draggable
         />
         {!pathname.startsWith("/admin") && <NavBar />}
-        <main className="flex-1 px-5 py-4 md:mx-10">
+        <main className={`flex-1 ${pathname !== "/" ? "px-5 py-4 md:mx-10" : ""}`}>
           <AppRoutes />
         </main>
         {!pathname.startsWith("/admin") && <WhatsAppButton />}
