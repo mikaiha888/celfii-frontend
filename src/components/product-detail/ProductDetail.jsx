@@ -66,8 +66,7 @@ const ProductDetail = ({ product, cart, isFavourite }) => {
             <button
               onClick={() => handleCartClick({ ...product, quantity })}
               disabled={item && item.quantity >= product.stock}
-              className="px-4 py-2 mt-4 text-white transition bg-gray-500 rounded"
-            >
+              className="px-4 py-2 mt-4 text-white transition bg-gray-500 rounded">
               Sin stock
             </button>
           ) : (
@@ -89,7 +88,7 @@ const ProductDetail = ({ product, cart, isFavourite }) => {
               {product.stock === 0 ? (
                 <button
                   onClick={() => window.open(whatsappLink, "_blank")}
-                  className="px-4 py-2 mt-4 w-full text-white bg-green-500 rounded hover:bg-green-700 transition"
+                  className="w-full px-4 py-2 mt-4 text-white transition bg-green-500 rounded hover:bg-green-700"
                 >
                   Consultar disponibilidad por WhatsApp
                 </button>
@@ -107,7 +106,7 @@ const ProductDetail = ({ product, cart, isFavourite }) => {
           {cart && cart.length ? (
             <Link
               to="/cart"
-              className="px-4 py-2 mt-4 text-center text-red-600 border border-red-600 bg-gray-100 rounded hover:bg-gray-200 transition"
+              className="px-4 py-2 mt-4 text-center text-red-600 transition bg-gray-100 border border-red-600 rounded hover:bg-gray-200"
             >
               Ver Carrito
             </Link>
@@ -123,17 +122,17 @@ const ProductDetail = ({ product, cart, isFavourite }) => {
 
       <FeaturedProductsSlider products={featuredProducts} />
 
-      <div className="mt-20 p-4 bg-gray-100 rounded-lg shadow-md">
+      <div className="p-4 mt-20 bg-gray-100 rounded-lg shadow-md">
         <h3 className="text-xl font-semibold text-center">
           ¿Tienes preguntas sobre este producto?
         </h3>
-        <p className="text-gray-600 mt-2 text-center">
+        <p className="mt-2 text-center text-gray-600">
           Si tienes alguna duda, ¡estamos para ayudarte! Puedes contactarnos directamente por
           WhatsApp.
         </p>
         <button
           onClick={() => window.open(whatsappLink, "_blank")}
-          className="mt-4 px-4 py-2 text-white bg-green-500 rounded hover:bg-green-700 transition w-full text-center"
+          className="w-full px-4 py-2 mt-4 text-center text-white transition bg-green-500 rounded hover:bg-green-700"
         >
           Contáctanos por WhatsApp
         </button>

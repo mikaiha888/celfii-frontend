@@ -1,25 +1,21 @@
 import { ChevronFirst, ChevronLeft, ChevronRight, ChevronLast } from "lucide-react";
 
-const Pagination = ({ currentPage, totalPages, onPageChange }) => {
-  const handleFirst = () => {
-    if (currentPage > 1) onPageChange(1);
-  };
+const PaginationButton = ({ disabled, onClick, Icon, ariaLabel }) => (
+  <button
+    onClick={onClick}
+    disabled={disabled}
+    className={`flex items-center justify-center w-10 h-10 rounded-full transition-colors ${
+      disabled ? "bg-gray-200 cursor-not-allowed" : "bg-red-500 hover:bg-red-600 text-white"
+    }`}
+    aria-label={ariaLabel}
+  >
+    <Icon className="w-5 h-5" />
+  </button>
+);
 
-  const handlePrev = () => {
-    if (currentPage > 1) onPageChange(currentPage - 1);
-  };
-
-  const handleNext = () => {
-    if (currentPage < totalPages) onPageChange(currentPage + 1);
-  };
-
-  const handleLast = () => {
-    if (currentPage < totalPages) onPageChange(totalPages);
-  };
-
+const Pagination = ({ currentPage, totalPages, onPageChange, maxVisiblePages = 5 }) => {
   const generatePageNumbers = () => {
     const pageNumbers = [];
-    const maxVisiblePages = 5;
     let startPage, endPage;
 
     if (totalPages <= maxVisiblePages) {
@@ -27,16 +23,8 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
       endPage = totalPages;
     } else {
       const halfVisible = Math.floor(maxVisiblePages / 2);
-      if (currentPage <= halfVisible) {
-        startPage = 1;
-        endPage = maxVisiblePages;
-      } else if (currentPage + halfVisible >= totalPages) {
-        startPage = totalPages - maxVisiblePages + 1;
-        endPage = totalPages;
-      } else {
-        startPage = currentPage - halfVisible;
-        endPage = currentPage + halfVisible;
-      }
+      startPage = Math.max(1, currentPage - halfVisible);
+      endPage = Math.min(totalPages, currentPage + halfVisible);
     }
 
     for (let i = startPage; i <= endPage; i++) {
@@ -49,29 +37,20 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
   const pageNumbers = generatePageNumbers();
 
   return (
-    <div className="flex justify-center items-center space-x-4 mt-7">
-      <button
-        onClick={handleFirst}
+    <div className="flex items-center justify-center space-x-4 mt-7">
+      <PaginationButton
         disabled={currentPage === 1}
-        className={`flex items-center justify-center w-10 h-10 rounded-full transition-colors ${
-          currentPage === 1
-            ? "bg-gray-200 cursor-not-allowed"
-            : "bg-red-500 hover:bg-red-600 text-white"
-        }`}
-      >
-        <ChevronFirst className="w-5 h-5" />
-      </button>
-      <button
-        onClick={handlePrev}
+        onClick={() => currentPage > 1 && onPageChange(1)}
+        Icon={ChevronFirst}
+        ariaLabel="Ir a la primera página"
+      />
+
+      <PaginationButton
         disabled={currentPage === 1}
-        className={`flex items-center justify-center w-10 h-10 rounded-full transition-colors ${
-          currentPage === 1
-            ? "bg-gray-200 cursor-not-allowed"
-            : "bg-red-500 hover:bg-red-600 text-white"
-        }`}
-      >
-        <ChevronLeft className="w-5 h-5" />
-      </button>
+        onClick={() => currentPage > 1 && onPageChange(currentPage - 1)}
+        Icon={ChevronLeft}
+        ariaLabel="Ir a la página anterior"
+      />
 
       {pageNumbers.map((page) => (
         <button
@@ -82,43 +61,37 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
               ? "bg-red-600 text-white"
               : "bg-gray-200 hover:bg-gray-300 text-black"
           }`}
+          aria-current={page === currentPage ? "page" : undefined}
         >
           {page}
         </button>
       ))}
 
       {currentPage < totalPages - 2 && <span className="text-gray-500">...</span>}
+
       {currentPage < totalPages - 1 && (
         <button
           onClick={() => onPageChange(totalPages)}
-          className="px-3 py-1 rounded-md bg-gray-200 hover:bg-gray-300 text-black"
+          className="px-3 py-1 text-black bg-gray-200 rounded-md hover:bg-gray-300"
+          aria-label={`Ir a la última página (${totalPages})`}
         >
           {totalPages}
         </button>
       )}
 
-      <button
-        onClick={handleNext}
+      <PaginationButton
         disabled={currentPage === totalPages}
-        className={`flex items-center justify-center w-10 h-10 rounded-full transition-colors ${
-          currentPage === totalPages
-            ? "bg-gray-200 cursor-not-allowed"
-            : "bg-red-500 hover:bg-red-600 text-white"
-        }`}
-      >
-        <ChevronRight className="w-5 h-5" />
-      </button>
-      <button
-        onClick={handleLast}
+        onClick={() => currentPage < totalPages && onPageChange(currentPage + 1)}
+        Icon={ChevronRight}
+        ariaLabel="Ir a la página siguiente"
+      />
+
+      <PaginationButton
         disabled={currentPage === totalPages}
-        className={`flex items-center justify-center w-10 h-10 rounded-full transition-colors ${
-          currentPage === totalPages
-            ? "bg-gray-200 cursor-not-allowed"
-            : "bg-red-500 hover:bg-red-600 text-white"
-        }`}
-      >
-        <ChevronLast className="w-5 h-5" />
-      </button>
+        onClick={() => currentPage < totalPages && onPageChange(totalPages)}
+        Icon={ChevronLast}
+        ariaLabel="Ir a la última página"
+      />
     </div>
   );
 };

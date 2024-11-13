@@ -20,8 +20,8 @@ const ItemsContainer = () => {
   }, [dispatch]);
 
   return (
-    <div className="container flex flex-wrap gap-20 py-24">
-      <div className="w-full md:w-1/5">
+    <div className="container flex flex-wrap gap-20 py-24 md:justify-around">
+      <div className="w-full lg:w-1/5">
         <button>
           <img src={logo} alt="Cel-Fii logo" className="w-32 h-auto" />
         </button>

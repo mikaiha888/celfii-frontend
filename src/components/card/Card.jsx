@@ -45,19 +45,20 @@ const Card = ({ product, favourites }) => {
 
   return (
     <div
-      className="relative overflow-hidden"
       onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}>
+      onMouseLeave={() => setHovered(false)}
+      className="relative overflow-hidden transition-all duration-300 ease-in-out cursor-pointer"
+    >
       <Link to={`/product/${product.id}`}>
-        {product.images && product.images[0] && (
-          <div className="relative">
+        <div className="relative w-full overflow-hidden transition-all duration-300 transform bg-gray-100 border aspect-square">
+          {product.images && product.images[0] && (
             <img
-              className="object-cover rounded-lg shadow-md w-60 h-80 border-gray-50"
-              src={product.images[currentImageIndex].url || ""}
+              className="object-cover w-full h-full"
+              src={product.images[currentImageIndex].url}
               alt={product.images[currentImageIndex].altText || product.name}
             />
-          </div>
-        )}
+          )}
+        </div>
       </Link>
       {product.images && product.images.length > 1 && (
         <>
@@ -66,7 +67,8 @@ const Card = ({ product, favourites }) => {
               onClick={handlePreviousImage}
               className={`absolute top-1/2 left-0 transform -translate-y-10 bg-gray-800 p-1 rounded-e-full transition-opacity duration-300 ${
                 hovered ? "opacity-100" : "opacity-0"
-              }`}>
+              }`}
+            >
               <ChevronLeft className="text-white" />
             </button>
           )}
@@ -75,30 +77,34 @@ const Card = ({ product, favourites }) => {
               onClick={handleNextImage}
               className={`absolute top-1/2 right-0 transform -translate-y-10 bg-gray-800 p-1 rounded-l-full transition-opacity duration-300 ${
                 hovered ? "opacity-100" : "opacity-0"
-              }`}>
+              }`}
+            >
               <ChevronRight className="text-white" />
             </button>
           )}
         </>
       )}
-      <div className="flex items-center justify-between mt-1">
-        <h3 className="w-40 text-sm text-gray-500 truncate">{product.name}</h3>
+      <div className="flex justify-between gap-8 mt-3">
+        <h3 className="flex-1 text-lg font-semibold text-gray-800 truncate">{product.name}</h3>
+        <p className="font-semibold text-gray-900 text-md">ARS {product.priceArs}</p>
       </div>
-      <div className="flex justify-between mt-1">
-        <span className="px-2 py-1 text-xs font-medium text-white bg-red-500 rounded-full">
+
+      <div className="flex items-center justify-between mt-1">
+        <span className="font-medium text-red-500">
           {product.category.name}
         </span>
-        <p className="font-semibold text-md font-poppins">ARS {product.priceArs}</p>
       </div>
       <div
         className={`absolute top-0 right-4 w-10 h-12 transition-transform duration-300 overflow-hidden flex items-center ${
           hovered ? "translate-y-0" : "-translate-y-12"
-        }`}>
+        }`}
+      >
         <div
           onClick={handleToggleFavourite}
           className={`h-full w-full rounded-bl-md rounded-br-md flex items-center cursor-pointer justify-center ${
-            hovered ? "bg-red-700 hover:bg-red-800" : "bg-red-600"
-          }`}>
+            hovered ? "bg-red-600 hover:bg-red-600" : "bg-red-600"
+          }`}
+        >
           <Heart
             className="transition-transform duration-300"
             fill={isFavourite ? "#7f1d1d" : "white"}

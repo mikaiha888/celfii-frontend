@@ -11,4 +11,8 @@
   .text-btn {
     @apply px-6 py-3 font-semibold text-red-600 duration-200 hover:text-red-700;
   }
+
+  hr {
+    @apply w-full my-2 border border-gray-200;
+  }
 }
