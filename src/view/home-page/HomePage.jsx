@@ -15,17 +15,13 @@ const HomePage = () => {
   const { categories } = useSelector((state) => state.categories);
   const { favourites } = useSelector((state) => state.cartFavs);
 
+  const mostPopularProducts = [...products].slice(0, 20);
+  const selectedProducts = [...products].sort(() => 0.5 - Math.random()).slice(0, 10);
+
   useEffect(() => {
     dispatch(loadCategories());
     dispatch(loadCartFavs());
-    dispatch(loadProducts({
-      page: 1,
-      perPage: 10,
-      name: "",
-      category: "",
-      sort: "newest",
-      price: { min: "", max: "" },
-    }));
+    dispatch(loadProducts({ perPage: 100, sort: "most popular" }));
   }, [dispatch]);
 
   const handleCategoryClick = (categoryName) => {
@@ -36,8 +32,8 @@ const HomePage = () => {
     <div>
       <HeroBanner />
       <FeaturesSection />
-      <MostPopular products={products} favourites={favourites} />
-      <FeaturedProductsSlider products={products} />
+      <MostPopular products={mostPopularProducts} favourites={favourites} />
+      <FeaturedProductsSlider products={selectedProducts} />
       <CategoriesGrid categories={categories} onCategoryClick={handleCategoryClick} />
       <PurchaseInstructions />
     </div>

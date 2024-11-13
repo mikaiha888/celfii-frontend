@@ -32,7 +32,7 @@ const Footer = () => {
         <div className="container flex items-center justify-between pt-2 pb-8 text-sm text-center text-gray-400">
           <div className="flex gap-4">
             <span>&copy; {new Date().getFullYear()} Cel-Fii. Todos los derechos reservados.</span>
-            <Link to="/terminos-servicio" className="hover:text-red-400">Terminos・Políticas de privacidad</Link>
+            <Link to="/terminos-servicio" onClick={() =>  window.scrollTo(0, 0)} className="hover:text-red-400">Terminos・Políticas de privacidad</Link>
           </div>
           <SocialIcons icons={socialMediaIcons} />
         </div>
