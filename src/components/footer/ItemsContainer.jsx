@@ -1,22 +1,17 @@
 import logo from "../../assets/logo-celfii1.png";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { loadCategories } from "../../redux/actions";
-import {
-  aboutUsLinks,
-  customerServiceLinks,
-  paymentMethodsLinks,
-} from "./menu";
+import { useDispatch, useSelector } from "react-redux";
+import { aboutUsLinks, customerServiceLinks, paymentMethodsLinks } from "./menu";
 
 import Items from "./Items";
 
 const ItemsContainer = () => {
   const dispatch = useDispatch();
   const { categories } = useSelector((state) => state.categories);
-  
   const popularCategoriesLinks = categories && categories.map((category) => ({
     name: category.name,
-    url: `/productos`,
+    url: "/productos",
     isCategory: true,
   }));
 
