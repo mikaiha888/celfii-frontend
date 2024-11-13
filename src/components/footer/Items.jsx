@@ -35,7 +35,7 @@ const Items = ({ links, title }) => {
           <li key={link.name}>
             {link.isCategory ? (
               <a
-                href={"/productos"}
+                href={`/productos/${link.name.toLowerCase()}?page=1`}
                 onClick={() => handleLinkClick(link)}
                 className="text-sm font-medium leading-6 text-gray-400 duration-200 hover:text-red-400"
               >

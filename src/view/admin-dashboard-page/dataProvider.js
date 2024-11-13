@@ -14,8 +14,7 @@ const dataProvider = {
     }
     const defaultFilters = {
       name: undefined,
-      minPrice: undefined,
-      maxPrice: undefined,
+      price: { min: undefined, max: undefined },
       category: undefined,
       sort: "",
       onlyDeleted: undefined,

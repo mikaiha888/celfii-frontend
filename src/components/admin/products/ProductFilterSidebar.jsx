@@ -38,8 +38,7 @@ const ProductFilterSidebar = () => {
   const applyFilters = () => {
     setFilters({
       ...filterValues,
-      minPrice: minPrice || undefined,
-      maxPrice: maxPrice || undefined,
+      price: { min: minPrice || undefined, max: maxPrice || undefined },
     });
   };
 
@@ -49,8 +48,7 @@ const ProductFilterSidebar = () => {
     setMaxPrice("");
     setFilters({
       name: undefined,
-      minPrice: undefined,
-      maxPrice: undefined,
+      price: { min: undefined, max: undefined },
       category: undefined,
       sort: undefined,
       onlyDeleted: undefined,
@@ -60,8 +58,7 @@ const ProductFilterSidebar = () => {
   const handleSearch = () => {
     setFilters({
       name: searchTerm,
-      minPrice: undefined,
-      maxPrice: undefined,
+      price: { min: undefined, max: undefined },
       category: undefined,
       sort: undefined,
       onlyDeleted: undefined,
@@ -74,7 +71,7 @@ const ProductFilterSidebar = () => {
     }
   };
 
-  const isPriceFilterActive = minPrice || maxPrice;
+  const isPriceFilterActive = filterValues.price?.min || filterValues.price?.max;
   const isSortFilterActive = filterValues.sort;
   const isCategoryFilterActive = filterValues.category;
   const isStatusFilterActive = filterValues.onlyDeleted;
