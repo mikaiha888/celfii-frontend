@@ -15,7 +15,7 @@ const UserCreate = (props) => {
     try {
       await dataProvider.create("users", { data });
       notify("Usuario creado con éxito");
-      redirect("/admin/users");
+      redirect("/private-admin-console/users");
       refresh();
     } catch (error) {
       notify(`Error: ${error.message}`, { type: "warning" });
@@ -29,27 +29,27 @@ const UserCreate = (props) => {
           source="username"
           label="Nombre de Usuario"
           validate={required}
-          className="block w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 text-black"
+          className="block w-full px-4 py-2 text-black border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
         />
         <TextInput
           source="email"
           label="Correo Electrónico"
           validate={required}
-          className="block w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 text-black"
+          className="block w-full px-4 py-2 text-black border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
         />
 
-        <div className="my-4 relative">
+        <div className="relative my-4">
           <TextInput
             source="password"
             label="Contraseña"
             type={showPassword ? "text" : "password"}
             validate={required}
-            className="block w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 text-black"
+            className="block w-full px-4 py-2 text-black border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
           />
           <button
             type="button"
             onClick={() => setShowPassword(!showPassword)}
-            className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-red-500"
+            className="absolute text-gray-500 transform -translate-y-1/2 right-2 top-1/2 hover:text-red-500"
           >
             {showPassword ? "Ocultar" : "Mostrar"}
           </button>
@@ -58,7 +58,7 @@ const UserCreate = (props) => {
         <div className="flex justify-end mt-6">
           <button
             type="submit"
-            className="px-6 py-2 bg-red-600 text-white font-semibold rounded-md hover:bg-red-700 transition duration-200"
+            className="px-6 py-2 font-semibold text-white transition duration-200 bg-red-600 rounded-md hover:bg-red-700"
           >
             Crear Usuario
           </button>

@@ -13,7 +13,7 @@ const Footer = () => {
 
   return (
     <footer className="mt-20 bg-black">
-      {!pathname.startsWith("/product") && !pathname.startsWith("/admin") && (
+      {!pathname.startsWith("/product") && !pathname.startsWith("//private-admin-console") && (
         <div className="p-8 text-center bg-gray-50 sm:p-12 md:py-20 md:px-24 lg:py-32 lg:px-40">
           <p className="text-lg font-medium md:text-xl">Estamos aquí para ti</p>
           <h3 className="my-5 text-2xl font-semibold md:text-3xl lg:text-4xl font-poppins">

@@ -34,7 +34,7 @@ const LoginForm = () => {
     setErrorMessage("");
     const success = await dispatch(loginUser(formData));
     success
-      ? navigate("/admin")
+      ? navigate("/private-admin-console")
       : setErrorMessage("Credenciales inválidas. Por favor, verifica tu email y contraseña.");
   };
 

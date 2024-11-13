@@ -49,7 +49,7 @@ const UserMenu = () => {
           <MenuItem>
             {({ active }) => (
               <Link
-                to="login"
+                to="/"
                 onClick={() => dispatch(logoutUser())}
                 className={classNames(
                   active ? "bg-gray-100" : "",
