@@ -52,13 +52,30 @@ const ProductDataGrid = () => {
 
   return (
     <div style={{ marginRight: "20px" }}>
-      {" "}
       <Datagrid>
         <TextField source="name" label="Nombre del Producto" sortable={false} />
         <ImageField source="images[0].url" label="Imagen" sortable={false} />
         <TextField source="category.name" label="Categoría" sortable={false} />
         <NumberField source="priceArs" label="Precio (ARS)" sortable={false} />
-        <NumberField source="stock" label="Stock" sortable={false} />
+        <FunctionField
+          label="Stock"
+          render={(record) => (
+            <span
+              style={{
+                color:
+                  record.stock > 5
+                    ? "green"
+                    : record.stock > 1
+                    ? "orange"
+                    : "red",
+                fontWeight: "bold",
+              }}
+            >
+              {record.stock}
+            </span>
+          )}
+        />
+
         <TextField source="code" label="Código" sortable={false} />
         <NumberField source="view.counter" label="Vistas" sortable={false} />
 
