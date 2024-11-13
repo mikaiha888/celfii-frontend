@@ -20,7 +20,7 @@ const CategoryEdit = (props) => {
     try {
       await dataProvider.create("categories", { data });
       notify("Categoría creada exitosamente", { type: "info" });
-      redirect("/admin/categories");
+      redirect("/private-admin-console/categories");
     } catch (error) {
       notify(`Error creando categoría: ${error}`, { type: "warning" });
     }

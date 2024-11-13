@@ -28,7 +28,7 @@ const AppRoutes = () => (
     <Route path="/nosotros" element={<AboutUs />} />
     <Route path="/productos" element={<ProductsPage />} />
     <Route path="/configuracion" element={<Settings />} />
-    <Route path="/admin/*" element={<AdminDashboard />} />
+    <Route path="/private-admin-console/*" element={<AdminDashboard />} />
     <Route path="/favourites" element={<FavouritePage />} />
     <Route path="/product/:id" element={<ProductDetailPage />} />
     <Route path="/terminos-servicio" element={<TermsOfService />} />

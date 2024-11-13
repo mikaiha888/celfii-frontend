@@ -9,13 +9,16 @@ import Items from "./Items";
 const ItemsContainer = () => {
   const dispatch = useDispatch();
   const { categories } = useSelector((state) => state.categories);
+
   const popularCategoriesLinks =
     categories &&
-    categories.map((category) => ({
-      name: category.name,
-      url: "/productos",
-      isCategory: true,
-    }));
+    categories
+      .map((category) => ({
+        name: category.name,
+        url: "/productos",
+        isCategory: true,
+      }))
+      .slice(0, 5);
 
   useEffect(() => {
     dispatch(loadCategories());

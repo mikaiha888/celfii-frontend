@@ -18,7 +18,7 @@ const ProductEdit = () => {
     try {
       await dataProvider.create("products", { data });
       notify("Producto creado exitosamente", { type: "info" });
-      redirect("/admin/products");
+      redirect("/private-admin-console/products");
     } catch (error) {
       notify(`Error creando proyecto: ${error}`, { type: "warning" });
     }

@@ -80,7 +80,7 @@ const AdminDashboard = () => {
     const userData = loadFromSessionStorage("userData");
 
     if (!userData) {
-      navigate("/login");
+      navigate("/");
       toast.error("La sesión ha expirado. Vuelve a iniciar sesión para continuar.");
     } else if (userData.role && userData.role.name === "Master") {
       setIsMaster(true);
@@ -91,7 +91,7 @@ const AdminDashboard = () => {
     <ThemeProvider theme={lightTheme}>
       <Admin
         dataProvider={dataProvider}
-        basename="/admin"
+        basename="/private-admin-console"
         layout={CustomLayout}
         theme={lightTheme}
         darkTheme={darkTheme}
