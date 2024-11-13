@@ -9,6 +9,8 @@ const OptionalNavBar = () => {
   const { pathname } = useLocation();
   const { categories } = useSelector((state) => state.categories);
 
+  const selectedCategories = categories ? categories.slice(0, 6) : [];
+
   const handleSearch = ({ name, category }) => {
     removeFromLocalStorage("filters");
     const param = name ? { name, page: 1 } : { page: 1 };
@@ -23,7 +25,7 @@ const OptionalNavBar = () => {
     pathname === "/" && (
       <div className="w-2/3 px-10 absolute left-1/2 transform -translate-x-1/2 bg-white shadow-md h-16 rounded-[10px] hidden md:flex md:items-center md:justify-between z-50">
         <ul className="hidden lg:flex lg:gap-x-4">
-          {categories.map((category, index) => (
+          {selectedCategories.map((category, index) => (
             <li
               key={index}
               onClick={() => handleSearch({ category: category.name.toLowerCase() })}

@@ -7,13 +7,15 @@ const CategoriesGrid = () => {
   const dispatch = useDispatch();
   const { categories } = useSelector((state) => state.categories);
 
+  const selectedCategories = categories ? categories.slice(0, 5) : [];
+
   useEffect(() => {
     dispatch(loadCategories());
   }, [dispatch]);
 
   return (
     <section className="container flex flex-wrap justify-center gap-24 my-48">
-      {categories.map((category) => (
+      {selectedCategories.map((category) => (
         <>
           <Link
             key={category.name}

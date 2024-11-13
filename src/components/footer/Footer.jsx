@@ -7,6 +7,10 @@ import { Link, useLocation } from "react-router-dom";
 const Footer = () => {
   const { pathname } = useLocation();
 
+  const message = "¡Hola! Me gustaría saber más sobre sus productos.";
+  const phoneNumber = 5492604545982;
+  const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+
   return (
     <footer className="mt-20 bg-black">
       {!pathname.startsWith("/product") && !pathname.startsWith("/admin") && (
@@ -22,9 +26,12 @@ const Footer = () => {
             está disponible para ayudarte y responder a tus inquietudes de manera rápida y
             eficiente. ¡Escríbenos y hablemos!
           </p>
-          <button className="px-6 py-3 mt-8 text-sm rounded-full primary-btn md:text-base">
+          <a
+            href={whatsappLink}
+            className="px-6 py-3 mt-8 text-sm rounded-full primary-btn md:text-base"
+          >
             Abrir Chat
-          </button>
+          </a>
         </div>
       )}
       <div className="px-20 2xl:px-0">
@@ -32,7 +39,13 @@ const Footer = () => {
         <div className="container flex items-center justify-between pt-2 pb-8 text-sm text-center text-gray-400">
           <div className="flex gap-4">
             <span>&copy; {new Date().getFullYear()} Cel-Fii. Todos los derechos reservados.</span>
-            <Link to="/terminos-servicio" onClick={() =>  window.scrollTo(0, 0)} className="hover:text-red-400">Terminos・Políticas de privacidad</Link>
+            <Link
+              to="/terminos-servicio"
+              onClick={() => window.scrollTo(0, 0)}
+              className="hover:text-red-400"
+            >
+              Terminos・Políticas de privacidad
+            </Link>
           </div>
           <SocialIcons icons={socialMediaIcons} />
         </div>
