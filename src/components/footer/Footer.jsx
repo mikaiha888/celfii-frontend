@@ -2,13 +2,13 @@ import { socialMediaIcons } from "./menu";
 
 import SocialIcons from "./SocialIcons";
 import ItemsContainer from "./ItemsContainer";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Footer = () => {
   const { pathname } = useLocation();
 
   return (
-    <footer className="bg-black mt-60">
+    <footer className="mt-20 bg-black">
       {!pathname.startsWith("/product") && !pathname.startsWith("/admin") && (
         <div className="p-8 text-center bg-gray-50 sm:p-12 md:py-20 md:px-24 lg:py-32 lg:px-40">
           <p className="text-lg font-medium md:text-xl">Estamos aquí para ti</p>
@@ -30,10 +30,10 @@ const Footer = () => {
       <div className="px-20 2xl:px-0">
         <ItemsContainer />
         <div className="container flex items-center justify-between pt-2 pb-8 text-sm text-center text-gray-400">
-          <span>
-            &copy; {new Date().getFullYear()} Cel-Fii. Todos los derechos reservados.
-            Terminos・Políticas de privacidad
-          </span>
+          <div className="flex gap-4">
+            <span>&copy; {new Date().getFullYear()} Cel-Fii. Todos los derechos reservados.</span>
+            <Link to="/terminos-servicio" className="hover:text-red-400">Terminos・Políticas de privacidad</Link>
+          </div>
           <SocialIcons icons={socialMediaIcons} />
         </div>
       </div>
