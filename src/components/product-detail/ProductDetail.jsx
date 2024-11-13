@@ -37,13 +37,17 @@ const ProductDetail = ({ product, cart, isFavourite }) => {
   };
 
   const phoneNumber = "+5492604545982";
-  const message = `¡Hola! Quería consultar por el producto ${product.name}, ¿sigue disponible?`;
+  const message = `¡Hola! Quería consultar por el producto ${product.name}`;
   const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
   return (
     <>
       <button onClick={toggleFavourite} className="absolute text-2xl top-2 right-2">
-        <Heart stroke={0} fill={isFavourite ? "#de3f3f" : "#d6d6d6"} />
+        <Heart
+          stroke={0}
+          fill={isFavourite ? "#de3f3f" : "#d6d6d6"}
+          className="hover:fill-red-600"
+        />
       </button>
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
@@ -110,13 +114,30 @@ const ProductDetail = ({ product, cart, isFavourite }) => {
           ) : null}
         </div>
       </div>
+
       <hr className="mt-6" />
       <div className="mt-6">
         <h2 className="mb-2 text-2xl font-bold">Descripción del Producto</h2>
         <p className="text-gray-600 whitespace-pre-line">{product.description}</p>
-
       </div>
+
       <FeaturedProductsSlider products={featuredProducts} />
+
+      <div className="mt-20 p-4 bg-gray-100 rounded-lg shadow-md">
+        <h3 className="text-xl font-semibold text-center">
+          ¿Tienes preguntas sobre este producto?
+        </h3>
+        <p className="text-gray-600 mt-2 text-center">
+          Si tienes alguna duda, ¡estamos para ayudarte! Puedes contactarnos directamente por
+          WhatsApp.
+        </p>
+        <button
+          onClick={() => window.open(whatsappLink, "_blank")}
+          className="mt-4 px-4 py-2 text-white bg-green-500 rounded hover:bg-green-700 transition w-full text-center"
+        >
+          Contáctanos por WhatsApp
+        </button>
+      </div>
     </>
   );
 };
