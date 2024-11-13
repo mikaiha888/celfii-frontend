@@ -49,10 +49,13 @@ const dataProvider = {
     const formData = new FormData();
     if (params.data.images) {
       params.data.images.forEach((image) => {
-        if (image.rawFile && image.rawFile instanceof File) {
+        if (image.rawFile && image.rawFile instanceof File)
           formData.append("images", image.rawFile);
-        }
       });
+    }
+    if (params.data.image) {
+      if (params.data.image.rawFile && params.data.image.rawFile instanceof File)
+        formData.append("image", params.data.image.rawFile);
     }
     if (params.data.category && typeof params.data.category === "object") {
       formData.append("category", params.data.category.name);
@@ -60,7 +63,7 @@ const dataProvider = {
       formData.append("category", params.data.category);
     }
     for (const key in params.data) {
-      if (key !== "images" && key !== "category") {
+      if (key !== "images" && key !== "category" && key !== "image") {
         formData.append(key, params.data[key]);
       }
     }
