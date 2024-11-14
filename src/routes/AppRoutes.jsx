@@ -14,7 +14,7 @@ import AdminDashboard from "../view/admin-dashboard-page/AdminDashboard";
 import TermsOfService from "../view/terms-of-service-page/TermsOfService";
 import PrivacyPolicyPage from "../view/privacy-policy-page/PrivacyPolicyPage";
 import ProductDetailPage from "../view/product-detail-page/ProductDetailPage";
-import Reparaciones from "../view/repair-page/repair";
+// import Reparaciones from "../view/repair-page/repair";
 
 const AppRoutes = () => (
   <Routes>
@@ -34,7 +34,7 @@ const AppRoutes = () => (
     <Route path="/terminos-servicio" element={<TermsOfService />} />
     <Route path="/productos/:categoria" element={<ProductsPage />} />
     <Route path="/politica-privacidad" element={<PrivacyPolicyPage />} />
-    <Route path="/reparaciones" element={<Reparaciones />} />
+    {/* <Route path="/reparaciones" element={<Reparaciones />} /> */}
   </Routes>
 );
 
