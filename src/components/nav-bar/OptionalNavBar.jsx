@@ -23,7 +23,7 @@ const OptionalNavBar = () => {
 
   return (
     pathname === "/" && (
-      <div className="w-2/3 px-10 absolute left-1/2 transform -translate-x-1/2 bg-white shadow-md h-16 rounded-[10px] hidden md:flex md:items-center md:justify-between z-50">
+      <div className="w-2/3 px-10 pb-5 absolute left-1/2 transform -translate-x-1/2 bg-white shadow-md h-16 rounded-b-[10px] hidden md:flex md:items-center md:justify-between z-50">
         <ul className="hidden lg:flex lg:gap-x-4">
           {selectedCategories.map((category, index) => (
             <li
