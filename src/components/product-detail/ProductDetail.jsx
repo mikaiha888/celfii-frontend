@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Heart } from "lucide-react";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,12 +8,19 @@ import QuantityCounter from "../counter/QuantityCounter";
 import FeaturedProductsSlider from "../../view/home-page/home-sections/FeaturedProductsSlider";
 import ImageCarousel from "../../components/image-carousel/ImageCarousel";
 import { Link } from "react-router-dom";
+import { loadProducts } from "../../redux/actions";
 
 const ProductDetail = ({ product, cart, isFavourite }) => {
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(1);
   const item = cart && cart.find((item) => item.id === product.id);
   const { products } = useSelector((state) => state.products);
+
+  useEffect(() => {
+    if (!products.length) {
+      dispatch(loadProducts());
+    }
+  }, [dispatch, products.length]);
 
   const featuredProducts = products.slice(0, 10);
 
@@ -66,7 +73,8 @@ const ProductDetail = ({ product, cart, isFavourite }) => {
             <button
               onClick={() => handleCartClick({ ...product, quantity })}
               disabled={item && item.quantity >= product.stock}
-              className="px-4 py-2 mt-4 text-white transition bg-gray-500 rounded">
+              className="px-4 py-2 mt-4 text-white transition bg-gray-500 rounded"
+            >
               Sin stock
             </button>
           ) : (
@@ -120,7 +128,11 @@ const ProductDetail = ({ product, cart, isFavourite }) => {
         <p className="text-gray-600 whitespace-pre-line">{product.description}</p>
       </div>
 
-      <FeaturedProductsSlider products={featuredProducts} />
+      {featuredProducts.length > 0 ? (
+        <FeaturedProductsSlider products={featuredProducts} />
+      ) : (
+        <p>Cargando productos destacados...</p>
+      )}
 
       <div className="p-4 mt-20 bg-gray-100 rounded-lg shadow-md">
         <h3 className="text-xl font-semibold text-center">
