@@ -19,11 +19,11 @@ const App = () => {
           pauseOnHover
           draggable
         />
-        {!pathname.startsWith("/admin") && <NavBar />}
+        {!pathname.startsWith("/private-admin-console") && <NavBar />}
         <main className={`flex-1 ${pathname !== "/" ? "px-5 py-4 md:mx-10" : ""}`}>
           <AppRoutes />
         </main>
-        {!pathname.startsWith("/admin") && <WhatsAppButton />}
+        {!pathname.startsWith("/private-admin-console") && <WhatsAppButton />}
         <Footer />
       </div>
     </>

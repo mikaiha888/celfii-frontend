@@ -29,7 +29,7 @@ const ProductEdit = () => {
         data: { imagesToDelete, ...data },
       });
       notify("Producto actualizado exitosamente", { type: "info" });
-      redirect("/admin/products");
+      redirect("/private-admin-console/products");
     } catch (error) {
       notify(`Error actualizando proyecto: ${error}`, { type: "warning" });
     }

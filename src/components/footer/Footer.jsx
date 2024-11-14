@@ -13,7 +13,7 @@ const Footer = () => {
 
   return (
     <footer className="mt-20 bg-black">
-      {!pathname.startsWith("/product") && !pathname.startsWith("/admin") && (
+      {!pathname.startsWith("/product") && !pathname.startsWith("//private-admin-console") && (
         <div className="p-8 text-center bg-gray-50 sm:p-12 md:py-20 md:px-24 lg:py-32 lg:px-40">
           <p className="text-lg font-medium md:text-xl">Estamos aquí para ti</p>
           <h3 className="my-5 text-2xl font-semibold md:text-3xl lg:text-4xl font-poppins">
@@ -26,12 +26,11 @@ const Footer = () => {
             está disponible para ayudarte y responder a tus inquietudes de manera rápida y
             eficiente. ¡Escríbenos y hablemos!
           </p>
-          <a
-            href={whatsappLink}
-            className="px-6 py-3 mt-8 text-sm rounded-full primary-btn md:text-base"
-          >
-            Abrir Chat
-          </a>
+          <button className="px-6 py-3 mt-8 text-sm rounded-full primary-btn" >
+            <a href={whatsappLink}>
+              Abrir Chat
+            </a>
+          </button>
         </div>
       )}
       <div className="px-20 2xl:px-0">
