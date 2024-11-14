@@ -9,7 +9,7 @@ import store from "./redux";
 import App from "./App.jsx";
 import "./index.css";
 
-axios.defaults.baseURL = "http://localhost:3001";
+axios.defaults.baseURL = "https://celfii-backend.up.railway.app";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
